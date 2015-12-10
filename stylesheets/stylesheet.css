@@ -107,12 +107,14 @@ a {
     font-size: 1rem; } }
 
 .main-content{
+	padding: 2em;
 	border-right: lightgray solid 1px;
 	width: 48%;
 	height: 100%;
 	float: left;
 }
 .changelog-content{
+	padding: 2em;
 	border-left: lightgray solid 1px;
 	width: 48%;
 	height: 100%;
