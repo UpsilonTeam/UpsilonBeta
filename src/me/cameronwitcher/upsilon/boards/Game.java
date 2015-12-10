@@ -27,11 +27,17 @@ public class Game extends JFrame {
 	private PlayerModelBoard models;
 	private MenuBoard menu;
 	public int DEBUG_LEVEL = 1;
+	private String version = "0.0.1 BETA";
 
 	public Game(int i) {
+		
 		game = this;
 		Utils.broadcastMessage("TEEST", "Game.class (32)");
 		game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+	
+	public String getVersion(){
+		return version;
 	}
 
 	public void init() {
