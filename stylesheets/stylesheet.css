@@ -127,3 +127,16 @@ a {
 .main-content p {
   margin-bottom: 1em; 
 }
+
+.changelog-content :first-child {
+  margin-top: 0; }
+
+.changelog-content h1, .changelog-content h2, .changelog-content h3, .changelog-content h4, .changelog-content h5, .changelog-content h6 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  font-weight: normal;
+  color: #159957; 
+}
+.changelog-content p {
+  margin-bottom: 1em; 
+}
