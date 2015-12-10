@@ -314,7 +314,7 @@ public class Player extends Entity implements Moveable,Keyable {
 		if (!Bridge.getGame().getBoard().ingame) {
 			return;
 		}
-		if (x >= 650 || x <= -1 || y >= 650 || y <= -1) {
+		if (y >= 650) {
 			kill(DamageReason.VOID);
 		}
 		
@@ -499,8 +499,7 @@ public class Player extends Entity implements Moveable,Keyable {
 			y = 1;
 		if (x > 640 - getImage().getWidth(null))
 			x = 640 - getImage().getWidth(null);
-		if (y > 640 - getImage().getHeight(null))
-			y = 640 - getImage().getHeight(null);
+		
 	}
 
 	
