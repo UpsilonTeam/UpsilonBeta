@@ -91,9 +91,9 @@ public class MenuBoard extends JPanel implements ActionListener {
 	public void drawMenu(Graphics g){
 		String title = "Upsilon";
 		
-		g.drawImage(Texture.loadTexture("/res/background-win.png"), 0, 0, M_WIDTH, M_HEIGHT, null);
+		g.drawImage(Texture.loadTexture("background-win.png"), 0, 0, M_WIDTH, M_HEIGHT, null);
 		
-		g.drawImage(Texture.loadTexture("/res/playermodels/" 
+		g.drawImage(Texture.loadTexture("playermodels/" 
 		+ Utils.getPlayerModel().toLowerCase() 
 		+ "/stand_right.png"), (M_WIDTH/2)-((13*5)/2), (M_HEIGHT/2)-((44*5)/2), 13*5, 44*5, null);
 		

@@ -23,7 +23,7 @@ public class FallingFloor extends Entity implements Moveable {
 
     private void initFloor() {
         
-        loadImage("/res/falling-floor.png");
+        loadImage("falling-floor.png");
         getImageDimensions();
     }
     

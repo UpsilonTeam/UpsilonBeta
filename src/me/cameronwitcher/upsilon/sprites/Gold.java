@@ -5,7 +5,7 @@ import me.cameronwitcher.upsilon.spriteutils.Moveable;
 import me.cameronwitcher.upsilon.spriteutils.Sprite;
 import me.cameronwitcher.upsilon.spriteutils.SpriteType;
 
-public class Gold extends Sprite implements Money,Moveable {
+public class Gold extends Sprite implements Money {
 	
 	int value;
 
@@ -22,7 +22,7 @@ public class Gold extends Sprite implements Money,Moveable {
 
     private void initFloor() {
         
-        loadImage("/res/gold.png");
+        loadImage("gold.png");
         getImageDimensions();
     }
 
@@ -32,21 +32,4 @@ public class Gold extends Sprite implements Money,Moveable {
 	}
 	
 
-	@Override
-	public void move() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void disable() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void enable() {
-		// TODO Auto-generated method stub
-		
-	}
 }

@@ -23,7 +23,9 @@ import me.cameronwitcher.upsilon.utils.Button;
 import me.cameronwitcher.upsilon.utils.ButtonMethod;
 import me.cameronwitcher.upsilon.utils.DamageReason;
 import me.cameronwitcher.upsilon.utils.Direction;
+import me.cameronwitcher.upsilon.utils.Sound;
 import me.cameronwitcher.upsilon.utils.Utils;
+import res.Audio;
 
 public class Player extends Entity implements Moveable,Keyable {
 
@@ -74,18 +76,18 @@ public class Player extends Entity implements Moveable,Keyable {
 		Utils.setPlayerModel(model);
 		if(!walking){
 
-			loadImage("/res/playermodels/" + model.toString().toLowerCase() + "/stand_" + getDirection().toString().toLowerCase() + ".png");
+			loadImage("playermodels/" + model.toString().toLowerCase() + "/stand_" + getDirection().toString().toLowerCase() + ".png");
 			setImageDimensions(13, 41, -2, -2);
 		} else {
 
-			loadImage("/res/playermodels/" + model.toString().toLowerCase() + "/walk_" + getDirection().toString().toLowerCase() + ".gif");
+			loadImage("playermodels/" + model.toString().toLowerCase() + "/walk_" + getDirection().toString().toLowerCase() + ".gif");
 			setImageDimensions(29, 41, -2, -2);
 		}
 	}
 
 	private void initPlayer() {
 		Utils.checkPlayerInfo(this);
-		loadImage("/res/playermodels/" + model.toString().toLowerCase() + "/stand_right.png");
+		loadImage("playermodels/" + model.toString().toLowerCase() + "/stand_right.png");
 		setImageDimensions(13, 41, -2, -2);
 		setDirection(Direction.RIGHT);
 		
@@ -110,7 +112,7 @@ public class Player extends Entity implements Moveable,Keyable {
 				walking= true;
 				
 
-				loadImage("/res/playermodels/" + model.toString().toLowerCase() + "/walk_left.gif");
+				loadImage("playermodels/" + model.toString().toLowerCase() + "/walk_left.gif");
 				setImageDimensions(29, 41, -2, -2);
 				
 				
@@ -123,13 +125,20 @@ public class Player extends Entity implements Moveable,Keyable {
 				walking= true;
 				
 
-				loadImage("/res/playermodels/" + model.toString().toLowerCase() + "/walk_right.gif");
+				loadImage("playermodels/" + model.toString().toLowerCase() + "/walk_right.gif");
 				setImageDimensions(29, 41, -2, -2);
 				
 				
 
 			}
 
+			
+			if (key == KeyEvent.VK_0) {
+				Audio.playSound(Sound.TEST);
+				Utils.broadcastMessage("SOUND", "pp");	
+			}
+			
+			
 			if (key == KeyEvent.VK_W || key == KeyEvent.VK_UP) {
 				if (climbing) {
 					setDirection(Direction.UP);
@@ -201,6 +210,7 @@ public class Player extends Entity implements Moveable,Keyable {
 	private void jump() {
 		if (jumping || falling)
 			return;
+		Audio.playSound(Sound.JUMP);
 		onground = false;
 		jumping = true;
 		falling = false;
@@ -224,7 +234,7 @@ public class Player extends Entity implements Moveable,Keyable {
 			if (key == KeyEvent.VK_A || key == KeyEvent.VK_LEFT) {
 				dx = 0;
 				walking= false;
-				loadImage("/res/playermodels/" + model.toString().toLowerCase() + "/stand_left.png");
+				loadImage("playermodels/" + model.toString().toLowerCase() + "/stand_left.png");
 				if(invisible)
 					toggleInvisiblility();
 				
@@ -234,7 +244,7 @@ public class Player extends Entity implements Moveable,Keyable {
 			if (key == KeyEvent.VK_D || key == KeyEvent.VK_RIGHT) {
 				dx = 0;
 				walking= false;
-				loadImage("/res/playermodels/" + model.toString().toLowerCase() + "/stand_right.png");
+				loadImage("playermodels/" + model.toString().toLowerCase() + "/stand_right.png");
 				if(invisible)
 					toggleInvisiblility();
 				setImageDimensions(13, 41, -2, -2);
@@ -339,7 +349,8 @@ public class Player extends Entity implements Moveable,Keyable {
 					if (sprite instanceof Money) {
 						climbing = false;
 						Money money = (Money) sprite;
-						score = score + (money).getValue();
+						addScore(money.getValue());
+						
 						sprite.remove();
 						Utils.player_score = score;
 					}
@@ -503,6 +514,11 @@ public class Player extends Entity implements Moveable,Keyable {
 	}
 
 	
+
+	private void addScore(int value) {
+		score = score + value;
+		Audio.playSound(Sound.SCORE);
+	}
 
 	@Override
 	public void kill(DamageReason reason) {

@@ -3,6 +3,8 @@ package me.cameronwitcher.upsilon.spriteutils.tools;
 import me.cameronwitcher.upsilon.Bridge;
 import me.cameronwitcher.upsilon.sprites.Arrow;
 import me.cameronwitcher.upsilon.spriteutils.SpriteType;
+import me.cameronwitcher.upsilon.utils.Sound;
+import res.Audio;
 
 public class Bow extends Weapon {
 	
@@ -14,7 +16,7 @@ public class Bow extends Weapon {
 	
 	public void init(){
 		damage = 10;
-		loadImage("/res/bow.png");
+		loadImage("bow.png");
 		setImageDimensions(16, 16,0,0);
 	}
 	
@@ -25,6 +27,7 @@ public class Bow extends Weapon {
 	
 	@Override
 	public void use(){
+		Audio.playSound(Sound.BOW_SHOOT);
 		Arrow arrow = new Arrow(
 				getEntity().x, 
 				getEntity().y,

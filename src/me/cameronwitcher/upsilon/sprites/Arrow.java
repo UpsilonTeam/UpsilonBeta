@@ -23,7 +23,7 @@ public class Arrow extends Projectile  {
     }
 
     private void init() {
-        loadImage("/res/arrow_" + direction.toString().toLowerCase() + ".png");
+        loadImage("arrow_" + direction.toString().toLowerCase() + ".png");
         setImageDimensions(11, 4, 0, 0);
     }	
 }

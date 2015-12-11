@@ -77,7 +77,7 @@ public class Game extends JFrame {
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
-		setIconImage(Texture.loadTexture("/res/logo.png"));
+		setIconImage(Texture.loadTexture("logo.png"));
 	}
 
 	public void startLevel(GameBoard board) {

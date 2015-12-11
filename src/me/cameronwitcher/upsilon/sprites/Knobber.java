@@ -46,7 +46,7 @@ public class Knobber extends Entity implements Moveable,Keyable {
     }
 
     private void init() {
-        loadImage("/res/knobber/stand_left.png");
+        loadImage("knobber/stand_left.png");
         setImageDimensions(29, 41, -2, -2);
         
     }
@@ -131,7 +131,7 @@ public class Knobber extends Entity implements Moveable,Keyable {
 					attemptShoot(Bridge.getGame().getBoard().player);
 				}
 				if(dx==0){
-					loadImage("/res/knobber/stand_" + getDirection().toString().toLowerCase() + ".png");
+					loadImage("knobber/stand_" + getDirection().toString().toLowerCase() + ".png");
 					walking = false;
 				}
 				else {
@@ -165,9 +165,9 @@ public class Knobber extends Entity implements Moveable,Keyable {
 	private void setDir(Direction d) {
 		setDirection(d);
 		if(walking){
-			loadImage("/res/knobber/walk_" + getDirection().toString().toLowerCase() + ".gif");
+			loadImage("knobber/walk_" + getDirection().toString().toLowerCase() + ".gif");
 		} else {
-			loadImage("/res/knobber/stand_" + getDirection().toString().toLowerCase() + ".png");
+			loadImage("knobber/stand_" + getDirection().toString().toLowerCase() + ".png");
 		}
 	}
 

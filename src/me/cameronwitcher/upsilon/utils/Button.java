@@ -7,6 +7,7 @@ import java.awt.Polygon;
 import java.awt.event.MouseEvent;
 
 import me.cameronwitcher.upsilon.spriteutils.Clickable;
+import res.Audio;
 
 public class Button implements Clickable {
 	
@@ -47,6 +48,7 @@ public class Button implements Clickable {
 
 	@Override
 	public void mousePressed(MouseEvent e) {
+		Audio.playSound(Sound.BUTTON_CLICK);
 		method.clicked();
 		
 	}

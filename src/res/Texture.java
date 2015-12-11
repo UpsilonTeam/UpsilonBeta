@@ -9,10 +9,10 @@ public class Texture {
 	public static Image loadTexture(String resource){
 		
 		try {
-			return new ImageIcon(Texture.class.getResource(resource)).getImage();
+			return new ImageIcon(Texture.class.getResource("/res/images/" + resource)).getImage();
 		} catch (Exception e) {
 			try {
-				return new ImageIcon(Texture.class.getResource("/res/unknown.png")).getImage();
+				return new ImageIcon(Texture.class.getResource("/res/images/unknown.png")).getImage();
 			} catch (Exception e1) {
 				return null;
 			}

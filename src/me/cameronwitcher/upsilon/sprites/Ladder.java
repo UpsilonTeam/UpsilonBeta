@@ -18,7 +18,7 @@ public class Ladder extends Sprite {
 
     private void initLadder() {
         
-        loadImage("/res/ladder.png");
+        loadImage("ladder.png");
         getImageDimensions();
     }
 }

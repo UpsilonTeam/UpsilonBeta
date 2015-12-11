@@ -24,25 +24,25 @@ public class Wall extends Sprite {
     	
     	switch(state){
     	case LEFT_LOWER_CORNER:
-    		loadImage("/res/wall/lowerLeftCorner.png");
+    		loadImage("wall/lowerLeftCorner.png");
     		break;
     	case LEFT_UPPER_CORNER:
-    		loadImage("/res/wall/upperLeftCorner.png");
+    		loadImage("wall/upperLeftCorner.png");
     		break;
     	case RIGHT_LOWER_CORNER:
-    		loadImage("/res/wall/lowerRightCorner.png");
+    		loadImage("wall/lowerRightCorner.png");
     		break;
     	case RIGHT_UPPER_CORNER:
-    		loadImage("/res/wall/upperRightCorner.png");
+    		loadImage("wall/upperRightCorner.png");
     		break;
     	case VERTICAL:
-    		loadImage("/res/wall/vertical.png");
+    		loadImage("wall/vertical.png");
     		break;
     	case HORIZONTAL:
-    		loadImage("/res/wall/horizontal.png");
+    		loadImage("wall/horizontal.png");
     		break;
     		default:
-    			loadImage("/res/wall/vertical.png");
+    			loadImage("wall/vertical.png");
     			break;
     	}
         getImageDimensions();

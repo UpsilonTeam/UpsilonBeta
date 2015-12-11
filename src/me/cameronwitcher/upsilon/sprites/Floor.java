@@ -18,7 +18,7 @@ public class Floor extends Sprite {
 
     private void initFloor() {
         
-        loadImage("/res/floor.png");
+        loadImage("floor.png");
         getImageDimensions();
     }
 }

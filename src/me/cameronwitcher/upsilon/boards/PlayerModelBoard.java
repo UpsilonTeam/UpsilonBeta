@@ -135,10 +135,10 @@ public class PlayerModelBoard extends JPanel implements ActionListener {
 	public void drawMenu(Graphics g){
 		String title = "Player Model Selector";
 		
-		g.drawImage(Texture.loadTexture("/res/background-win.png"), 0, 0, P_WIDTH, P_HEIGHT, null);
+		g.drawImage(Texture.loadTexture("background-win.png"), 0, 0, P_WIDTH, P_HEIGHT, null);
 		
 		
-		g.drawImage(Texture.loadTexture("/res/playermodels/" + model.toLowerCase() + "/stand_right.png"), (P_WIDTH/2)-((13*5)/2), (P_HEIGHT/2)-((44*5)/2), 13*5, 44*5, null);
+		g.drawImage(Texture.loadTexture("playermodels/" + model.toLowerCase() + "/stand_right.png"), (P_WIDTH/2)-((13*5)/2), (P_HEIGHT/2)-((44*5)/2), 13*5, 44*5, null);
 
 		
 		Font titlefont = new Font("Helvetica", Font.BOLD, 35);

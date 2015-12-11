@@ -94,7 +94,7 @@ public class Entity extends Sprite {
 				if(this instanceof Player){
 
 				
-					loadImage("/res/playermodels/" + (Bridge.getGame().getBoard().player.model.toString().toLowerCase()) + "/stand_" + direction.toString().toLowerCase() + ".png");
+					loadImage("playermodels/" + (Bridge.getGame().getBoard().player.model.toString().toLowerCase()) + "/stand_" + direction.toString().toLowerCase() + ".png");
 				}
 			}
 				

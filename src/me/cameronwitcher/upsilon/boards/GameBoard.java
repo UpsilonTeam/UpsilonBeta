@@ -30,10 +30,10 @@ import me.cameronwitcher.upsilon.Bridge;
 import me.cameronwitcher.upsilon.sprites.FallingFloor;
 import me.cameronwitcher.upsilon.sprites.Floor;
 import me.cameronwitcher.upsilon.sprites.Gate;
+import me.cameronwitcher.upsilon.sprites.Gold;
 import me.cameronwitcher.upsilon.sprites.Knobber;
 import me.cameronwitcher.upsilon.sprites.Ladder;
 import me.cameronwitcher.upsilon.sprites.Player;
-import me.cameronwitcher.upsilon.sprites.Spike;
 import me.cameronwitcher.upsilon.sprites.Wall;
 import me.cameronwitcher.upsilon.spriteutils.Clickable;
 import me.cameronwitcher.upsilon.spriteutils.Keyable;
@@ -170,12 +170,12 @@ public class GameBoard extends JPanel implements ActionListener {
     	
 
 
-    	level1.add(new Spike(6*32,598));
-    	level1.add(new Spike(7*32,598));
-    	level1.add(new Spike(8*32,598));
-    	level1.add(new Spike(9*32,598));
-    	level1.add(new Spike(10*32,598));
-    	level1.add(new Spike(11*32,598));
+    	level1.add(new Gold(6*32,598));
+    	level1.add(new Gold(7*32,598));
+    	level1.add(new Gold(8*32,598));
+    	level1.add(new Gold(9*32,598));
+    	level1.add(new Gold(10*32,598));
+    	level1.add(new Gold(11*32,598));
     	
     	
     	level1.add(new Floor(12*32,608));
@@ -582,7 +582,7 @@ public class GameBoard extends JPanel implements ActionListener {
     
     private void drawInventory(Graphics g){
     	try{
-    		g.drawImage(Texture.loadTexture("/res/background-win.png"), 0, 0, null);
+    		g.drawImage(Texture.loadTexture("background-win.png"), 0, 0, null);
     	
     	
     
@@ -635,7 +635,7 @@ public class GameBoard extends JPanel implements ActionListener {
 
 	private void drawWin(Graphics g){
     	
-    	g.drawImage(Texture.loadTexture("/res/background-win.png"), 0, 0, null);
+    	g.drawImage(Texture.loadTexture("background-win.png"), 0, 0, null);
     	
         String won = "You won!";
         String restart = "Restart?";
@@ -660,7 +660,7 @@ public class GameBoard extends JPanel implements ActionListener {
 
     private void drawObjects(Graphics g) {
     	
-    	g.drawImage(Texture.loadTexture("/res/background.png"), 0, 0, this);
+    	g.drawImage(Texture.loadTexture("background.png"), 0, 0, this);
     	g.setColor(Color.black);
     	g.setFont(new Font("Helvetica", Font.BOLD, 10));
     	g.drawString("Lives: " + player.lives, B_WIDTH/4, 20);
@@ -740,7 +740,7 @@ public class GameBoard extends JPanel implements ActionListener {
     	}
     	
     	if(paused){
-    		g.drawImage(Texture.loadTexture("/res/darken.png"), 0, 0, null);
+    		g.drawImage(Texture.loadTexture("darken.png"), 0, 0, null);
     	}
     	
     	
@@ -828,7 +828,7 @@ public class GameBoard extends JPanel implements ActionListener {
     	
     	if(gameStatus.contains("gameover")){
     		
-    		g.drawImage(Texture.loadTexture("/res/background.png"), 0, 0, null);
+    		g.drawImage(Texture.loadTexture("background.png"), 0, 0, null);
         	
         	
 
@@ -856,7 +856,7 @@ public class GameBoard extends JPanel implements ActionListener {
             
         }
     	if(gameStatus.contains("won")){
-    		g.drawImage(Texture.loadTexture("/res/background.png"), 0, 0, null);
+    		g.drawImage(Texture.loadTexture("background.png"), 0, 0, null);
     		g.setColor(Color.black);
     		String won = "You won level " + gameStatus.split(":")[1] +"!";
             
