@@ -2,6 +2,8 @@ package me.cameronwitcher.upsilon.utils;
 
 import java.awt.Font;
 import java.awt.Rectangle;
+import java.awt.Shape;
+import java.awt.geom.Area;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
@@ -11,9 +13,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
 import javax.swing.JOptionPane;
 
 import me.cameronwitcher.upsilon.Bridge;
@@ -23,7 +22,6 @@ import me.cameronwitcher.upsilon.spriteutils.Sprite;
 import me.cameronwitcher.upsilon.spriteutils.tools.Tool;
 import me.cameronwitcher.upsilon.spriteutils.tools.ToolType;
 import res.Audio;
-import sun.applet.Main;
 
 public class Utils {
 
@@ -387,6 +385,13 @@ public class Utils {
 	public static void playSound(Sound sound) {
 		Audio.playSound(sound);
 		
+	}
+	
+	public static boolean intersects(Shape shape1, Shape shape2){
+		Area a1 = new Area(shape1);
+		Area a2 = new Area(shape2);
+		a1.intersect(a2);
+		return !a1.isEmpty();
 	}
 
 }

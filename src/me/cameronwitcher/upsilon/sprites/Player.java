@@ -346,6 +346,7 @@ public class Player extends Entity implements Moveable,Keyable {
 				for (Sprite sprite : Bridge.getGame().getBoard().getLevel(level)) {
 					if(sprite instanceof Player) continue;
 					if (!getPolygon().intersects(sprite.getPolygon().getBounds()))continue;
+					if(!Utils.intersects(getPolygon(), sprite.getPolygon())) continue;
 					if (sprite instanceof Money) {
 						climbing = false;
 						Money money = (Money) sprite;
@@ -365,18 +366,15 @@ public class Player extends Entity implements Moveable,Keyable {
 						jump();
 					}
 					if (sprite.getSubType().equals(SpriteSubType.PARTIAL_COLLIDEABLE) && !jumping) {
-						if (getPolygon().getBounds().getMaxY() - sprite.getPolygon().getBounds().getMinY() <= 5
-								&& getPolygon().getBounds().getMaxY() - sprite.getPolygon().getBounds().getMinY() >= 0) {
-							if(sprite.getType().equals(SpriteType.FALLING_FLOOR)){
+						switch(getIntercectingDirection(sprite.getPolygon().getBounds())){
+						case DOWN:
+							if(sprite.getType().equals(SpriteType.FALLING_FLOOR))
 								if(!((FallingFloor) sprite).t) ((FallingFloor) sprite).startFalling();
-								y = sprite.getY() - (height-2);
-							}else {
-								y = sprite.getY() - (height-2);
-							}
-							if(!jumping){
-								onground = true;
-								falling = false;
-							}
+							falling = false;
+							onground = true;
+							break;
+						default:
+							break;
 							
 						}
 					}
