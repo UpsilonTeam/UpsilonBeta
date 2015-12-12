@@ -670,7 +670,7 @@ public class GameBoard extends JPanel implements ActionListener {
     		
     		if(!(sprite instanceof Player) && !(sprite instanceof Knobber)) g.drawImage(sprite.getImage(), sprite.getX(), sprite.getY(), this);
     		if(debug && hitboxes)
-    			g.drawRect((int)sprite.getPolygon().getBounds().getX(),(int) sprite.getPolygon().getBounds().getY(), (int) sprite.getPolygon().getBounds().width, (int) sprite.getPolygon().getBounds().height);	
+    			g.drawPolygon(sprite.getPolygon());
     	}
     	
     
@@ -694,12 +694,12 @@ public class GameBoard extends JPanel implements ActionListener {
     		}
     		
     		if(debug && hitboxes)
-    			g.drawRect((int)sprite.getPolygon().getBounds().getX(),(int) sprite.getPolygon().getBounds().getY(), (int) sprite.getPolygon().getBounds().width, (int) sprite.getPolygon().getBounds().height);	
+    			g.drawPolygon(sprite.getPolygon());
     	}
 		
 		for(Player s : players){
     		Sprite sprite = (Sprite) s;
-    		s.drawHealthBar(g, (B_WIDTH/2)-((B_WIDTH/2)/2), 60, B_WIDTH/2, 20);
+    		((Player) s).drawHealthBar(g, s.x-(100/2), s.y-20, 100, 5);
     		if(!player.walking){
     			g.drawImage((sprite).getImage(), (sprite.getX()), sprite.getY(), 13, 41, this);	
     		} else {
@@ -710,7 +710,7 @@ public class GameBoard extends JPanel implements ActionListener {
     			g.drawImage(tool.getImage(), ((B_WIDTH/2 + B_WIDTH)/2)+getFontMetrics(new Font("Helvetica", Font.BOLD, 10)).stringWidth("Tool: "), 10, 15, 15, this);
     		}
     		if(debug && hitboxes)
-    			g.drawRect((int)sprite.getPolygon().getBounds().getX(),(int) sprite.getPolygon().getBounds().getY(), (int) sprite.getPolygon().getBounds().width, (int) sprite.getPolygon().getBounds().height);
+    			g.drawPolygon(sprite.getPolygon());
 		}
     		
     	

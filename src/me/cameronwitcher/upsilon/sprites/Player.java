@@ -375,7 +375,6 @@ public class Player extends Entity implements Moveable,Keyable {
 							break;
 						default:
 							break;
-							
 						}
 					}
 
@@ -540,23 +539,26 @@ public class Player extends Entity implements Moveable,Keyable {
 		disabled = false;
 	}
 
+
 	public void drawHealthBar(Graphics g, int x, int y, int width, int height) {
 		
 		Color c = g.getColor();
 		
+		int shealth = ((health/maxhealth)*100);
+		
 		int bar = health*(width/maxhealth);
 		width = maxhealth*(width/maxhealth);
 		
-		g.drawString(health + "%", (x+(width/2))-((g.getFontMetrics().stringWidth(health + "%")/2)), y);
+		g.drawString(shealth + "%", (x+(width/2))-((g.getFontMetrics().stringWidth(shealth + "%")/2)), y);
 		
 		
 //		g.drawRect(x, y, ((health/2)), 5);
 		g.drawRect(x, y, width, height);
-		if(health >= 75)
+		if(shealth >= 75)
 			g.setColor(Color.GREEN);
-		if(health < 75 && health >= 25)
+		if(shealth < 75 && health >= 25)
 			g.setColor(Color.YELLOW);
-		if(health < 25)
+		if(shealth < 25)
 			g.setColor(Color.RED);
 		
 		g.fillRect(x, y, bar, height);
