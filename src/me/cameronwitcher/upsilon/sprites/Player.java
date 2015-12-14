@@ -7,6 +7,7 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 import me.cameronwitcher.upsilon.Bridge;
 import me.cameronwitcher.upsilon.boards.GameBoard;
@@ -197,8 +198,7 @@ public class Player extends Entity implements Moveable,Keyable {
 			
 			
 			if (key == KeyEvent.VK_1) {
-				kill(DamageReason.VOID);
-//				Bridge.getGame().getBoard().clickables.add(new Button("Test", 43, 43, 50, 30, Color.MAGENTA, Color.white, new Font("Helvetica", Font.BOLD, 10), ButtonMethod.LEVEL_UP));
+	    		Utils.displayMessage(new Random().nextInt(), "TEST", 0, 34, 10, "#00FF00", 10);
 			}
 		}
 	}
