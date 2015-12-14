@@ -449,6 +449,8 @@ public class GameBoard extends JPanel implements ActionListener {
     	for(int i=0;i!=18;i++){
     		level6.add(new Floor(i*32, 11*32));
     	}
+    	level6.add(new Knobber(2*32, 9*32));
+    	level6.add(new Gate(10, 10*32));
     	
     	level6.add(player);
     	

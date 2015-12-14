@@ -219,7 +219,6 @@ public class Utils {
 					Utils.broadcastMessage("SAVE: " + tool.getType().toString(), "Utils.class (222)");
 				}
 			} catch (NullPointerException ex) {
-				Utils.broadcastMessage("BROKE", "Utils.class (225)");
 			}
 		} catch (IOException ex) {
 		} finally {
