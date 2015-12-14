@@ -1,33 +1,23 @@
-<!DOCTYPE html>
-<html lang="en-us">
-  <head>
-    <meta charset="UTF-8">
-    <title>Upsilon by UpsilonTeam</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-  </head>
-  <body>
-    <section class="page-header">
-      <h1 class="project-name">Upsilon</h1>
-      <h2 class="project-tagline">An open source game for FBLA</h2>
-      <a href="https://github.com/UpsilonTeam/UpsilonBeta" class="btn">View on GitHub</a>
-    </section>
-    <div class="changelog-content">
-      <div class="change">
-        <h3>0.0.1</h3>
-        <p>We moved to UpsilonBeta, so we have officially restarted, version wise.</p>
-        <ul>
-          <li>Moved code over</li>
-          <li>Added some backend stuff</li>
-          <li>Added a website</li>
-          <li>Added two levels</li>
-        </ul>
-      </div>
-      
-      
-    </div>
+---
+layout: default
+---
 
-  
-  </body>
-</html>
+<div class="home">
+
+  <h1 class="page-heading">Posts</h1>
+
+  <ul class="post-list">
+    {% for post in site.posts %}
+      <li>
+        <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
+
+        <h2>
+          <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+        </h2>
+      </li>
+    {% endfor %}
+  </ul>
+
+  <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
+
+</div>
