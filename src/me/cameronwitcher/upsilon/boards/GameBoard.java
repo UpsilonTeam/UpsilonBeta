@@ -59,7 +59,6 @@ public class GameBoard extends JPanel implements ActionListener {
 	
 
 	public Timer timer;
-    public Player player;
     public boolean debug;
     public boolean won;
     public boolean loaded = false;
@@ -85,7 +84,6 @@ public class GameBoard extends JPanel implements ActionListener {
 	public Map<Integer, String> messages_player = new HashMap<>();	
 	public HashMap<Integer, Sprite> sprites = new HashMap<>();
 	public List<Clickable> clickables = new ArrayList<>();
-	public List<Player> players = new ArrayList<>();
 	public List<Moveable> moveables = new ArrayList<>();
 	
 	public List<Moveable> moveables_temp = new ArrayList<>();
@@ -101,24 +99,19 @@ public class GameBoard extends JPanel implements ActionListener {
     ArrayList<Sprite> level6 = new ArrayList<>();
     private HashMap<Integer, ArrayList<Sprite>> levels = new HashMap<>();
 
-    public GameBoard(int level) {
+    public GameBoard() {
     	
-    	messages.put(0, "1:1:1:1:#333333:1");
-    	initBoard(level);
-    	Bridge.getGame().board = this;
     }
 
-    private void initBoard(int level) {
+    public void init() {
     	
-    	
-    	Utils.savePlayerInfo(player);
-    	Utils.player_level = level;
     	
     	ingame = true;
     	
     	gameStatus = "ingame";
     	
-    	player = new Player(0,0,0);
+    	Bridge.setPlayer(new Player(0,0));
+    	Utils.savePlayerInfo(Bridge.getPlayer());
 
         addKeyListener(new TAdapter());
         addMouseMotionListener(new MMListener());
@@ -222,7 +215,7 @@ public class GameBoard extends JPanel implements ActionListener {
     	level1.add(new Gate(12*32,10*32));
     	level1.add(new Bow(9*32,14*32));
     	level1.add(new NinjaCloak(10*32,14*32));
-    	level1.add(player);
+    	level1.add(Bridge.getPlayer());
     	
     	
     	levels.put(1, level1);
@@ -242,7 +235,7 @@ public class GameBoard extends JPanel implements ActionListener {
     	level2.add(new Floor(11*32,10*32));
     	level2.add(new Floor(12*32,9*32));
     	level2.add(new Gate(12*32,8*32));
-    	level2.add(player);
+    	level2.add(Bridge.getPlayer());
     	
     	levels.put(2, level2);
     	
@@ -262,7 +255,7 @@ public class GameBoard extends JPanel implements ActionListener {
     	level3.add(new FallingFloor(11*32,12*32));
     	level3.add(new FallingFloor(12*32,13*32));
     	level3.add(new Gate(12*32,12*32));
-    	level3.add(player);
+    	level3.add(Bridge.getPlayer());
     	
     	levels.put(3, level3);
     	
@@ -335,7 +328,7 @@ public class GameBoard extends JPanel implements ActionListener {
     	level4.add(new Floor(12*32,11*32));
     	level4.add(new Gate(12*32,10*32));
     	level4.add(new Knobber(10*32,14*32));
-    	level4.add(player);
+    	level4.add(Bridge.getPlayer());
     	
     	
     	
@@ -429,7 +422,7 @@ public class GameBoard extends JPanel implements ActionListener {
     	level5.add(new Floor(18*32,16*32));
     	level5.add(new Floor(19*32,16*32));
     	level5.add(new Gate(1,15*32));
-    	level5.add(player);
+    	level5.add(Bridge.getPlayer());
     	
     	levels.put(5, level5);
     	
@@ -453,7 +446,7 @@ public class GameBoard extends JPanel implements ActionListener {
     	level6.add(new Knobber(2*32, 9*32));
     	level6.add(new Gate(10, 10*32));
     	
-    	level6.add(player);
+    	level6.add(Bridge.getPlayer());
     	
     	
     	levels.put(6, level6);
@@ -506,7 +499,7 @@ public class GameBoard extends JPanel implements ActionListener {
     	}
     	sprites.clear();
     	moveables.clear();
-    	players.clear();
+    	Bridge.setPlayerLocation(0,0);
     	tools.clear();
     	clickables.clear();
     	try{
@@ -519,8 +512,7 @@ public class GameBoard extends JPanel implements ActionListener {
         		}
         		
         		if(sprite instanceof Player){
-        			sprites.remove(player);
-        			players.add((Player) sprite);
+        			sprites.remove(sprite);
         			
         		}
         		if(sprite instanceof Tool){
@@ -539,8 +531,7 @@ public class GameBoard extends JPanel implements ActionListener {
         		}
         		
         		if(sprite instanceof Player){
-        			sprites.remove(player);
-        			players.add((Player) sprite);
+        			sprites.remove(sprite);
         			
         		}
         		if(sprite instanceof Tool){
@@ -557,7 +548,7 @@ public class GameBoard extends JPanel implements ActionListener {
     	
     }
     
-    void loadHelp() {
+    public void loadHelp() {
     	
     	paused = true;
     	Utils.displayMessage(1, "Welcome to Upsilon. Here is some help for you.", B_WIDTH/2, 40, -1, "#FFFFFF", 25);
@@ -609,7 +600,7 @@ public class GameBoard extends JPanel implements ActionListener {
     		g.drawString(inv, (B_WIDTH/2) - (fmlarge.stringWidth(inv)/2), 30);
         
 
-    		g.drawImage(player.inventory.get(l).getImage(), B_WIDTH/2, B_HEIGHT/2, this);
+    		g.drawImage(Bridge.getPlayer().inventory.get(l).getImage(), B_WIDTH/2, B_HEIGHT/2, this);
         
     
     		clickables.add(new Button(close, B_WIDTH/4, (B_HEIGHT/2 + B_HEIGHT)/2, B_WIDTH/6, 18, Color.GRAY, Color.WHITE, small, ButtonMethod.CLOSE_INVENTORY));
@@ -670,13 +661,13 @@ public class GameBoard extends JPanel implements ActionListener {
     private void drawObjects(Graphics g) {
     	
     	
-    	g.drawImage(Utils.getBackground(player.level).getImage(), 0, 0, this);
+    	g.drawImage(Utils.getBackground(Bridge.getPlayer().level).getImage(), 0, 0, this);
     	g.setColor(Color.black);
     	g.setFont(new Font("Helvetica", Font.BOLD, 10));
-    	g.drawString("Lives: " + player.lives, B_WIDTH/4, 20);
-    	g.drawString("Score: " + player.score, (B_WIDTH/2 + B_WIDTH)/2, 10);
+    	g.drawString("Lives: " + Bridge.getPlayer().lives, B_WIDTH/4, 20);
+    	g.drawString("Score: " + Bridge.getPlayer().score, (B_WIDTH/2 + B_WIDTH)/2, 10);
     	g.drawString("Tool:", (B_WIDTH/2 + B_WIDTH)/2, 20);
-    	for(Sprite sprite : getLevel(player.level)){
+    	for(Sprite sprite : getLevel(Bridge.getPlayer().level)){
     		
     		if(!(sprite instanceof Player) && !(sprite instanceof Knobber)) g.drawImage(sprite.getImage(), sprite.getX(), sprite.getY(), this);
     		if(debug && hitboxes)
@@ -706,22 +697,21 @@ public class GameBoard extends JPanel implements ActionListener {
     		if(debug && hitboxes)
     			g.drawPolygon(sprite.getPolygon());
     	}
+		Player player = Bridge.getPlayer();
 		
-		for(Player s : players){
-    		Sprite sprite = (Sprite) s;
-    		((Player) s).drawHealthBar(g, s.x-(100/2), s.y-20, 100, 5);
-    		if(!player.walking){
-    			g.drawImage((sprite).getImage(), (sprite.getX()), sprite.getY(), 13, 41, this);	
-    		} else {
-    			g.drawImage((sprite).getImage(), (sprite.getX()), sprite.getY(), 29, 41, this);
-    		}
-    		if(((Player) sprite).hasTool()){
-    			Tool tool = ((Player) sprite).getTool();
-    			g.drawImage(tool.getImage(), ((B_WIDTH/2 + B_WIDTH)/2)+getFontMetrics(new Font("Helvetica", Font.BOLD, 10)).stringWidth("Tool: "), 10, 15, 15, this);
-    		}
-    		if(debug && hitboxes)
-    			g.drawPolygon(sprite.getPolygon());
+		Bridge.getPlayer().drawHealthBar(g, player.x-(100/2), player.y-20, 100, 5);
+		if(!Bridge.getPlayer().walking){
+			g.drawImage((Bridge.getPlayer()).getImage(), (Bridge.getPlayer().getX()), Bridge.getPlayer().getY(), 13, 41, this);	
+		} else {
+			g.drawImage((Bridge.getPlayer()).getImage(), (Bridge.getPlayer().getX()), Bridge.getPlayer().getY(), 29, 41, this);
 		}
+		if(Bridge.getPlayer().hasTool()){
+			Tool tool = ((Player) Bridge.getPlayer()).getTool();
+			g.drawImage(tool.getImage(), ((B_WIDTH/2 + B_WIDTH)/2)+getFontMetrics(new Font("Helvetica", Font.BOLD, 10)).stringWidth("Tool: "), 10, 15, 15, this);
+		}
+		if(debug && hitboxes)
+			g.drawPolygon(Bridge.getPlayer().getPolygon());
+		
     		
     	
     	for(Sprite sprite : tools){
@@ -908,17 +898,10 @@ public class GameBoard extends JPanel implements ActionListener {
     		moveables.add(sprite);
     	}
     	
-    	temp_.clear();
-    	
-    	for(Player player : players){
-    		player.move();
-    		temp_.add(player);	
+    	Bridge.getPlayer().move();
+    		
     	}
-    	players.clear();
     	
-    	for(Moveable player : temp_){
-    		players.add((Player) player);
-    	}
     	
     	for(Moveable sprite : moveables_temp){
     		moveables.add(sprite);
@@ -1036,7 +1019,7 @@ public class GameBoard extends JPanel implements ActionListener {
 	}
 
 	public void start() {
-		this.initBoard(1);
+		this.initBoard();
 	}
 
 	public void pause() {

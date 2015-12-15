@@ -67,7 +67,6 @@ public class Knobber extends Entity implements Moveable,Keyable {
     }
 	@Override
 	public void move() {
-		Utils.broadcastMessage(onground + "", "LL");
 		if(!dead){
 			if (x >= 650 || x <= -1 || y >= 650 || y <= -1) {
 				kill(DamageReason.VOID);

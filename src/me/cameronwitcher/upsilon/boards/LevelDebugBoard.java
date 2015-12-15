@@ -81,7 +81,7 @@ public class LevelDebugBoard extends JPanel implements ActionListener {
 		
 		g.drawRect(0, 0, 640, 640);
 		
-		for(Sprite sprite : new GameBoard(0).getLevel(i)){
+		for(Sprite sprite : new GameBoard().getLevel(i)){
 			g.drawImage(sprite.getImage(), sprite.getX(), sprite.getY(), this);
 		}
 		

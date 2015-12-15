@@ -22,6 +22,7 @@ import javax.swing.Timer;
 
 import me.cameronwitcher.upsilon.Bridge;
 import me.cameronwitcher.upsilon.spriteutils.Clickable;
+import me.cameronwitcher.upsilon.utils.Background;
 import me.cameronwitcher.upsilon.utils.Button;
 import me.cameronwitcher.upsilon.utils.ButtonMethod;
 import me.cameronwitcher.upsilon.utils.Utils;
@@ -40,9 +41,7 @@ public class MenuBoard extends JPanel implements ActionListener {
 	Timer timer;
 	public List<Clickable> clickables = new ArrayList<>();
 	
-	Game game;
-	public MenuBoard(Game game){
-		this.game = game;
+	public MenuBoard(){
 		initBoard();
 	}
 	
@@ -57,25 +56,13 @@ public class MenuBoard extends JPanel implements ActionListener {
         
         clickables.add(new Button("Play", M_WIDTH/4, (M_HEIGHT/2 + M_HEIGHT)/2, M_WIDTH/4, (M_HEIGHT/20+10), Color.gray, Color.white, new Font("Helvetica", Font.BOLD, 25), ButtonMethod.START));
         
-        //Cameron
-        //Changed "level select" to "quit"
-        //Closes the program.
-        clickables.add(new Button("Quit", ((M_WIDTH/2)+M_WIDTH)/2, (M_HEIGHT/2 + M_HEIGHT)/2, M_WIDTH/4, (M_HEIGHT/20+10), Color.gray, Color.white, new Font("Helvetica", Font.BOLD, 25), ButtonMethod.QUIT));
-        //Cameron
-        //Removed temp. 
-//        clickables.add(new Button("Player Model",  M_WIDTH/2, ((M_HEIGHT/2 + M_HEIGHT)/2)+((M_HEIGHT/20))+20, M_WIDTH/4, (M_HEIGHT/20+10), Color.gray, Color.white, new Font("Helvetica", Font.BOLD, 25), ButtonMethod.PLAYER_MODELS));
         
+        clickables.add(new Button("Quit", ((M_WIDTH/2)+M_WIDTH)/2, (M_HEIGHT/2 + M_HEIGHT)/2, M_WIDTH/4, (M_HEIGHT/20+10), Color.gray, Color.white, new Font("Helvetica", Font.BOLD, 25), ButtonMethod.QUIT));
         
         
 		setLayout(null);
 		
-		
-		
-		
-		
-        setFocusable(true);
-        
-        
+		setFocusable(true);
         
         setPreferredSize(new Dimension(M_WIDTH, M_HEIGHT));
 	}
@@ -84,36 +71,21 @@ public class MenuBoard extends JPanel implements ActionListener {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         drawMenu(g);
-//        Utils.broadcastMessage("MENU PAINT", "MenuBoard.class (81)");
         Toolkit.getDefaultToolkit().sync();
     }
 	
 	public void drawMenu(Graphics g){
-		String title = "Upsilon";
 		
-		g.drawImage(Texture.loadTexture("background-win.png"), 0, 0, M_WIDTH, M_HEIGHT, null);
+		g.drawImage(Texture.loadTexture("win-background.png"), 0, 0, M_WIDTH, M_HEIGHT, null);
 		
 		g.drawImage(Texture.loadTexture("playermodels/" 
 		+ Utils.getPlayerModel().toLowerCase() 
-		+ "/stand_right.png"), (M_WIDTH/2)-((13*5)/2), (M_HEIGHT/2)-((44*5)/2), 13*5, 44*5, null);
-		
-
-		Font titlefont = new Font("Helvetica", Font.BOLD, 35);
-		g.setFont(titlefont);
-		FontMetrics fm = getFontMetrics(titlefont);
+		+ "/walk_right.png"), (M_WIDTH/2)-((13*5)/2), (M_HEIGHT/2)-((44*5)/2), 13*5, 44*5, null);
 		
 		g.setColor(Color.white);
 		
-		g.drawString(title, (M_WIDTH - fm.stringWidth(title)) / 2, (int) fm.getStringBounds(title, g).getHeight());
-		
 		for(Clickable clickable : clickables){
     		g.drawPolygon(clickable.drawPolygon(g));
-    		if(clickable instanceof Button){
-    			Button button = (Button) clickable;
-    			g.setColor((button).getForeground());
-    			g.setFont(button.getFont());
-    			g.drawString((button).getString(), button.x - (getFontMetrics(button.getFont()).stringWidth(button.getString())/2), button.y + (getFontMetrics(button.getFont()).getHeight())/4);
-    		}
     	}
 
 		

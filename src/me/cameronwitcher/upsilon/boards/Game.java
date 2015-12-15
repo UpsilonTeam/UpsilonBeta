@@ -7,7 +7,9 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
+import me.cameronwitcher.upsilon.Bridge;
 import me.cameronwitcher.upsilon.spriteutils.PlayerModel;
 import me.cameronwitcher.upsilon.spriteutils.tools.Tool;
 import me.cameronwitcher.upsilon.utils.Utils;
@@ -19,58 +21,24 @@ public class Game extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private Scanner commandScanner;
-	GameBoard board;
-	private Game game;
-	private Game game_temp;
-	private LevelDebugBoard level;
-	private PlayerModelBoard models;
-	private MenuBoard menu;
 	public int DEBUG_LEVEL = 1;
 	private String version = "0.0.1 BETA";
+	public JPanel board;
 
-	public Game(int i) {
-		
-		game = this;
+	public Game() {
 		Utils.broadcastMessage("TEEST", "Game.class (32)");
-		game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
-	
+
 	public String getVersion(){
 		return version;
 	}
 
 	public void init() {
+		
+		add(new MenuBoard());
 
-		Timer timer = new Timer();
-		timer.schedule(new TimerTask() {
-
-			@Override
-			public void run() {
-				commandScanner = new Scanner(System.in);
-				String command = commandScanner.next();
-				if (command.equalsIgnoreCase("fly"))
-					getBoard().toggleGravity();
-				if (command.equalsIgnoreCase("yellow")) {
-					Utils.broadcastMessage("TESTST", "Game.class (48)");
-					getBoard().player.setPlayerModel(PlayerModel.YELLOW);
-				}
-				if (command.equalsIgnoreCase("green"))
-					getBoard().player.setPlayerModel(PlayerModel.GREEN);
-				if (command.equalsIgnoreCase("blue"))
-					getBoard().player.setPlayerModel(PlayerModel.BLUE);
-				if (command.equalsIgnoreCase("purple"))
-					getBoard().player.setPlayerModel(PlayerModel.PURPLE);
-				if (command.equalsIgnoreCase("pink"))
-					getBoard().player.setPlayerModel(PlayerModel.PINK);
-			}
-
-		}, 15, 15);
-
-		menu = new MenuBoard(this);
-		add(menu);
-
-		// setResizable(false);
+		setResizable(false);
 		pack();
 
 		setTitle("Upsilon");
@@ -80,76 +48,33 @@ public class Game extends JFrame {
 		setIconImage(Texture.loadTexture("logo.png"));
 	}
 
-	public void startLevel(GameBoard board) {
 
-		Timer timer = new Timer();
-		timer.schedule(new TimerTask() {
 
-			@Override
-			public void run() {
-				commandScanner = new Scanner(System.in);
-				String command = commandScanner.nextLine();
-				if (command.equalsIgnoreCase("fly"))
-					getBoard().toggleGravity();
-				if (command.equalsIgnoreCase("yellow")) {
-					Utils.broadcastMessage("TESTST", "Game.class (88)");
-					getBoard().player.setPlayerModel(PlayerModel.YELLOW);
-				}
-				if (command.equalsIgnoreCase("green"))
-					getBoard().player.setPlayerModel(PlayerModel.GREEN);
-				if (command.equalsIgnoreCase("blue"))
-					getBoard().player.setPlayerModel(PlayerModel.BLUE);
-				if (command.equalsIgnoreCase("purple"))
-					getBoard().player.setPlayerModel(PlayerModel.PURPLE);
-				if (command.equalsIgnoreCase("pink"))
-					getBoard().player.setPlayerModel(PlayerModel.PINK);
-			}
+	
 
-		}, 15, 15);
-
-		add(board);
-
-		setResizable(false);
-		pack();
-		setLocationRelativeTo(null);
-
+	public void start() {
+		clear();
 		setTitle("Upsilon");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
-		setIconImage(Texture.loadTexture("/res/logo.png"));
+		setIconImage(Texture.loadTexture("logo.png"));
+		Utils.broadcastMessage("START", "Game.class (105)");
+		
+		setPreferredSize(new Dimension(640, 640));
+		pack();
+		
+		add(new GameBoard());
 
+		setResizable(false);
+		
 		if (Utils.player_level == 1) {
-			board.loadHelp();
+			((GameBoard) board).loadHelp();
 		}
 	}
-
-	public GameBoard getBoard() {
-
-		return board;
-	}
-
-	private void restart() {
-		game.clear();
-		Utils.broadcastMessage("RESTART", "Game.class (126)");
-		menu = new MenuBoard(this);		
-		game.setPreferredSize(new Dimension(menu.M_WIDTH, menu.M_HEIGHT));
-		game.pack();
-		game.setVisible(true);
-
-		game.add(menu);
-		game.setLocationRelativeTo(null);
-		
-	}
-
-	public void start(int i) {
-		game.clear();
-		Utils.broadcastMessage("START", "Game.class (143)");
-		board = new GameBoard(1);
-		game.setPreferredSize(new Dimension(board.B_WIDTH, board.B_HEIGHT));
-		game.pack();
-
-		game.setResizable(false);
-		game.startLevel(board);
+	
+	public void restart(){
+		Utils.player_level = 1;
+		Bridge.getGame().board.loadLevel();
 	}
 
 	public void openLevelDebug(int i) {
@@ -167,7 +92,7 @@ public class Game extends JFrame {
 		game.clear();
 		Utils.broadcastMessage("LOAD LEVEL", "Game.class (167)");
 		game.pack();
-		board = new GameBoard(i);
+		board = new GameBoard();
 		game.setPreferredSize(new Dimension(board.B_WIDTH, board.B_HEIGHT));
 		game.setResizable(false);
 		game.startLevel(board);
@@ -186,13 +111,19 @@ public class Game extends JFrame {
 	}
 
 	public void openMenu() {
-		game.restart();
+		game.clear();
+		menu = new MenuBoard();
+		game.setPreferredSize(new Dimension(menu.M_WIDTH, menu.M_HEIGHT));
+		game.pack();
+		game.setVisible(true);
+		
+		game.add(menu);
+		game.setLocationRelativeTo(null);
 	}
 
 	public void clear() {
-		game.removeAll();
-		game.dispose();
-		game = new Game(1);
+		removeAll();
+		dispose();
 	}
 
 	public void openInventory(List<Tool> inv) {
@@ -203,6 +134,11 @@ public class Game extends JFrame {
 
 	public void closeInventory() {
 		board.inv = false;
+	}
+
+	public void setBoard(JPanel board) {
+		this.board = board;
+		add(board);
 	}
 
 }

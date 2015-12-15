@@ -41,9 +41,6 @@ public class Utils {
 
 	public static void init() {
 		root = "C://Upsilon/";
-		rootFile = new File(root);
-		if (!rootFile.exists())
-			runInstall();
 		config = new File(root + "/config.txt");
 		modelsFile = new File(root + "/models.txt");
 		inventoryFile = new File(root + "/inventory.txt");
@@ -354,6 +351,7 @@ public class Utils {
 		player_model = model.toString();
 	}
 
+	//TODO
 	public static String getPlayerModel() {
 		return "YELLOW";
 	}

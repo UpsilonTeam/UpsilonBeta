@@ -52,7 +52,7 @@ public class Player extends Entity implements Moveable,Keyable {
 	private HashMap<Integer, Integer> jumpInfo = new HashMap<>();
 	private boolean ctrl = false;
 
-	public Player(int x, int y, int help) {
+	public Player(int x, int y) {
 		super(x, y);
 		onground = false;
 		jumping = false;
