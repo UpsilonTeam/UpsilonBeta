@@ -44,6 +44,7 @@ import me.cameronwitcher.upsilon.spriteutils.State;
 import me.cameronwitcher.upsilon.spriteutils.tools.Bow;
 import me.cameronwitcher.upsilon.spriteutils.tools.NinjaCloak;
 import me.cameronwitcher.upsilon.spriteutils.tools.Tool;
+import me.cameronwitcher.upsilon.utils.Background;
 import me.cameronwitcher.upsilon.utils.Button;
 import me.cameronwitcher.upsilon.utils.ButtonMethod;
 import me.cameronwitcher.upsilon.utils.Utils;
@@ -667,6 +668,7 @@ public class GameBoard extends JPanel implements ActionListener {
     }
 
     private void drawObjects(Graphics g) {
+    	
     	
     	g.drawImage(Utils.getBackground(player.level).getImage(), 0, 0, this);
     	g.setColor(Color.black);

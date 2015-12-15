@@ -35,7 +35,7 @@ public class Utils {
 	public static String player_model;
 	private static String root;
 	private static File rootFile;
-	private static HashMap<Integer, Background> backgrounds = new HashMap<>();
+	public static HashMap<Integer, Background> backgrounds = new HashMap<>();
 	private static ArrayList<String> models = new ArrayList<>();
 	private static ArrayList<String> player_inv = new ArrayList<>();
 
@@ -47,6 +47,16 @@ public class Utils {
 		config = new File(root + "/config.txt");
 		modelsFile = new File(root + "/models.txt");
 		inventoryFile = new File(root + "/inventory.txt");
+		
+		
+		
+		backgrounds.put(1, Background.SKY);
+		backgrounds.put(2, Background.SKY);
+		backgrounds.put(3, Background.SKY);
+		backgrounds.put(4, Background.SKY);
+		backgrounds.put(5, Background.SKY);
+		backgrounds.put(6, Background.SKY);
+		
 
 		int length = (int) config.length();
 		byte[] bytes = new byte[length];
