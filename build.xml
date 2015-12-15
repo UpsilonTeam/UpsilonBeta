@@ -7,14 +7,14 @@
   <property name="build" location="build"/>
   <property name="dist" location="dist"/>
 
-  <target name="init">
+  <target name="test">
     <!-- Create the time stamp -->
     <tstamp/>
     <!-- Create the build directory structure used by compile -->
     <mkdir dir="${build}"/>
   </target>
 
-  <target name="compile" depends="init"
+  <target name="compile" depends="test"
         description="compile the source">
     <!-- Compile the java code from ${src} into ${build} -->
     <javac srcdir="${src}" destdir="${build}"/>
