@@ -11,6 +11,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.swing.JOptionPane;
@@ -34,6 +35,7 @@ public class Utils {
 	public static String player_model;
 	private static String root;
 	private static File rootFile;
+	private static HashMap<Integer, Background> backgrounds = new HashMap<>();
 	private static ArrayList<String> models = new ArrayList<>();
 	private static ArrayList<String> player_inv = new ArrayList<>();
 
@@ -391,6 +393,10 @@ public class Utils {
 		Area a2 = new Area(shape2);
 		a1.intersect(a2);
 		return !a1.isEmpty();
+	}
+	
+	public static Background getBackground(int level){
+		return backgrounds.get(level);
 	}
 
 }

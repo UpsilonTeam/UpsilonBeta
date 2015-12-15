@@ -668,7 +668,7 @@ public class GameBoard extends JPanel implements ActionListener {
 
     private void drawObjects(Graphics g) {
     	
-    	g.drawImage(Texture.loadTexture("background.png"), 0, 0, this);
+    	g.drawImage(Utils.getBackground(player.level).getImage(), 0, 0, this);
     	g.setColor(Color.black);
     	g.setFont(new Font("Helvetica", Font.BOLD, 10));
     	g.drawString("Lives: " + player.lives, B_WIDTH/4, 20);
