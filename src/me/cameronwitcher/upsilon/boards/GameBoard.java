@@ -636,13 +636,13 @@ public class GameBoard extends JPanel implements ActionListener {
     }
 
 	private void drawWin(Graphics g){
+		Button restart = new Button("Restart", B_WIDTH/2, B_HEIGHT/2, B_WIDTH/6, B_HEIGHT/10, Color.decode("#44cc44"), Color.white, new Font("Helvetica", Font.PLAIN, 15), ButtonMethod.RESTART);
+        clickables.add(restart);
     	
     	g.drawImage(Texture.loadTexture("background-win.png"), 0, 0, null);
     	
         String won = "You won!";
-        Button restart = new Button("Restart", B_WIDTH/2, B_HEIGHT/2, B_WIDTH/6, B_HEIGHT/10, Color.decode("#44cc44"), Color.white, new Font("Helvetica", Font.PLAIN, 15), ButtonMethod.RESTART);
         
-        clickables.add(restart);
         Font small = new Font("Helvetica", Font.BOLD, 14);
         Font large = new Font("Helvetica", Font.BOLD, 25);
 //        FontMetrics fmsmall = getFontMetrics(small);
@@ -653,6 +653,11 @@ public class GameBoard extends JPanel implements ActionListener {
         g.drawString(won, (B_WIDTH - fmlarge.stringWidth(won)) / 2, B_HEIGHT / 3);
         g.setColor(Color.red);
         g.setFont(small);
+        for(Clickable clickable : clickables){
+        	clickable.drawPolygon(g);
+        }
+        
+        clickables.clear();
         
         
     
@@ -814,12 +819,6 @@ public class GameBoard extends JPanel implements ActionListener {
     	
     	for(Clickable clickable : clickables){
     		g.drawPolygon(clickable.drawPolygon(g));
-    		if(clickable instanceof Button){
-    			Button button = (Button) clickable;
-    			g.setColor((button).getForeground());
-    			g.setFont(button.getFont());
-    			g.drawString((button).getString(), button.x - (getFontMetrics(button.getFont()).stringWidth(button.getString())/2), button.y + (getFontMetrics(button.getFont()).getHeight()/4));
-    		}
     	}
     	
     }

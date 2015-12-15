@@ -92,6 +92,8 @@ public class Button implements Clickable {
 		Polygon p = getPolygon();
 		g.setColor(back);
 		g.fillPolygon(p);
+		g.setColor(fore);
+		g.drawString(message, x-(g.getFontMetrics(g.getFont()).stringWidth(message)/2), y + (g.getFontMetrics().getHeight()/4));
 		return p;
 	}
 
