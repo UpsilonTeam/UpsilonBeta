@@ -48,7 +48,12 @@ public class Bridge implements Provider<Source> {
         System.out.println("Service running at " + address);
         System.out.println("Type [CTRL]+[C] to quit!");
 
-        Thread.sleep(Long.MAX_VALUE);
+        try {
+			Thread.sleep(Long.MAX_VALUE);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 	
