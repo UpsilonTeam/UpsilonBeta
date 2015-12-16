@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.util.Random;
 
 import me.cameronwitcher.upsilon.Bridge;
+import me.cameronwitcher.upsilon.boards.GameBoard;
 import me.cameronwitcher.upsilon.sprites.Player;
 import me.cameronwitcher.upsilon.spriteutils.tools.Tool;
 import me.cameronwitcher.upsilon.utils.DamageReason;
@@ -103,8 +104,7 @@ public class Entity extends Sprite {
 			if (!walking) {
 				if (this instanceof Player) {
 
-					loadImage("playermodels/" + (Bridge.getGame().getBoard().player.model.toString().toLowerCase())
-							+ "/stand_" + direction.toString().toLowerCase() + ".png");
+					loadImage("playermodels/yellow/stand_" + direction.toString().toLowerCase() + ".png");
 				}
 			}
 

@@ -1,12 +1,11 @@
 package me.cameronwitcher.upsilon.sprites;
 
-import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import me.cameronwitcher.upsilon.Bridge;
+import me.cameronwitcher.upsilon.boards.GameBoard;
 import me.cameronwitcher.upsilon.spriteutils.Entity;
 import me.cameronwitcher.upsilon.spriteutils.Keyable;
 import me.cameronwitcher.upsilon.spriteutils.Moveable;
@@ -15,6 +14,7 @@ import me.cameronwitcher.upsilon.spriteutils.SpriteSubType;
 import me.cameronwitcher.upsilon.spriteutils.SpriteType;
 import me.cameronwitcher.upsilon.spriteutils.tools.Bow;
 import me.cameronwitcher.upsilon.utils.AI;
+import me.cameronwitcher.upsilon.utils.BoardType;
 import me.cameronwitcher.upsilon.utils.DamageReason;
 import me.cameronwitcher.upsilon.utils.Direction;
 import me.cameronwitcher.upsilon.utils.Utils;
@@ -72,8 +72,10 @@ public class Knobber extends Entity implements Moveable,Keyable {
 				kill(DamageReason.VOID);
 			}
 			
+			if(!Bridge.getGame().getBoard().getType().equals(BoardType.GAME_BOARD)) return;
+			
 			try{
-				for (Sprite sprite : Bridge.getGame().getBoard().getLevel(Utils.player_level)) {
+				for (Sprite sprite : ((GameBoard) Bridge.getGame().getBoard()).getLevel(Utils.player_level)) {
 					if(sprite instanceof Knobber) continue;
 					if (!getPolygon().intersects(sprite.getPolygon().getBounds())){
 						continue;
@@ -114,20 +116,20 @@ public class Knobber extends Entity implements Moveable,Keyable {
 				}
 				else dy = 4;
 				
-				if(AI.getFollowSprite(this, Bridge.getGame().getBoard().player) == 1){
+				if(AI.getFollowSprite(this, Bridge.player) == 1){
 					walking = true;
 					setDir(Direction.RIGHT);
 				}
-				if(AI.getFollowSprite(this, Bridge.getGame().getBoard().player) == -1){
+				if(AI.getFollowSprite(this, Bridge.player) == -1){
 					walking = true;
 					setDir(Direction.LEFT);
 				}
 						
 				
-				dx = AI.getFollowSprite(this, Bridge.getGame().getBoard().player);
-				if(Math.abs(Bridge.getGame().getBoard().player.x -this.x) <=100){
+				dx = AI.getFollowSprite(this, Bridge.player);
+				if(Math.abs(Bridge.player.x -this.x) <=100){
 					dx=0;
-					attemptShoot(Bridge.getGame().getBoard().player);
+					attemptShoot(Bridge.player);
 				}
 				if(dx==0){
 					loadImage("knobber/stand_" + getDirection().toString().toLowerCase() + ".png");

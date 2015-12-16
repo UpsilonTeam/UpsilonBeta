@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import me.cameronwitcher.upsilon.Bridge;
 import me.cameronwitcher.upsilon.spriteutils.PlayerModel;
 import me.cameronwitcher.upsilon.spriteutils.tools.Tool;
+import me.cameronwitcher.upsilon.utils.Board;
 import me.cameronwitcher.upsilon.utils.Utils;
 import res.Texture;
 
@@ -23,7 +24,7 @@ public class Game extends JFrame {
 	private static final long serialVersionUID = 1L;
 	public int DEBUG_LEVEL = 1;
 	private String version = "0.0.1 BETA";
-	public JPanel board;
+	public Board board;
 
 	public Game() {
 		Utils.broadcastMessage("TEEST", "Game.class (32)");
@@ -74,51 +75,39 @@ public class Game extends JFrame {
 	
 	public void restart(){
 		Utils.player_level = 1;
-		Bridge.getGame().board.loadLevel();
+		((GameBoard)Bridge.getGame().getBoard()).loadLevel();
 	}
 
 	public void openLevelDebug(int i) {
-		game.clear();
-		level = new LevelDebugBoard(i);
-		game.setPreferredSize(new Dimension(level.L_WIDTH, level.L_HEIGHT));
-		game.pack();
-		game.setVisible(true);
+		clear();
+		setPreferredSize(new Dimension(640, 640));
+		pack();
+		setVisible(true);
 
-		game.add(level);
-		game.setLocationRelativeTo(null);
+		setBoard(new LevelDebugBoard(i));
+		setLocationRelativeTo(null);
 	}
 
 	public void loadLevel(int i) {
-		game.clear();
+		clear();
 		Utils.broadcastMessage("LOAD LEVEL", "Game.class (167)");
-		game.pack();
-		board = new GameBoard();
-		game.setPreferredSize(new Dimension(board.B_WIDTH, board.B_HEIGHT));
-		game.setResizable(false);
-		game.startLevel(board);
+		pack();
+		setBoard(new GameBoard());
+		setPreferredSize(new Dimension(640, 640));
+		setResizable(false);
+		start();
 	}
 
-	public void openPlayerModels() {
-		game.clear();
-
-		Utils.broadcastMessage("LOAD MODELS", "Game.class (178)");
-		game.pack();
-		game.setVisible(true);
-		models = new PlayerModelBoard(game);
-		game.setPreferredSize(new Dimension(models.P_WIDTH, models.P_HEIGHT));
-		game.add(models);
-		game.setLocationRelativeTo(null);
-	}
+	
 
 	public void openMenu() {
-		game.clear();
-		menu = new MenuBoard();
-		game.setPreferredSize(new Dimension(menu.M_WIDTH, menu.M_HEIGHT));
-		game.pack();
-		game.setVisible(true);
+		clear();
+		setPreferredSize(new Dimension(960, 640));
+		pack();
+		setVisible(true);
 		
-		game.add(menu);
-		game.setLocationRelativeTo(null);
+		
+		setLocationRelativeTo(null);
 	}
 
 	public void clear() {
@@ -128,17 +117,21 @@ public class Game extends JFrame {
 
 	public void openInventory(List<Tool> inv) {
 
-		board.inv = true;
+		((GameBoard)Bridge.getGame().getBoard()).inv = true;
 
 	}
 
 	public void closeInventory() {
-		board.inv = false;
+		((GameBoard)Bridge.getGame().getBoard()).inv = false;
 	}
 
-	public void setBoard(JPanel board) {
+	public void setBoard(Board board) {
 		this.board = board;
 		add(board);
+	}
+
+	public Board getBoard() {
+		return board;
 	}
 
 }

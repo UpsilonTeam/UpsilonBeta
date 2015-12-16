@@ -1,9 +1,17 @@
 package me.cameronwitcher.upsilon;
 
 import java.awt.Dimension;
+
 import java.io.File;
+import java.io.StringReader;
 
 import javax.swing.JFrame;
+import javax.xml.transform.Source;
+import javax.xml.transform.stream.StreamSource;
+import javax.xml.ws.Provider;
+import javax.xml.ws.Service;
+import javax.xml.ws.ServiceMode;
+import javax.xml.ws.WebServiceProvider;
 
 import me.cameronwitcher.upsilon.boards.Game;
 import me.cameronwitcher.upsilon.boards.GameBoard;
@@ -12,10 +20,16 @@ import me.cameronwitcher.upsilon.sprites.Player;
 import me.cameronwitcher.upsilon.utils.Utils;
 import res.Texture;
 
-public class Bridge {
+@WebServiceProvider
+@ServiceMode(value = Service.Mode.PAYLOAD)
+public class Bridge implements Provider<Source> {
 
 	private static Game game;
 	public static Player player;
+	
+	public Source invoke(Source request) {
+        return  new StreamSource(new StringReader("<p>Hello There!</p>"));
+    }
 
 	public static void main(String[] args) {
 		game = new Game();
