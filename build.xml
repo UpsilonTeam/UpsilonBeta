@@ -21,6 +21,17 @@
     <javac srcdir="${src}" destdir="${build}"/>
     <echo message="Compiled project." />
   </target>
+  
+  <target name="run" depends="compile"
+      description="Run the webserver. Hopfully.">
+      <echo message="Running project." />
+      <java classname="me.cameronwitcher.upsilon.Bridge">
+          <classpath>
+              <pathelement path="${build}" />
+          </classpath>
+      </java>
+      <echo message="Started project." />
+  </target>
 
   <target name="dist" depends="compile"
         description="generate the distribution">
@@ -32,6 +43,8 @@
     
     <echo message="Created distro." />
   </target>
+  
+  
 
   <target name="clean"
         description="clean up">
