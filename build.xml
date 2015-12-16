@@ -18,9 +18,11 @@
         description="compile the source">
     <!-- Compile the java code from ${src} into ${build} -->
     <javac srcdir="${src}" destdir="${build}"/>
-    
-    
-    <java classname="me.cameronwitcher.upsilon.Bridge">
+  </target>
+  
+  <target name="run" depends="compile"
+      description="Run the webserver">
+      <java classname="me.cameronwitcher.upsilon.Bridge">
         <classpath>
             <pathelement path="${build}" />
         </classpath>
