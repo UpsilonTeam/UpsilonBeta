@@ -4,4 +4,4 @@ notifications:
 script:
   - ant test
   - ant compile
-  - and run
+  - ant run
