@@ -19,13 +19,15 @@
     <!-- Compile the java code from ${src} into ${build} -->
     <javac srcdir="${src}" destdir="${build}"/>
     
-  </target>
-  
-  <java classname="me.cameronwitcher.upsilon.Bridge" depends="compile">
+    
+    <java classname="me.cameronwitcher.upsilon.Bridge">
         <classpath>
             <pathelement path="${build}" />
         </classpath>
     </java>
+  </target>
+  
+  
 
   
 
