@@ -40,7 +40,7 @@
   
 
   <target name="clean"
-        description="clean up">
+        description="clean up" depends="dist">
     <!-- Delete the ${build} and ${dist} directory trees -->
     <delete dir="${build}"/>
     <delete dir="${dist}"/>
