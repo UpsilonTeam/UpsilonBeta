@@ -5,6 +5,7 @@ import java.awt.Polygon;
 import java.awt.Rectangle;
 
 import me.cameronwitcher.upsilon.Bridge;
+import me.cameronwitcher.upsilon.boards.GameBoard;
 import me.cameronwitcher.upsilon.utils.Direction;
 import me.cameronwitcher.upsilon.utils.Utils;
 import res.Texture;
@@ -40,7 +41,7 @@ public class Sprite {
     
 
 	public void remove(){
-		Bridge.getGame().getBoard().removeSprite(this);
+		((GameBoard)Bridge.getGame().getBoard()).removeSprite(this);
     }
     
     public SpriteType getType(){return null;}

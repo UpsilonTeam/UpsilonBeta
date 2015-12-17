@@ -1,6 +1,7 @@
 package me.cameronwitcher.upsilon.spriteutils;
 
 import me.cameronwitcher.upsilon.Bridge;
+import me.cameronwitcher.upsilon.boards.GameBoard;
 import me.cameronwitcher.upsilon.utils.DamageReason;
 import me.cameronwitcher.upsilon.utils.Direction;
 import me.cameronwitcher.upsilon.utils.Utils;
@@ -38,7 +39,7 @@ public class Projectile extends Entity implements Moveable {
 			x = x+speed;
 		if(direction.equals(Direction.LEFT))
 			x = x-speed;
-		for(Sprite sprite : Bridge.getGame().getBoard().getLevel(Utils.player_level)){
+		for(Sprite sprite : ((GameBoard)Bridge.getGame().getBoard()).getLevel(Utils.player_level)){
 			if(!this.getPolygon().getBounds().intersects(sprite.getPolygon().getBounds())) continue;
 			if(sprite instanceof Entity){
 				if(!sprite.getType().equals(shooter.getType())){

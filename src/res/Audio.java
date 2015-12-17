@@ -10,7 +10,7 @@ import me.cameronwitcher.upsilon.utils.Utils;
 public class Audio {
 	
 	public static synchronized void playSound(final Sound sound) {
-		Utils.broadcastMessage("TEST", "aa");
+		Utils.broadcastMessage("TEST", "audio.class");
 		new Thread(new Runnable() {
 			
 			// The wrapper thread is unnecessary, unless it blocks on the

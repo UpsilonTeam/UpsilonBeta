@@ -11,11 +11,13 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.swing.JOptionPane;
 
 import me.cameronwitcher.upsilon.Bridge;
+import me.cameronwitcher.upsilon.boards.GameBoard;
 import me.cameronwitcher.upsilon.sprites.Player;
 import me.cameronwitcher.upsilon.spriteutils.PlayerModel;
 import me.cameronwitcher.upsilon.spriteutils.Sprite;
@@ -27,24 +29,28 @@ public class Utils {
 
 	private static List<Integer> ids = new ArrayList<>();
 	private static File config;
-	private static File modelsFile;
 	private static File inventoryFile;
 	public static int player_level;
 	public static int player_score;
-	public static String player_model;
 	private static String root;
 	private static File rootFile;
-	private static ArrayList<String> models = new ArrayList<>();
+	public static HashMap<Integer, Background> backgrounds = new HashMap<>();
 	private static ArrayList<String> player_inv = new ArrayList<>();
 
 	public static void init() {
 		root = "C://Upsilon/";
-		rootFile = new File(root);
-		if (!rootFile.exists())
-			runInstall();
 		config = new File(root + "/config.txt");
-		modelsFile = new File(root + "/models.txt");
 		inventoryFile = new File(root + "/inventory.txt");
+		
+		
+		
+		backgrounds.put(1, Background.SKY);
+		backgrounds.put(2, Background.SKY);
+		backgrounds.put(3, Background.SKY);
+		backgrounds.put(4, Background.SKY);
+		backgrounds.put(5, Background.SKY);
+		backgrounds.put(6, Background.SKY);
+		
 
 		int length = (int) config.length();
 		byte[] bytes = new byte[length];
@@ -92,28 +98,7 @@ public class Utils {
 			e1.printStackTrace();
 		}
 
-		int length1 = (int) modelsFile.length();
-		byte[] bytes1 = new byte[length1];
-		FileInputStream in1;
-		try {
-			in1 = new FileInputStream(modelsFile);
-			try {
-				in1.read(bytes1);
-			} catch (IOException e) {
-
-				e.printStackTrace();
-			} finally {
-				try {
-					in1.close();
-				} catch (IOException e) {
-
-					e.printStackTrace();
-				}
-			}
-		} catch (FileNotFoundException e1) {
-
-			e1.printStackTrace();
-		}
+		
 
 		String invs = new String(invb);
 		String[] invd = invs.split("-");
@@ -132,16 +117,10 @@ public class Utils {
 				player_level = Integer.parseInt(info.split(":")[1]);
 			if (info.contains("score"))
 				player_score = Integer.parseInt(info.split(":")[1]);
-			if (info.contains("model"))
-				player_model = info.split(":")[1];
+			
 		}
 
-		String contents1 = new String(bytes1);
-		String[] data1 = contents1.split("-");
-		for (String info : data1) {
-			models.add(info);
-		}
-
+		
 	}
 
 	public static void broadcastMessage(String message, String location) {
@@ -151,18 +130,11 @@ public class Utils {
 	}
 
 	public static void displayMessage(int id, String message, int x, int y, int time, String color, int size) {
-		Bridge.getGame()
-				.getBoard().messages.put(
-						id,
-						message + ":"
-								+ ((x - Bridge.getGame().getBoard()
-										.getFontMetrics(new Font("Helvetica", Font.BOLD, size)).stringWidth(message)
-										/ 2))
-								+ ":" + y + ":" + time + ":" + color + ":" + size);
+		((GameBoard)Bridge.getGame().getBoard()).messages.put(id,message + ":"+ ((x - ((GameBoard)Bridge.getGame().getBoard()).getFontMetrics(new Font("Helvetica", Font.BOLD, size)).stringWidth(message)/ 2)) + ":" + y + ":" + time + ":" + color + ":" + size);
 	}
 
 	public static void addPlayerMessage(int id, String message, int xmod, int ymod, int time, String color, int size) {
-		Bridge.getGame().getBoard().messages_player.put(id,
+		((GameBoard)Bridge.getGame().getBoard()).messages_player.put(id,
 				message + ":" + xmod + ":" + ymod + ":" + time + ":" + color + ":" + size);
 	}
 
@@ -184,13 +156,9 @@ public class Utils {
 		inventoryFile.delete();
 		if (!inventoryFile.getParentFile().mkdirs()) {
 		}
-		modelsFile.delete();
-		if (!modelsFile.getParentFile().mkdirs()) {
-		}
 		try {
 			player_level = player.level;
 			player_score = player.score;
-			player_model = player.model.toString();
 		} catch (NullPointerException ex) {
 		}
 
@@ -198,8 +166,7 @@ public class Utils {
 		try {
 			out = new BufferedWriter(new FileWriter(config, true));
 			out.append("level:" + player_level + "-");
-			out.append("score:" + player_score + "-");
-			out.append("model:" + player_model);
+			out.append("score:" + player_score);
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		} finally {
@@ -229,29 +196,13 @@ public class Utils {
 				e.printStackTrace();
 			}
 		}
-
-		try {
-			out = new BufferedWriter(new FileWriter(modelsFile, true));
-			for (String model : models) {
-				out.append(model + "-");
-			}
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		} finally {
-			try {
-				out.close();
-			} catch (IOException e) {
-
-				e.printStackTrace();
-			}
-		}
+		
 
 	}
 
 	public static void initPlayer(Player player) {
 		player.level = player_level;
 		player.score = player_score;
-		player.model = PlayerModel.valueOf(player_model);
 		for (String i : player_inv) {
 			try {
 				player.inventory.add(ToolType.getNewTool(ToolType.valueOf(i)));
@@ -267,15 +218,12 @@ public class Utils {
 		if (!rootFile.exists())
 			rootFile.mkdirs();
 		config = new File(root + "/config.txt");
-		modelsFile = new File(root + "/models.txt");
 		inventoryFile = new File(root + "/inventory.txt");
 
 		if (!config.getParentFile().mkdirs()) {
 			Utils.broadcastMessage("Coundn't make config", "Utils.class (280)");
 		}
-		if (!modelsFile.getParentFile().mkdirs()) {
-			Utils.broadcastMessage("Coundn't make models", "Utils.class (283)");
-		}
+		
 		if (!inventoryFile.getParentFile().mkdirs()) {
 			Utils.broadcastMessage("Coundn't make inv", "Utils.class (286)");
 		}
@@ -285,8 +233,7 @@ public class Utils {
 		try {
 			out = new BufferedWriter(new FileWriter(config, true));
 			out.append("level:" + 1 + "-");
-			out.append("score:" + 0 + "-");
-			out.append("model:YELLOW");
+			out.append("score:" + 0);
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		} finally {
@@ -299,19 +246,7 @@ public class Utils {
 		}
 		BufferedWriter out1 = null;
 
-		try {
-			out1 = new BufferedWriter(new FileWriter(modelsFile, true));
-			out1.append("YELLOW");
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		} finally {
-			try {
-				out1.close();
-			} catch (IOException e) {
-
-				e.printStackTrace();
-			}
-		}
+		
 
 		BufferedWriter invout = null;
 
@@ -334,44 +269,14 @@ public class Utils {
 	public static void checkPlayerInfo(Player player) {
 		player.level = player_level;
 		player.score = player_score;
-		if (!player.model.toString().toLowerCase().equals(player_model.toLowerCase()))
-			player.setPlayerModel(PlayerModel.valueOf(player_model));
 	}
 
-	public static void setPlayerModel(PlayerModel model) {
-		player_model = model.toString();
-	}
 
-	public static String getPlayerModel() {
-		return "YELLOW";
-	}
-
-	public static boolean playerHasModel(PlayerModel model) {
-		if (models.contains(model.toString()))
-			return true;
-		else
-			return false;
-	}
-
-	public static void buyModel(PlayerModel model) {
-		if (Bridge.getGame().getBoard().player.score >= PlayerModel.valueOf(model.toString().toUpperCase()).getPrice()) {
-			models.add(model.toString().toUpperCase());
-			player_score = player_score - model.getPrice();
-			Bridge.getGame().getBoard().player.score = player_score;
-			Utils.setPlayerModel(model);
-			JOptionPane.showMessageDialog(null, "You have bought the " + model.toString() + " player model!", "Title",
-					JOptionPane.PLAIN_MESSAGE);
-		} else {
-			JOptionPane.showMessageDialog(null,
-					"You don't have enough money for that. You need $" + (model.getPrice()) + " more.", "Error",
-					JOptionPane.ERROR_MESSAGE);
-		}
-	}
 
 	public static Sprite getSpriteAtLocation(int x, int y) {
 		Rectangle point = new Rectangle(x, y, 5, 5);
-		Bridge.getGame().getBoard().drawRectangle(point);
-		for (Sprite sprite : Bridge.getGame().getBoard().getLevel(player_level)) {
+		((GameBoard)Bridge.getGame().getBoard()).drawRectangle(point);
+		for (Sprite sprite : ((GameBoard)Bridge.getGame().getBoard()).getLevel(player_level)) {
 			if (point.intersects(sprite.getPolygon().getBounds())) {
 				point = null;
 				return sprite;
@@ -391,6 +296,10 @@ public class Utils {
 		Area a2 = new Area(shape2);
 		a1.intersect(a2);
 		return !a1.isEmpty();
+	}
+	
+	public static Background getBackground(int level){
+		return backgrounds.get(level);
 	}
 
 }

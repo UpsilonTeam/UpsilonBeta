@@ -1,35 +1,20 @@
 package me.cameronwitcher.upsilon.boards;
 
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionAdapter;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JPanel;
-
-import me.cameronwitcher.upsilon.Bridge;
-import me.cameronwitcher.upsilon.spriteutils.Clickable;
 import me.cameronwitcher.upsilon.spriteutils.Sprite;
-import me.cameronwitcher.upsilon.utils.ButtonCreator;
-import me.cameronwitcher.upsilon.utils.Utils;
-import res.Texture;
+import me.cameronwitcher.upsilon.utils.Board;
+import me.cameronwitcher.upsilon.utils.BoardType;
 
-public class LevelDebugBoard extends JPanel implements ActionListener {
+public class LevelDebugBoard extends Board implements ActionListener {
 	
     /**
 	 * 
@@ -41,11 +26,12 @@ public class LevelDebugBoard extends JPanel implements ActionListener {
 	int i;
 	
 	public LevelDebugBoard(int i){
+		setType(BoardType.LEVEL_DEBUG);
 		this.i = i;
 		init();
 	}
 	
-	public JPanel init(){
+	public void init(){
 		setLayout(null);
 		
 		startTimer();
@@ -56,7 +42,7 @@ public class LevelDebugBoard extends JPanel implements ActionListener {
         
         setPreferredSize(new Dimension(L_WIDTH, L_HEIGHT));
         
-        return this;
+      
 	}
 	
 	public void startTimer(){
@@ -81,7 +67,7 @@ public class LevelDebugBoard extends JPanel implements ActionListener {
 		
 		g.drawRect(0, 0, 640, 640);
 		
-		for(Sprite sprite : new GameBoard(0).getLevel(i)){
+		for(Sprite sprite : new GameBoard().getLevel(i)){
 			g.drawImage(sprite.getImage(), sprite.getX(), sprite.getY(), this);
 		}
 		

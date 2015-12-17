@@ -4,6 +4,7 @@ import java.awt.Image;
 import java.awt.event.MouseEvent;
 
 import me.cameronwitcher.upsilon.Bridge;
+import me.cameronwitcher.upsilon.boards.GameBoard;
 import me.cameronwitcher.upsilon.spriteutils.Entity;
 import me.cameronwitcher.upsilon.spriteutils.Sprite;
 import me.cameronwitcher.upsilon.utils.Direction;
@@ -39,7 +40,7 @@ public class Tool extends Sprite {
 	public void setEntity(Entity entity){
 		this.entity = entity;
 		try{
-			Bridge.getGame().getBoard().removeSprite(this);
+			((GameBoard)Bridge.getGame().getBoard()).removeSprite(this);
 		} catch(Exception ex){};
 		
 		

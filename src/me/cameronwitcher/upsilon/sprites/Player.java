@@ -20,6 +20,7 @@ import me.cameronwitcher.upsilon.spriteutils.Sprite;
 import me.cameronwitcher.upsilon.spriteutils.SpriteSubType;
 import me.cameronwitcher.upsilon.spriteutils.SpriteType;
 import me.cameronwitcher.upsilon.spriteutils.tools.Tool;
+import me.cameronwitcher.upsilon.utils.BoardType;
 import me.cameronwitcher.upsilon.utils.Button;
 import me.cameronwitcher.upsilon.utils.ButtonMethod;
 import me.cameronwitcher.upsilon.utils.DamageReason;
@@ -48,11 +49,10 @@ public class Player extends Entity implements Moveable,Keyable {
 	public int speedboost = 1;
 	public int level = 1;
 	public List<Tool> inventory = new ArrayList<>();
-	public PlayerModel model = PlayerModel.YELLOW;
 	private HashMap<Integer, Integer> jumpInfo = new HashMap<>();
 	private boolean ctrl = false;
 
-	public Player(int x, int y, int help) {
+	public Player(int x, int y) {
 		super(x, y);
 		onground = false;
 		jumping = false;
@@ -72,23 +72,11 @@ public class Player extends Entity implements Moveable,Keyable {
 	
 	
 
-	public void setPlayerModel(PlayerModel model) {
-		this.model = model;
-		Utils.setPlayerModel(model);
-		if(!walking){
-
-			loadImage("playermodels/" + model.toString().toLowerCase() + "/stand_" + getDirection().toString().toLowerCase() + ".png");
-			setImageDimensions(13, 41, -2, -2);
-		} else {
-
-			loadImage("playermodels/" + model.toString().toLowerCase() + "/walk_" + getDirection().toString().toLowerCase() + ".gif");
-			setImageDimensions(29, 41, -2, -2);
-		}
-	}
+	
 
 	private void initPlayer() {
 		Utils.checkPlayerInfo(this);
-		loadImage("playermodels/" + model.toString().toLowerCase() + "/stand_right.png");
+		loadImage("playermodels/yellow/stand_right.png");
 		setImageDimensions(13, 41, -2, -2);
 		setDirection(Direction.RIGHT);
 		
@@ -97,7 +85,9 @@ public class Player extends Entity implements Moveable,Keyable {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		if(!Bridge.getGame().getBoard().paused){
+		
+		if(!Bridge.getGame().getBoard().getType().equals(BoardType.GAME_BOARD)) return;
+		if(!((GameBoard)Bridge.getGame().getBoard()).paused){
 
 			int key = e.getKeyCode();
 			if(key == KeyEvent.VK_CONTROL){
@@ -113,7 +103,7 @@ public class Player extends Entity implements Moveable,Keyable {
 				walking= true;
 				
 
-				loadImage("playermodels/" + model.toString().toLowerCase() + "/walk_left.gif");
+				loadImage("playermodels/yellow/walk_left.gif");
 				setImageDimensions(29, 41, -2, -2);
 				
 				
@@ -126,7 +116,7 @@ public class Player extends Entity implements Moveable,Keyable {
 				walking= true;
 				
 
-				loadImage("playermodels/" + model.toString().toLowerCase() + "/walk_right.gif");
+				loadImage("playermodels/yellow/walk_right.gif");
 				setImageDimensions(29, 41, -2, -2);
 				
 				
@@ -158,10 +148,10 @@ public class Player extends Entity implements Moveable,Keyable {
 					dy = 2;
 			}
 			if (key == KeyEvent.VK_F) {
-				Bridge.getGame().getBoard().toggleGravity();
+				((GameBoard)Bridge.getGame().getBoard()).toggleGravity();
 			}
 			if (key == KeyEvent.VK_H) {
-				Bridge.getGame().getBoard().toggleHitboxes();
+				((GameBoard)Bridge.getGame().getBoard()).toggleHitboxes();
 			}
 			if (key == KeyEvent.VK_EQUALS) {
 				speedboost = speedboost + 1;
@@ -171,7 +161,7 @@ public class Player extends Entity implements Moveable,Keyable {
 					speedboost = speedboost - 1;
 			}
 			if (key == KeyEvent.VK_F3) {
-				Bridge.getGame().getBoard().toggleDebugMode();
+				((GameBoard)Bridge.getGame().getBoard()).toggleDebugMode();
 			}
 			
 			if (key == KeyEvent.VK_SHIFT) {
@@ -179,13 +169,13 @@ public class Player extends Entity implements Moveable,Keyable {
 				shifting = true;
 			}
 			if (key == KeyEvent.VK_E) {
-				openInventory(Bridge.getGame().getBoard());
+				openInventory(((GameBoard)Bridge.getGame().getBoard()));
 			}
 			
 			if (key == KeyEvent.VK_O && shifting) {
 
-				Bridge.getGame().getBoard().gameStatus = "won:" + level;
-				Bridge.getGame().getBoard().ingame = false;
+				((GameBoard)Bridge.getGame().getBoard()).gameStatus = "won:" + level;
+				((GameBoard)Bridge.getGame().getBoard()).ingame = false;
 				x = 0;
 				y = 0;
 			
@@ -219,7 +209,10 @@ public class Player extends Entity implements Moveable,Keyable {
 
 	public void keyReleased(KeyEvent e) {
 		int key = e.getKeyCode();
-		if(!Bridge.getGame().getBoard().paused){
+		
+		if(!Bridge.getGame().getBoard().getType().equals(BoardType.GAME_BOARD)) return;
+		
+		if(!((GameBoard)Bridge.getGame().getBoard()).paused){
 			
 			if (key == KeyEvent.VK_SHIFT) {
 				shifting = false;
@@ -234,7 +227,7 @@ public class Player extends Entity implements Moveable,Keyable {
 			if (key == KeyEvent.VK_A || key == KeyEvent.VK_LEFT) {
 				dx = 0;
 				walking= false;
-				loadImage("playermodels/" + model.toString().toLowerCase() + "/stand_left.png");
+				loadImage("playermodels/yellow/stand_left.png");
 				if(invisible)
 					toggleInvisiblility();
 				
@@ -244,7 +237,7 @@ public class Player extends Entity implements Moveable,Keyable {
 			if (key == KeyEvent.VK_D || key == KeyEvent.VK_RIGHT) {
 				dx = 0;
 				walking= false;
-				loadImage("playermodels/" + model.toString().toLowerCase() + "/stand_right.png");
+				loadImage("playermodels/yellow/stand_right.png");
 				if(invisible)
 					toggleInvisiblility();
 				setImageDimensions(13, 41, -2, -2);
@@ -262,10 +255,10 @@ public class Player extends Entity implements Moveable,Keyable {
 			
 		}
 		if (key == KeyEvent.VK_ESCAPE) {
-			if (Bridge.getGame().getBoard().paused) {
-				Bridge.getGame().getBoard().resume();
+			if (((GameBoard)Bridge.getGame().getBoard()).paused) {
+				((GameBoard)Bridge.getGame().getBoard()).resume();
 			} else
-				Bridge.getGame().getBoard().pause();
+				((GameBoard)Bridge.getGame().getBoard()).pause();
 		}
 	}
 
@@ -288,26 +281,26 @@ public class Player extends Entity implements Moveable,Keyable {
 	public void levelUp() {
 		Utils.player_level += level + 1;
 		level = level +1;
-		Bridge.getGame().getBoard().sprites.clear();
-		Bridge.getGame().getBoard().clickables.clear();
-		Bridge.getGame().getBoard().moveables.clear();
-		Bridge.getGame().getBoard().tools.clear();
-		Bridge.getGame().getBoard().moveables_temp.clear();
-		Bridge.getGame().getBoard().removedSprites.clear();
+		((GameBoard)Bridge.getGame().getBoard()).sprites.clear();
+		((GameBoard)Bridge.getGame().getBoard()).clickables.clear();
+		((GameBoard)Bridge.getGame().getBoard()).moveables.clear();
+		((GameBoard)Bridge.getGame().getBoard()).tools.clear();
+		((GameBoard)Bridge.getGame().getBoard()).moveables_temp.clear();
+		((GameBoard)Bridge.getGame().getBoard()).removedSprites.clear();
 		
 		x=0;
 		y=0;
 
 		Utils.savePlayerInfo(this);
-		Bridge.getGame().getBoard().loadLevel();
-		Bridge.getGame().getBoard().ingame = true;
+		((GameBoard)Bridge.getGame().getBoard()).loadLevel();
+		((GameBoard)Bridge.getGame().getBoard()).ingame = true;
 		
 	}
 
 	public void setLevel(int level) {
 		this.level = level;
-		Bridge.getGame().getBoard().ingame = true;
-		Bridge.getGame().getBoard().loadLevel();
+		((GameBoard)Bridge.getGame().getBoard()).ingame = true;
+		((GameBoard)Bridge.getGame().getBoard()).loadLevel();
 	}
 
 	public int getLevel() {
@@ -321,7 +314,7 @@ public class Player extends Entity implements Moveable,Keyable {
 		if (disabled)
 			return;
 		Utils.checkPlayerInfo(this);
-		if (!Bridge.getGame().getBoard().ingame) {
+		if (!((GameBoard)Bridge.getGame().getBoard()).ingame) {
 			return;
 		}
 		if (y >= 650) {
@@ -343,7 +336,7 @@ public class Player extends Entity implements Moveable,Keyable {
 			
 
 			try {
-				for (Sprite sprite : Bridge.getGame().getBoard().getLevel(level)) {
+				for (Sprite sprite : ((GameBoard)Bridge.getGame().getBoard()).getLevel(level)) {
 					if(sprite instanceof Player) continue;
 					if (!getPolygon().intersects(sprite.getPolygon().getBounds()))continue;
 					if(!Utils.intersects(getPolygon(), sprite.getPolygon())) continue;
@@ -401,8 +394,8 @@ public class Player extends Entity implements Moveable,Keyable {
 						climbing = false;
 					}
 					if(sprite.getType().equals(SpriteType.GATE)){
-						Bridge.getGame().getBoard().gameStatus = "won:" + level;
-						Bridge.getGame().getBoard().ingame = false;
+						((GameBoard)Bridge.getGame().getBoard()).gameStatus = "won:" + level;
+						((GameBoard)Bridge.getGame().getBoard()).ingame = false;
 						x = 0;
 						y = 0;
 					}
@@ -524,8 +517,8 @@ public class Player extends Entity implements Moveable,Keyable {
 		y = 0;
 		health = 100;
 		if (lives <= 0) {
-			Bridge.getGame().getBoard().gameStatus = "gameover:" + reason.getMessage();
-			Bridge.getGame().getBoard().ingame = false;
+			((GameBoard)Bridge.getGame().getBoard()).gameStatus = "gameover:" + reason.getMessage();
+			((GameBoard)Bridge.getGame().getBoard()).ingame = false;
 		}
 	}
 
