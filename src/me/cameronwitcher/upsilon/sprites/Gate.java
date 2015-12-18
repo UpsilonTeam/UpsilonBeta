@@ -18,7 +18,7 @@ public class Gate extends Sprite {
 
     private void init() {
         
-        loadImage("True gate animation.gif");
+        loadImage("gate.gif");
         getImageDimensions();
     }
 }
