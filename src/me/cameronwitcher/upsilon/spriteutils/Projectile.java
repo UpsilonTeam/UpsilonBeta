@@ -39,7 +39,7 @@ public class Projectile extends Entity implements Moveable {
 			x = x+speed;
 		if(direction.equals(Direction.LEFT))
 			x = x-speed;
-		for(Sprite sprite : ((GameBoard)Bridge.getGame().getBoard()).getLevel(Utils.player_level)){
+		for(Sprite sprite : ((GameBoard)Bridge.getGame().getBoard()).sprites){
 			if(!this.getPolygon().getBounds().intersects(sprite.getPolygon().getBounds())) continue;
 			if(sprite instanceof Entity){
 				if(!sprite.getType().equals(shooter.getType())){

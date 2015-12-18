@@ -81,7 +81,7 @@ public class GameBoard extends Board implements ActionListener {
 	ArrayList<Rectangle> recs = new ArrayList<>();
 	public Map<Integer, String> messages = new HashMap<>();
 	public Map<Integer, String> messages_player = new HashMap<>();
-	public HashMap<Integer, Sprite> sprites = new HashMap<>();
+	public ArrayList<Sprite> sprites = new ArrayList<>();
 	public List<Clickable> clickables = new ArrayList<>();
 	public List<Moveable> moveables = new ArrayList<>();
 
@@ -425,6 +425,8 @@ public class GameBoard extends Board implements ActionListener {
 	}
 
 	public ArrayList<Sprite> getLevel(int level) {
+		
+		Utils.broadcastMessage(level + "", "GameBoard (429)");
 
 		return levels.get(level);
 	}
@@ -443,13 +445,11 @@ public class GameBoard extends Board implements ActionListener {
 			return;
 		}
 
-		if (ingame) {
-			if (ready)
+		if (ingame){
 				drawObjects(g);
-
-		} else {
-
-			drawGameOver(g);
+			} else {
+				if(loaded)
+				drawGameOver(g);
 		}
 
 		Toolkit.getDefaultToolkit().sync();
@@ -457,7 +457,10 @@ public class GameBoard extends Board implements ActionListener {
 	}
 
 	public void loadLevel() {
-		if (Utils.player_level > levels.size()) {
+		Utils.broadcastMessage("Load level", "GameBoard 460");
+		ingame = false;
+		loaded = false;
+		if (Utils.getPlayerLevel() > levels.size()) {
 			won = true;
 			return;
 		}
@@ -467,8 +470,8 @@ public class GameBoard extends Board implements ActionListener {
 		tools.clear();
 		clickables.clear();
 		try {
-			for (Sprite sprite : getLevel(Utils.player_level)) {
-				sprites.put(sprite.getID(), sprite);
+			for (Sprite sprite : getLevel(Utils.getPlayerLevel())) {
+				sprites.add(sprite);
 
 				if (sprite instanceof Moveable) {
 					sprites.remove(sprite);
@@ -488,7 +491,7 @@ public class GameBoard extends Board implements ActionListener {
 			}
 		} catch (NullPointerException ex) {
 			for (Sprite sprite : getLevel(1)) {
-				sprites.put(sprite.getID(), sprite);
+				sprites.add(sprite);
 
 				if (sprite instanceof Moveable) {
 					sprites.remove(sprite);
@@ -542,7 +545,7 @@ public class GameBoard extends Board implements ActionListener {
 
 	private void drawInventory(Graphics g) {
 		try {
-			g.drawImage(Texture.loadTexture("background-win.png"), 0, 0, null);
+			g.drawImage(Background.WIN.getImage(), 0, 0, null);
 
 			String inv = "Inventory";
 
@@ -607,13 +610,13 @@ public class GameBoard extends Board implements ActionListener {
 
 	private void drawObjects(Graphics g) {
 
-		g.drawImage(Utils.getBackground(Bridge.getPlayer().level).getImage(), 0, 0, this);
+		g.drawImage(Utils.getBackground(Utils.getPlayerLevel()).getImage(), 0, 0, this);
 		g.setColor(Color.black);
 		g.setFont(new Font("Helvetica", Font.BOLD, 10));
 		g.drawString("Lives: " + Bridge.getPlayer().lives, B_WIDTH / 4, 20);
 		g.drawString("Score: " + Bridge.getPlayer().score, (B_WIDTH / 2 + B_WIDTH) / 2, 10);
 		g.drawString("Tool:", (B_WIDTH / 2 + B_WIDTH) / 2, 20);
-		for (Sprite sprite : getLevel(Bridge.getPlayer().level)) {
+		for (Sprite sprite : sprites) {
 
 			if (!(sprite instanceof Player) && !(sprite instanceof Knobber))
 				g.drawImage(sprite.getImage(), sprite.getX(), sprite.getY(), this);
@@ -775,7 +778,7 @@ public class GameBoard extends Board implements ActionListener {
 
 		if (gameStatus.contains("gameover")) {
 
-			g.drawImage(Texture.loadTexture("background.png"), 0, 0, null);
+			g.drawImage(Background.WIN.getImage(), 0, 0, null);
 
 			String gameover = "Game Over";
 			String reason = gameStatus.split(":")[1];
@@ -864,10 +867,8 @@ public class GameBoard extends Board implements ActionListener {
 				moveables.remove(sprite);
 			if (tools.contains(sprite))
 				tools.remove(sprite);
-			if (getLevel(Utils.player_level).contains(sprite)) {
-				ArrayList<Sprite> list = levels.get(Utils.player_level);
-				list.remove(sprite);
-				levels.put(Utils.player_level, list);
+			if (sprites.contains(sprite)) {
+				sprites.remove(sprite);
 			}
 		}
 		removedSprites.clear();
@@ -985,26 +986,70 @@ public class GameBoard extends Board implements ActionListener {
 
 		@Override
 		public void keyPressed(KeyEvent e) {
+			
+			if(inv){
 
-			if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-				if (l == 0) {
-					l = Bridge.player.inventory.size() - 1;
-				} else {
-					l = l - 1;
+				if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+					if (l == 0) {
+						l = Bridge.player.inventory.size() - 1;
+					} else {
+						l = l - 1;
+					}
 				}
-			}
-			if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-				if (l == Bridge.player.inventory.size() - 1) {
-					l = 0;
-				} else {
-					l = l + 1;
+				if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+					if (l == Bridge.player.inventory.size() - 1) {
+						l = 0;
+					} else {
+						l = l + 1;
+					}
 				}
-			}
+				
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					ButtonMethod.SELECT_TOOL.clicked();
+				}
+				if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+					ButtonMethod.CLOSE_INVENTORY.clicked();
+					return;
+				}
 
+				
+
+			}
+			
+			if(e.getKeyCode() == KeyEvent.VK_1){
+				Utils.setPlayerLevel(1);
+			}
+			
+			if(e.getKeyCode() == KeyEvent.VK_2){
+				Utils.setPlayerLevel(2);
+			}
+			
+			if(e.getKeyCode() == KeyEvent.VK_3){
+				Utils.setPlayerLevel(3);
+			}
+			
+			if(e.getKeyCode() == KeyEvent.VK_4){
+				Utils.setPlayerLevel(4);
+			}
+			
+			if(e.getKeyCode() == KeyEvent.VK_5){
+				Utils.setPlayerLevel(5);
+			}
+			
+			if(e.getKeyCode() == KeyEvent.VK_6){
+				Utils.setPlayerLevel(6);
+			}
+			
+			if(e.getKeyCode() == KeyEvent.VK_7){
+				Utils.setPlayerLevel(7);
+			}
+			
+			if(e.getKeyCode() == KeyEvent.VK_8){
+				Utils.setPlayerLevel(8);
+			}
 			for (Sprite sprite : getLevel(Bridge.player.level))
 				if (sprite instanceof Keyable)
 					((Keyable) sprite).keyPressed(e);
-
 		}
 	}
 

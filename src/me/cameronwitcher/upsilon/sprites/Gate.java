@@ -6,7 +6,7 @@ import me.cameronwitcher.upsilon.spriteutils.SpriteType;
 public class Gate extends Sprite {
 
     public Gate(int x, int y) {
-        super(x, y+5);
+        super(x, y-12);
 
         init();
     }

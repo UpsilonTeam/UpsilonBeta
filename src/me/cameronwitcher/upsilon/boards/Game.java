@@ -68,14 +68,13 @@ public class Game extends JFrame {
 
 		setResizable(false);
 		
-		if (Utils.player_level == 1) {
+		if (Utils.getPlayerLevel() == 1) {
 			((GameBoard) board).loadHelp();
 		}
 	}
 	
 	public void restart(){
-		Utils.player_level = 1;
-		((GameBoard)Bridge.getGame().getBoard()).loadLevel();
+		Utils.setPlayerLevel(1);
 	}
 
 	public void openLevelDebug(int i) {
@@ -88,14 +87,9 @@ public class Game extends JFrame {
 		setLocationRelativeTo(null);
 	}
 
-	public void loadLevel(int i) {
-		clear();
+	public void loadLevel() {
 		Utils.broadcastMessage("LOAD LEVEL", "Game.class (167)");
-		pack();
-		setBoard(new GameBoard());
-		setPreferredSize(new Dimension(640, 640));
-		setResizable(false);
-		start();
+		((GameBoard) board).loadLevel();
 	}
 
 	

@@ -75,7 +75,7 @@ public class Knobber extends Entity implements Moveable,Keyable {
 			if(!Bridge.getGame().getBoard().getType().equals(BoardType.GAME_BOARD)) return;
 			
 			try{
-				for (Sprite sprite : ((GameBoard) Bridge.getGame().getBoard()).getLevel(Utils.player_level)) {
+				for (Sprite sprite : ((GameBoard)Bridge.getGame().getBoard()).sprites) {
 					if(sprite instanceof Knobber) continue;
 					if (!getPolygon().intersects(sprite.getPolygon().getBounds())){
 						continue;

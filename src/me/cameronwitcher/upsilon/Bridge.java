@@ -68,7 +68,7 @@ public class Bridge {
 
 		game.setResizable(false);
 		
-		if (Utils.player_level == 1) {
+		if (Utils.getPlayerLevel() == 1) {
 			((GameBoard) game.board).loadHelp();
 		}
 	

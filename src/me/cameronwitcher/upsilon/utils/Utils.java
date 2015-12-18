@@ -30,7 +30,7 @@ public class Utils {
 	private static List<Integer> ids = new ArrayList<>();
 	private static File config;
 	private static File inventoryFile;
-	public static int player_level;
+	private static int player_level;
 	public static int player_score;
 	private static String root;
 	private static File rootFile;
@@ -273,18 +273,7 @@ public class Utils {
 
 
 
-	public static Sprite getSpriteAtLocation(int x, int y) {
-		Rectangle point = new Rectangle(x, y, 5, 5);
-		((GameBoard)Bridge.getGame().getBoard()).drawRectangle(point);
-		for (Sprite sprite : ((GameBoard)Bridge.getGame().getBoard()).getLevel(player_level)) {
-			if (point.intersects(sprite.getPolygon().getBounds())) {
-				point = null;
-				return sprite;
-			}
-		}
-		point = null;
-		return null;
-	}
+	
 
 	public static void playSound(Sound sound) {
 		Audio.playSound(sound);
@@ -300,6 +289,21 @@ public class Utils {
 	
 	public static Background getBackground(int level){
 		return backgrounds.get(level);
+	}
+	
+	public static void setPlayerLevel(int level){
+		player_level = level;
+		savePlayerInfo(Bridge.player);
+		try{
+			if(Bridge.getGame().getBoard().getType().equals(BoardType.GAME_BOARD)){
+				Bridge.getGame().loadLevel();
+			}
+		} catch(NullPointerException ex){}
+		
+	}
+
+	public static int getPlayerLevel() {
+		return player_level;
 	}
 
 }

@@ -279,7 +279,7 @@ public class Player extends Entity implements Moveable,Keyable {
 	}
 
 	public void levelUp() {
-		Utils.player_level += level + 1;
+		Utils.setPlayerLevel(level + 1);
 		level = level +1;
 		((GameBoard)Bridge.getGame().getBoard()).sprites.clear();
 		((GameBoard)Bridge.getGame().getBoard()).clickables.clear();
@@ -336,7 +336,7 @@ public class Player extends Entity implements Moveable,Keyable {
 			
 
 			try {
-				for (Sprite sprite : ((GameBoard)Bridge.getGame().getBoard()).getLevel(level)) {
+				for (Sprite sprite : ((GameBoard)Bridge.getGame().getBoard()).sprites) {
 					if(sprite instanceof Player) continue;
 					if (!getPolygon().intersects(sprite.getPolygon().getBounds()))continue;
 					if(!Utils.intersects(getPolygon(), sprite.getPolygon())) continue;
