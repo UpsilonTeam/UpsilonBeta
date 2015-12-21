@@ -340,6 +340,7 @@ public class Player extends Entity implements Moveable,Keyable {
 					if(sprite instanceof Player) continue;
 					if (!getPolygon().intersects(sprite.getPolygon().getBounds()))continue;
 					if(!Utils.intersects(getPolygon(), sprite.getPolygon())) continue;
+					Utils.broadcastMessage("TEST", "PLAYER");
 					if (sprite instanceof Money) {
 						climbing = false;
 						Money money = (Money) sprite;

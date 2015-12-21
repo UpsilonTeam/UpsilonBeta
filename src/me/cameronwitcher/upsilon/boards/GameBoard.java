@@ -87,6 +87,7 @@ public class GameBoard extends Board implements ActionListener {
 
 	public List<Moveable> moveables_temp = new ArrayList<>();
 	public List<Sprite> removedSprites = new ArrayList<>();
+	List<Moveable> temp_ = new ArrayList<>();
 	public List<String> strings_temp = new ArrayList<>();
 	public List<String> strings_temp_player = new ArrayList<>();
 	public List<Sprite> tools = new ArrayList<>();
@@ -441,7 +442,9 @@ public class GameBoard extends Board implements ActionListener {
 
 		if (won) {
 			drawWin(g);
-
+		
+			
+			
 			return;
 		}
 
@@ -844,24 +847,18 @@ public class GameBoard extends Board implements ActionListener {
 	}
 
 	private void update() {
-		List<Moveable> temp_ = new ArrayList<>();
-		for (Moveable sprite : moveables) {
-			((Moveable) sprite).move();
-			temp_.add(sprite);
+		
+		for(Moveable sprite : moveables){
+			sprite.move();
+			temp_.add(sprite);	
 		}
 		moveables.clear();
-
 		for (Moveable sprite : temp_) {
 			moveables.add(sprite);
+			sprites.add(((Sprite)sprite));
 		}
-
+		temp_.clear();
 		Bridge.getPlayer().move();
-
-		for (Moveable sprite : moveables_temp) {
-			moveables.add(sprite);
-		}
-		moveables_temp.clear();
-
 		for (Sprite sprite : removedSprites){
 			if (moveables.contains(sprite))
 				moveables.remove(sprite);
@@ -872,10 +869,6 @@ public class GameBoard extends Board implements ActionListener {
 			}
 		}
 		removedSprites.clear();
-
-		if (!ready)
-			ready = true;
-		
 
 	}
 	
