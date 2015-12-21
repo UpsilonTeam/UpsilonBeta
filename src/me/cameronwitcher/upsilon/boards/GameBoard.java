@@ -552,6 +552,10 @@ public class GameBoard extends Board implements ActionListener {
 
 			String inv = "Inventory";
 
+			String close = "Close";
+
+			String select = "Select";
+
 			Font small = new Font("Helvetica", Font.BOLD, 14);
 
 			Font large = new Font("Helvetica", Font.BOLD, 25);
@@ -566,15 +570,22 @@ public class GameBoard extends Board implements ActionListener {
 
 			g.drawImage(Bridge.getPlayer().inventory.get(l).getImage(), B_WIDTH / 2, B_HEIGHT / 2, this);
 
-			clickables.add(new Button("Close", B_WIDTH / 4, (B_HEIGHT / 2 + B_HEIGHT) / 2, B_WIDTH / 6, 18, Color.GRAY,
+			clickables.add(new Button(close, B_WIDTH / 4, (B_HEIGHT / 2 + B_HEIGHT) / 2, B_WIDTH / 6, 18, Color.GRAY,
 					Color.WHITE, small, ButtonMethod.CLOSE_INVENTORY));
 
-			clickables.add(new Button("Select", (B_WIDTH / 2 + B_WIDTH) / 2, (B_HEIGHT / 2 + B_HEIGHT) / 2, B_WIDTH / 6,
+			clickables.add(new Button(select, (B_WIDTH / 2 + B_WIDTH) / 2, (B_HEIGHT / 2 + B_HEIGHT) / 2, B_WIDTH / 6,
 					18, Color.GRAY, Color.WHITE, small, ButtonMethod.SELECT_TOOL));
 
 			for (Clickable clickable : clickables) {
-				g.setFont(new Font("Helvetica", Font.BOLD, 12));
 				g.drawPolygon(clickable.drawPolygon(g));
+				if (clickable instanceof Button) {
+					Button button = (Button) clickable;
+					g.setColor((button).getForeground());
+					g.setFont(button.getFont());
+					g.drawString((button).getString(),
+							button.x - (getFontMetrics(button.getFont()).stringWidth(button.getString()) / 2),
+							button.y + (getFontMetrics(button.getFont()).getHeight() / 4));
+				}
 			}
 
 		} catch (IndexOutOfBoundsException ex) {
