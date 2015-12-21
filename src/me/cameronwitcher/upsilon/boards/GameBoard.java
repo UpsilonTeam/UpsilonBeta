@@ -860,8 +860,10 @@ public class GameBoard extends Board implements ActionListener {
 	private void update() {
 		
 		for(Moveable sprite : moveables){
+			sprites.remove(sprite);
 			sprite.move();
 			temp_.add(sprite);	
+			
 		}
 		moveables.clear();
 		for (Moveable sprite : temp_) {
