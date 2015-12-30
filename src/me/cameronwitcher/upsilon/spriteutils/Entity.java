@@ -4,8 +4,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.Random;
 
-import me.cameronwitcher.upsilon.Bridge;
-import me.cameronwitcher.upsilon.boards.GameBoard;
 import me.cameronwitcher.upsilon.sprites.Player;
 import me.cameronwitcher.upsilon.spriteutils.tools.Tool;
 import me.cameronwitcher.upsilon.utils.DamageReason;

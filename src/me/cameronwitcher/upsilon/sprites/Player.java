@@ -1,8 +1,5 @@
 package me.cameronwitcher.upsilon.sprites;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,14 +12,11 @@ import me.cameronwitcher.upsilon.spriteutils.Entity;
 import me.cameronwitcher.upsilon.spriteutils.Keyable;
 import me.cameronwitcher.upsilon.spriteutils.Money;
 import me.cameronwitcher.upsilon.spriteutils.Moveable;
-import me.cameronwitcher.upsilon.spriteutils.PlayerModel;
 import me.cameronwitcher.upsilon.spriteutils.Sprite;
 import me.cameronwitcher.upsilon.spriteutils.SpriteSubType;
 import me.cameronwitcher.upsilon.spriteutils.SpriteType;
 import me.cameronwitcher.upsilon.spriteutils.tools.Tool;
 import me.cameronwitcher.upsilon.utils.BoardType;
-import me.cameronwitcher.upsilon.utils.Button;
-import me.cameronwitcher.upsilon.utils.ButtonMethod;
 import me.cameronwitcher.upsilon.utils.DamageReason;
 import me.cameronwitcher.upsilon.utils.Direction;
 import me.cameronwitcher.upsilon.utils.Sound;
@@ -288,8 +282,7 @@ public class Player extends Entity implements Moveable,Keyable {
 		((GameBoard)Bridge.getGame().getBoard()).moveables_temp.clear();
 		((GameBoard)Bridge.getGame().getBoard()).removedSprites.clear();
 		
-		x=0;
-		y=0;
+		
 
 		Utils.savePlayerInfo(this);
 		((GameBoard)Bridge.getGame().getBoard()).loadLevel();
@@ -397,6 +390,7 @@ public class Player extends Entity implements Moveable,Keyable {
 					if(sprite.getType().equals(SpriteType.GATE)){
 						((GameBoard)Bridge.getGame().getBoard()).gameStatus = "won:" + level;
 						((GameBoard)Bridge.getGame().getBoard()).ingame = false;
+						Audio.playSound(Sound.WIN);
 						x = 0;
 						y = 0;
 					}

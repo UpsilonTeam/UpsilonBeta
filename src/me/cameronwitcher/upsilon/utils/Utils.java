@@ -1,7 +1,6 @@
 package me.cameronwitcher.upsilon.utils;
 
 import java.awt.Font;
-import java.awt.Rectangle;
 import java.awt.Shape;
 import java.awt.geom.Area;
 import java.io.BufferedWriter;
@@ -14,13 +13,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.swing.JOptionPane;
-
 import me.cameronwitcher.upsilon.Bridge;
 import me.cameronwitcher.upsilon.boards.GameBoard;
 import me.cameronwitcher.upsilon.sprites.Player;
-import me.cameronwitcher.upsilon.spriteutils.PlayerModel;
-import me.cameronwitcher.upsilon.spriteutils.Sprite;
 import me.cameronwitcher.upsilon.spriteutils.tools.Tool;
 import me.cameronwitcher.upsilon.spriteutils.tools.ToolType;
 import res.Audio;
@@ -244,7 +239,6 @@ public class Utils {
 				e.printStackTrace();
 			}
 		}
-		BufferedWriter out1 = null;
 
 		
 
