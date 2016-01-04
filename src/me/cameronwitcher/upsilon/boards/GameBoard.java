@@ -528,7 +528,7 @@ public class GameBoard extends Board implements ActionListener {
 
 		Utils.displayMessage(2, "These are coins. Pick them up to gain points!", 272, 578, -1, "#FFFFFF", 15);
 
-		Utils.displayMessage(3, "This is a bow. If you pick it up, it'll appear in your \"tool\" slot.", 9 * 32,
+		Utils.displayMessage(3, "This a bow. If you pick it up, it'll appear in your \"tool\" slot.", 9 * 32,
 				14 * 32, -1, "#FFFFFF", 15);
 
 		Utils.displayMessage(4, "<--- This is your HUD --->", B_WIDTH / 2, 15, -1, "#FFFFFF", 10);
@@ -540,9 +540,9 @@ public class GameBoard extends Board implements ActionListener {
 		Utils.displayMessage(8, "Up -> \"W\" or the up arrow", B_WIDTH / 2, B_HEIGHT / 2, -1, "#FFFFFF", 10);
 		Utils.displayMessage(9, "Down -> \"S\" or the down arrow", B_WIDTH / 2, (B_HEIGHT / 2) + 10, -1, "#FFFFFF", 10);
 		Utils.displayMessage(10, "Jump -> SPACE", B_WIDTH / 2, (B_HEIGHT / 2) + 20, -1, "#FFFFFF", 10);
-		Utils.displayMessage(11, "Use tool -> SHIFT", B_WIDTH / 2, (B_HEIGHT / 2) + 30, -1, "#FFFFFF", 10);
-		Utils.displayMessage(12, "This is your health ->",
-				getFontMetrics(getFont()).stringWidth("This is your health ->"), 70, -1, "#FFFFFF", 10);
+		Utils.displayMessage(11, "Open Inventory -> \"E\"", B_WIDTH, 30, -1, "#FFFFFF", 10);
+		Utils.displayMessage(12, "Use tool -> SHIFT", B_WIDTH / 2, (B_HEIGHT / 2) + 40, -1, "#FFFFFF", 10);
+		
 
 	}
 
