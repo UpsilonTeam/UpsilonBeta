@@ -105,6 +105,7 @@ public class Game extends JFrame {
 	}
 
 	public void clear() {
+		if(board!=null)((Board)board).disable();
 		removeAll();
 		dispose();
 	}

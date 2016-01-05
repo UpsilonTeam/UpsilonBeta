@@ -82,5 +82,26 @@ public class Bridge {
 		player.x = x;
 		player.y = y;
 	}
+	
+	public static void restart(){
+		
+		
+		Utils.broadcastMessage("Test", "BRIDNE");
+		game.clear();
+		
+		game = null;
+		game = new Game();
+		game.setBoard(new GameBoard());
+		game.setTitle("Upsilon");
+		game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		game.setVisible(true);
+		game.setIconImage(Texture.loadTexture("logo.png"));
+		game.setPreferredSize(new Dimension(640, 640));
+		game.pack();
+		
+		player.level = 1;
+		Utils.setPlayerLevel(1);
+		((GameBoard) game.board).init();
+	}
 
 }

@@ -20,5 +20,10 @@ public class Board extends JPanel {
 	public void setType(BoardType type){
 		this.type = type;
 	}
+
+	public void disable() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

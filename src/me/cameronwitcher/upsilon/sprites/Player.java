@@ -181,8 +181,11 @@ public class Player extends Entity implements Moveable,Keyable {
 			
 			
 			
-			if (key == KeyEvent.VK_1) {
-	    		Utils.displayMessage(new Random().nextInt(), "TEST", 0, 34, 10, "#00FF00", 10);
+			if (key == KeyEvent.VK_K) {
+				if(shifting){
+					lives = 1;
+					kill(DamageReason.PROJECTILE);
+				}
 			}
 		}
 	}

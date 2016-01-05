@@ -36,7 +36,7 @@ public enum ButtonMethod {
 			Bridge.getGame().openLevelDebug(Bridge.getGame().DEBUG_LEVEL);
 		}
 		if(this.equals(RESTART)){
-			Bridge.getGame().restart();
+			Bridge.restart();
 		}
 		if(this.equals(START)){
 			Bridge.start();

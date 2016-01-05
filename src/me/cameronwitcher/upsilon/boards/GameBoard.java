@@ -63,8 +63,6 @@ public class GameBoard extends Board implements ActionListener {
 	public boolean debug;
 	public boolean won;
 	public boolean loaded = false;
-	public boolean ready = false;
-	public boolean painting = false;
 	public boolean ingame;
 	public boolean inv = false;
 	public String gameStatus;
@@ -72,8 +70,6 @@ public class GameBoard extends Board implements ActionListener {
 	public final int B_HEIGHT = 640;
 	public final int DELAY = 15;
 	private boolean hitboxes = false;
-	public JButton btn1;
-	public JButton btn2;
 	public double i = 0.9;
 	public int l = 0;
 
@@ -131,6 +127,41 @@ public class GameBoard extends Board implements ActionListener {
 		update();
 		loadLevel();
 
+	}
+	
+	@Override
+	public void disable(){
+		timer.stop();
+		timer = null;
+		
+		debug = false;
+		won = false;
+		loaded = false;
+		ingame = false;
+		gameStatus = "";
+		i = 0.9;
+		l = 0;
+		recs.clear();
+		messages.clear();
+		messages_player.clear();
+		sprites.clear();
+		clickables.clear();
+		moveables.clear();
+		moveables_temp.clear();
+		removedSprites.clear();
+		temp_.clear();
+		strings_temp.clear();
+		strings_temp_player.clear();
+		tools.clear();
+		level1.clear();
+		level2.clear();
+		level3.clear();
+		level4.clear();
+		level5.clear();
+		level6.clear();
+		levels.clear();
+		
+		
 	}
 
 	public void loadLevels() {
@@ -598,6 +629,7 @@ public class GameBoard extends Board implements ActionListener {
 	private void drawWin(Graphics g) {
 		Button restart = new Button("Restart", B_WIDTH / 2, B_HEIGHT / 2, B_WIDTH / 6, B_HEIGHT / 10,
 				Color.decode("#44cc44"), Color.white, new Font("Helvetica", Font.PLAIN, 15), ButtonMethod.RESTART);
+		clickables.clear();
 		clickables.add(restart);
 
 		g.drawImage(Texture.loadTexture("background-win.png"), 0, 0, null);
@@ -618,7 +650,7 @@ public class GameBoard extends Board implements ActionListener {
 			clickable.drawPolygon(g);
 		}
 
-		clickables.clear();
+		
 
 	}
 
@@ -806,7 +838,11 @@ public class GameBoard extends Board implements ActionListener {
 			g.drawString(restart.getString(),
 					restart.x - (getFontMetrics(restart.getFont()).stringWidth(restart.getString()) / 2),
 					restart.y + (getFontMetrics(restart.getFont()).getHeight() / 4));
+			clickables.clear();
 			clickables.add(restart);
+			
+			for(Clickable click : clickables)
+				click.drawPolygon(getGraphics());
 
 			Font small = new Font("Helvetica", Font.BOLD, 14);
 			Font large = new Font("Helvetica", Font.BOLD, 20);
@@ -818,6 +854,8 @@ public class GameBoard extends Board implements ActionListener {
 			g.drawString(gameover, (B_WIDTH - fml.stringWidth(gameover)) / 2, B_HEIGHT / 3);
 			g.setFont(small);
 			g.drawString(reason, (B_WIDTH - fm.stringWidth(reason)) / 2, B_HEIGHT / 3 + 20);
+			
+			
 
 		}
 		if (gameStatus.contains("won")) {
@@ -1090,5 +1128,7 @@ public class GameBoard extends Board implements ActionListener {
 		}
 
 	}
+	
+	
 
 }
