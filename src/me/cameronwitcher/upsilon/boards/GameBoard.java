@@ -859,7 +859,7 @@ public class GameBoard extends Board implements ActionListener {
 		}
 		if (gameStatus.contains("won")) {
 
-			g.drawImage(Texture.loadTexture("background.png"), 0, 0, null);
+			g.drawImage(Background.WIN.getImage(), 0, 0, null);
 			g.setColor(Color.black);
 			String won = "You won level " + gameStatus.split(":")[1] + "!";
 
