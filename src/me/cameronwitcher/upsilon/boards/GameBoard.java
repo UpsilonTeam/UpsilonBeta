@@ -518,7 +518,6 @@ public class GameBoard extends Board implements ActionListener {
 
 				}
 				if (sprite instanceof Tool) {
-					sprites.remove(sprite);
 					tools.add(sprite);
 				}
 

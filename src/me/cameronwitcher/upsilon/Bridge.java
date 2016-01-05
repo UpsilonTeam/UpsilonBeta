@@ -86,7 +86,6 @@ public class Bridge {
 	public static void restart(){
 		
 		
-		Utils.broadcastMessage("Test", "BRIDNE");
 		game.clear();
 		
 		game = null;
@@ -96,7 +95,7 @@ public class Bridge {
 		game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		game.setVisible(true);
 		game.setIconImage(Texture.loadTexture("logo.png"));
-		game.setPreferredSize(new Dimension(640, 640));
+		game.setPreferredSize(new Dimension(655, 670));
 		game.pack();
 		
 		player.level = 1;
