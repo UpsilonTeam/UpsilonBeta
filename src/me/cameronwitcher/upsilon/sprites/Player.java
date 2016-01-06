@@ -120,7 +120,6 @@ public class Player extends Entity implements Moveable,Keyable {
 			
 			if (key == KeyEvent.VK_0) {
 				Audio.playSound(Sound.TEST);
-				Utils.broadcastMessage("SOUND", "pp");	
 			}
 			
 			
@@ -336,7 +335,6 @@ public class Player extends Entity implements Moveable,Keyable {
 					if(sprite instanceof Player) continue;
 					if (!getPolygon().intersects(sprite.getPolygon().getBounds()))continue;
 					if(!Utils.intersects(getPolygon(), sprite.getPolygon())) continue;
-					Utils.broadcastMessage("TEST", "PLAYER");
 					if (sprite instanceof Money) {
 						climbing = false;
 						Money money = (Money) sprite;
@@ -348,7 +346,6 @@ public class Player extends Entity implements Moveable,Keyable {
 					if(sprite instanceof Tool){
 						setTool(((Tool) sprite));
 						inventory.add(((Tool) sprite));
-						Utils.broadcastMessage("Added Tool: " + ((Tool) sprite).getType(), "Player.class (353)");
 					}
 					if(sprite.getSubType().equals(SpriteSubType.BAD_THINGS)){
 						damage(5, DamageReason.BAD_THINGS);

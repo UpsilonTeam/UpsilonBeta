@@ -27,7 +27,6 @@ public class Game extends JFrame {
 	public Board board;
 
 	public Game() {
-		Utils.broadcastMessage("TEEST", "Game.class (32)");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
@@ -59,7 +58,6 @@ public class Game extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
 		setIconImage(Texture.loadTexture("logo.png"));
-		Utils.broadcastMessage("START", "Game.class (105)");
 		
 		setPreferredSize(new Dimension(640, 640));
 		pack();
@@ -88,7 +86,6 @@ public class Game extends JFrame {
 	}
 
 	public void loadLevel() {
-		Utils.broadcastMessage("LOAD LEVEL", "Game.class (167)");
 		((GameBoard) board).loadLevel();
 	}
 

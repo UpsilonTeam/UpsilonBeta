@@ -51,27 +51,27 @@ public class Bridge {
 	}
 
 	public static void start() {
+		
+		
+
+		player = new Player(0, 0);
+		
 		game.clear();
+		
+		game = null;
 		game = new Game();
+		game.setBoard(new GameBoard());
 		game.setTitle("Upsilon");
 		game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		game.setVisible(true);
 		game.setIconImage(Texture.loadTexture("logo.png"));
-		Utils.broadcastMessage("START", "Bridge.class (53)");
-		
-		game.setPreferredSize(new Dimension(640, 640));
+		game.setPreferredSize(new Dimension(655, 670));
 		game.pack();
 		
-		game.setBoard(new GameBoard());
-		
+		player.level = 1;
+		Utils.setPlayerLevel(1);
 		((GameBoard) game.board).init();
-		
-
-		game.setResizable(false);
-		
-		if (Utils.getPlayerLevel() == 1) {
-			((GameBoard) game.board).loadHelp();
-		}
+	
 	
 	}
 

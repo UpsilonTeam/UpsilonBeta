@@ -458,7 +458,6 @@ public class GameBoard extends Board implements ActionListener {
 
 	public ArrayList<Sprite> getLevel(int level) {
 		
-		Utils.broadcastMessage(level + "", "GameBoard (429)");
 
 		return levels.get(level);
 	}
@@ -491,7 +490,6 @@ public class GameBoard extends Board implements ActionListener {
 	}
 
 	public void loadLevel() {
-		Utils.broadcastMessage("Load level", "GameBoard 460");
 		ingame = false;
 		loaded = false;
 		if (Utils.getPlayerLevel() > levels.size()) {

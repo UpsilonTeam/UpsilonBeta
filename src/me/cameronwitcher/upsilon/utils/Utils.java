@@ -118,9 +118,8 @@ public class Utils {
 		
 	}
 
-	public static void broadcastMessage(String message, String location) {
+	public static void broadcastMessage(String message) {
 		System.out.println(message);
-		System.out.println(location);
 		System.out.println();
 	}
 
@@ -178,7 +177,6 @@ public class Utils {
 			try {
 				for (Tool tool : player.inventory) {
 					out.append(tool.getType() + "-");
-					Utils.broadcastMessage("SAVE: " + tool.getType().toString(), "Utils.class (222)");
 				}
 			} catch (NullPointerException ex) {
 			}
@@ -216,11 +214,9 @@ public class Utils {
 		inventoryFile = new File(root + "/inventory.txt");
 
 		if (!config.getParentFile().mkdirs()) {
-			Utils.broadcastMessage("Coundn't make config", "Utils.class (280)");
 		}
 		
 		if (!inventoryFile.getParentFile().mkdirs()) {
-			Utils.broadcastMessage("Coundn't make inv", "Utils.class (286)");
 		}
 
 		BufferedWriter out = null;

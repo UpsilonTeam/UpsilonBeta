@@ -43,7 +43,6 @@ public class Projectile extends Entity implements Moveable {
 			if(!this.getPolygon().getBounds().intersects(sprite.getPolygon().getBounds())) continue;
 			if(sprite instanceof Entity){
 				if(!sprite.getType().equals(shooter.getType())){
-					Utils.broadcastMessage(shooter.getType() + " : " + sprite.getType(), "Projectile.class (46)");
 					((Entity) sprite).damage(this.damage, this, DamageReason.PROJECTILE);	
 				} else {
 					continue;
