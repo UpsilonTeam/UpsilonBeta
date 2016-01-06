@@ -29,7 +29,7 @@ public enum ButtonMethod {
 			Bridge.getPlayer().levelUp();
 		}
 		if(this.equals(MAIN_MENU)){
-			Bridge.getGame().openMenu();
+			Bridge.openMenu();
 		}
 		
 		if(this.equals(LEVEL_SELECT)){

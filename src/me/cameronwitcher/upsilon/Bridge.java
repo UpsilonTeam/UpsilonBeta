@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import me.cameronwitcher.upsilon.boards.Game;
 import me.cameronwitcher.upsilon.boards.GameBoard;
 import me.cameronwitcher.upsilon.boards.LevelDebugBoard;
+import me.cameronwitcher.upsilon.boards.MenuBoard;
 import me.cameronwitcher.upsilon.sprites.Player;
 import me.cameronwitcher.upsilon.utils.Utils;
 import res.Texture;
@@ -101,6 +102,19 @@ public class Bridge {
 		player.level = 1;
 		Utils.setPlayerLevel(1);
 		((GameBoard) game.board).init();
+	}
+	
+	public static void openMenu() {
+		game.clear();
+		game = null;
+		game = new Game();
+		game.setPreferredSize(new Dimension(960, 640));
+		game.setBoard(new MenuBoard());
+		game.pack();
+		game.setVisible(true);
+		
+		
+		game.setLocationRelativeTo(null);
 	}
 
 }
