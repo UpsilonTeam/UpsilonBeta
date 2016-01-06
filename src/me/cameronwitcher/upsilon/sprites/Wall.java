@@ -38,6 +38,10 @@ public class Wall extends Sprite {
     	case VERTICAL:
     		loadImage("wall/vertical.png");
     		break;
+    	case LARGE_VERTICAL:
+    		loadImage("wall/vertical_large.png");
+    		break;
+    		
     	case HORIZONTAL:
     		loadImage("wall/horizontal.png");
     		break;

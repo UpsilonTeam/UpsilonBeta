@@ -7,7 +7,8 @@ public enum State {
 	RIGHT_UPPER_CORNER("right_upper_corner"),
 	RIGHT_LOWER_CORNER("right_lower_corner"),
 	HORIZONTAL("horizontal"),
-	VERTICAL("vertical");
+	VERTICAL("vertical"),
+	LARGE_VERTICAL("vertical_large");
 	
 	String state;
 	
