@@ -306,6 +306,22 @@ public class GameBoard extends Board implements ActionListener {
 		level4.add(new Floor(4 * 32, 16 * 32));
 		level4.add(new Floor(3 * 32, 16 * 32));
 		level4.add(new Wall(2 * 32, 0 * 32, State.LARGE_VERTICAL));
+		level4.add(new Wall(2 * 32, 0 * 32, State.VERTICAL));
+		level4.add(new Wall(2 * 32, 1 * 32, State.VERTICAL));
+		level4.add(new Wall(2 * 32, 2 * 32, State.VERTICAL));
+		level4.add(new Wall(2 * 32, 3 * 32, State.VERTICAL));
+		level4.add(new Wall(2 * 32, 4 * 32, State.VERTICAL));
+		level4.add(new Wall(2 * 32, 5 * 32, State.VERTICAL));
+		level4.add(new Wall(2 * 32, 6 * 32, State.VERTICAL));
+		level4.add(new Wall(2 * 32, 7 * 32, State.VERTICAL));
+		level4.add(new Wall(2 * 32, 8 * 32, State.VERTICAL));
+		level4.add(new Wall(2 * 32, 9 * 32, State.VERTICAL));
+		level4.add(new Wall(2 * 32, 10 * 32, State.VERTICAL));
+		level4.add(new Wall(2 * 32, 11 * 32, State.VERTICAL));
+		level4.add(new Wall(2 * 32, 12 * 32, State.VERTICAL));
+		level4.add(new Wall(2 * 32, 13 * 32, State.VERTICAL));
+		level4.add(new Wall(2 * 32, 14 * 32, State.VERTICAL));
+		level4.add(new Wall(2 * 32, 15 * 32, State.VERTICAL));
         
 		level4.add(new Ladder(3 * 32, 15 * 32));
 		level4.add(new Ladder(3 * 32, 14 * 32));
