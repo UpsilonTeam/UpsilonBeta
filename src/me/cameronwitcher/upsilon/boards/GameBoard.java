@@ -867,11 +867,7 @@ public class GameBoard extends Board implements ActionListener {
 			clickables.add(levelup);
 
 			g.drawPolygon(levelup.drawPolygon(g));
-			g.setColor(levelup.getForeground());
-			g.setFont(levelup.getFont());
-			g.drawString(levelup.getString(),
-					levelup.x - (getFontMetrics(levelup.getFont()).stringWidth(levelup.getString()) / 2),
-					levelup.y + (getFontMetrics(levelup.getFont()).getHeight() / 4));
+			
 
 			Font small = new Font("Helvetica", Font.BOLD, 14);
 			FontMetrics fm = getFontMetrics(small);
