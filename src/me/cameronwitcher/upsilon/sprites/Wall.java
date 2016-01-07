@@ -8,10 +8,12 @@ import me.cameronwitcher.upsilon.utils.Utils;
 public class Wall extends Sprite {
 	
 	State state;
+	int size;
 
-    public Wall(int x, int y, State state) {
+    public Wall(int x, int y, int size, State state) {
         super(x, y);
         this.state = state;
+        this.size = size;
         init();
     }
     
@@ -37,6 +39,9 @@ public class Wall extends Sprite {
     		break;
     	case VERTICAL:
     		loadImage("wall/vertical.png");
+    		height = size;
+    		setImageDimensions(2, size);
+    		Utils.broadcastMessage(height + "");
     		break;
     	case LARGE_VERTICAL:
     		loadImage("wall/vertical_large.png");
@@ -44,11 +49,12 @@ public class Wall extends Sprite {
     		
     	case HORIZONTAL:
     		loadImage("wall/horizontal.png");
+    		setImageDimensions(size, 2);
+    		width = size;
     		break;
     		default:
     			loadImage("wall/vertical.png");
     			break;
     	}
-        getImageDimensions();
     }
 }

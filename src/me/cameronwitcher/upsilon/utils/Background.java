@@ -6,7 +6,7 @@ import res.Texture;
 
 public enum Background {
 	SKY("sky-background.png"),
-	HELL("hell-background.png"),
+	HELL("hell-background.gif"),
 	TEST("test-background.gif"),
 	WIN("win-background.png");
 	

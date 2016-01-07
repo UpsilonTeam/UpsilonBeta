@@ -63,6 +63,14 @@ public class Sprite {
         
         
     }
+    
+    protected void setImageDimensions(int width, int height) {
+
+        this.width = width;
+        this.height = height;
+        
+        
+    }
 
     protected void loadImage(String imageName) {
     	
@@ -118,9 +126,7 @@ public class Sprite {
     }
 
     public Polygon getPolygon() {
-    	bw = image.getWidth(null);
-    	bh = image.getHeight(null);
-    	bounds = new Polygon(new int[] {x,x+bw,x+bw,x}, new int[] {y+bh,y+bh,y,y}, 4);
+    	bounds = new Polygon(new int[] {x,x+width,x+width,x}, new int[] {y+height,y+height,y,y}, 4);
     	return bounds;
     }
     
@@ -133,6 +139,15 @@ public class Sprite {
 
 	public SpriteSubType getSubType() {
 		return getType().getSubType();
+	}
+
+
+	public int getWidth() {
+		return width;
+	}
+	
+	public int getHeight() {
+		return height;
 	}
 
 

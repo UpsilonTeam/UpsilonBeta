@@ -35,15 +35,15 @@ import me.cameronwitcher.upsilon.sprites.Knobber;
 import me.cameronwitcher.upsilon.sprites.Ladder;
 import me.cameronwitcher.upsilon.sprites.Player;
 import me.cameronwitcher.upsilon.sprites.Wall;
+import me.cameronwitcher.upsilon.sprites.tools.Bow;
+import me.cameronwitcher.upsilon.sprites.tools.NinjaCloak;
 import me.cameronwitcher.upsilon.spriteutils.Clickable;
 import me.cameronwitcher.upsilon.spriteutils.Keyable;
 import me.cameronwitcher.upsilon.spriteutils.Moveable;
 import me.cameronwitcher.upsilon.spriteutils.Sprite;
 import me.cameronwitcher.upsilon.spriteutils.SpriteType;
 import me.cameronwitcher.upsilon.spriteutils.State;
-import me.cameronwitcher.upsilon.spriteutils.tools.Bow;
-import me.cameronwitcher.upsilon.spriteutils.tools.NinjaCloak;
-import me.cameronwitcher.upsilon.spriteutils.tools.Tool;
+import me.cameronwitcher.upsilon.spriteutils.Tool;
 import me.cameronwitcher.upsilon.utils.Background;
 import me.cameronwitcher.upsilon.utils.Board;
 import me.cameronwitcher.upsilon.utils.BoardType;
@@ -222,7 +222,7 @@ public class GameBoard extends Board implements ActionListener {
 		level1.add(new Floor(6 * 32, 11 * 32));
 		level1.add(new Floor(7 * 32, 11 * 32));
 		level1.add(new Floor(8 * 32, 11 * 32));
-		level1.add(new Wall(8 * 32, 10 * 32, State.VERTICAL));
+		level1.add(new Wall(8 * 32, 10 * 32, 50, State.VERTICAL));
 		level1.add(new Floor(9 * 32, 11 * 32));
 		level1.add(new Floor(10 * 32, 11 * 32));
 		level1.add(new Floor(11 * 32, 11 * 32));
@@ -305,23 +305,7 @@ public class GameBoard extends Board implements ActionListener {
 		level4.add(new Floor(5 * 32, 16 * 32));
 		level4.add(new Floor(4 * 32, 16 * 32));
 		level4.add(new Floor(3 * 32, 16 * 32));
-		level4.add(new Wall(2 * 32, 0 * 32, State.LARGE_VERTICAL));
-		level4.add(new Wall(2 * 32, 0 * 32, State.VERTICAL));
-		level4.add(new Wall(2 * 32, 1 * 32, State.VERTICAL));
-		level4.add(new Wall(2 * 32, 2 * 32, State.VERTICAL));
-		level4.add(new Wall(2 * 32, 3 * 32, State.VERTICAL));
-		level4.add(new Wall(2 * 32, 4 * 32, State.VERTICAL));
-		level4.add(new Wall(2 * 32, 5 * 32, State.VERTICAL));
-		level4.add(new Wall(2 * 32, 6 * 32, State.VERTICAL));
-		level4.add(new Wall(2 * 32, 7 * 32, State.VERTICAL));
-		level4.add(new Wall(2 * 32, 8 * 32, State.VERTICAL));
-		level4.add(new Wall(2 * 32, 9 * 32, State.VERTICAL));
-		level4.add(new Wall(2 * 32, 10 * 32, State.VERTICAL));
-		level4.add(new Wall(2 * 32, 11 * 32, State.VERTICAL));
-		level4.add(new Wall(2 * 32, 12 * 32, State.VERTICAL));
-		level4.add(new Wall(2 * 32, 13 * 32, State.VERTICAL));
-		level4.add(new Wall(2 * 32, 14 * 32, State.VERTICAL));
-		level4.add(new Wall(2 * 32, 15 * 32, State.VERTICAL));
+		level4.add(new Wall(2 * 32, 0 * 32, 512, State.VERTICAL));
         
 		level4.add(new Ladder(3 * 32, 15 * 32));
 		level4.add(new Ladder(3 * 32, 14 * 32));
@@ -432,14 +416,10 @@ public class GameBoard extends Board implements ActionListener {
 
 		levels.put(5, level5);
 
-		level6.add(new Wall(0 * 32, 2 * 32, State.HORIZONTAL));
-		level6.add(new Wall(1 * 32, 2 * 32, State.HORIZONTAL));
-		level6.add(new Wall(2 * 32, 2 * 32, State.HORIZONTAL));
-		level6.add(new Wall(3 * 32, 2 * 32, State.HORIZONTAL));
-		level6.add(new Wall(4 * 32, 2 * 32, State.HORIZONTAL));
+		level6.add(new Wall(0 * 32, 2 * 32, 32*5, State.HORIZONTAL));
 
 		for (int i = 4; i != 17; i++) {
-			level6.add(new Wall(i * 32, (i * 32) / 2, State.HORIZONTAL));
+			level6.add(new Wall(i * 32, (i * 32) / 2, 32, State.HORIZONTAL));
 		}
 		level6.add(new Ladder(17 * 32, 8 * 32));
 		level6.add(new Ladder(17 * 32, 9 * 32));
@@ -662,8 +642,9 @@ public class GameBoard extends Board implements ActionListener {
 		g.drawString("Tool:", (B_WIDTH / 2 + B_WIDTH) / 2, 20);
 		for (Sprite sprite : sprites) {
 
-			if (!(sprite instanceof Player) && !(sprite instanceof Knobber))
-				g.drawImage(sprite.getImage(), sprite.getX(), sprite.getY(), this);
+			if (!(sprite instanceof Player) && !(sprite instanceof Knobber)){
+				g.drawImage(sprite.getImage(), sprite.getX(), sprite.getY(), sprite.getWidth(), sprite.getHeight(), this);
+			}
 			if (debug && hitboxes)
 				g.drawPolygon(sprite.getPolygon());
 		}
@@ -683,7 +664,7 @@ public class GameBoard extends Board implements ActionListener {
 				g.drawImage(sprite.getImage(), (sprite.getX()), sprite.getY(), 16, 4, this);
 				break;
 			default:
-				g.drawImage(sprite.getImage(), sprite.getX(), sprite.getY(), this);
+				g.drawImage(sprite.getImage(), sprite.getX(), sprite.getY(), sprite.getWidth(), sprite.getHeight(), this);
 				break;
 			}
 
@@ -894,15 +875,15 @@ public class GameBoard extends Board implements ActionListener {
 		for(Moveable sprite : moveables){
 			sprites.remove(sprite);
 			sprite.move();
-			temp_.add(sprite);	
+			moveables_temp.add(sprite);	
 			
 		}
 		moveables.clear();
-		for (Moveable sprite : temp_) {
+		for (Moveable sprite : moveables_temp) {
 			moveables.add(sprite);
 			sprites.add(((Sprite)sprite));
 		}
-		temp_.clear();
+		moveables_temp.clear();
 		Bridge.getPlayer().move();
 		for (Sprite sprite : removedSprites){
 			if (moveables.contains(sprite))
@@ -918,9 +899,11 @@ public class GameBoard extends Board implements ActionListener {
 	}
 	
 	public void toggleGravity() {
-		if (Bridge.player.gravity)
+		if (Bridge.player.gravity){
 			Bridge.player.gravity = false;
-		else
+			Bridge.player.dx=0;
+			Bridge.player.dy=0;
+		} else
 			Bridge.player.gravity = true;
 	}
 

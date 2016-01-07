@@ -6,13 +6,13 @@ import java.util.TimerTask;
 
 import me.cameronwitcher.upsilon.Bridge;
 import me.cameronwitcher.upsilon.boards.GameBoard;
+import me.cameronwitcher.upsilon.sprites.tools.Bow;
 import me.cameronwitcher.upsilon.spriteutils.Entity;
 import me.cameronwitcher.upsilon.spriteutils.Keyable;
 import me.cameronwitcher.upsilon.spriteutils.Moveable;
 import me.cameronwitcher.upsilon.spriteutils.Sprite;
 import me.cameronwitcher.upsilon.spriteutils.SpriteSubType;
 import me.cameronwitcher.upsilon.spriteutils.SpriteType;
-import me.cameronwitcher.upsilon.spriteutils.tools.Bow;
 import me.cameronwitcher.upsilon.utils.AI;
 import me.cameronwitcher.upsilon.utils.BoardType;
 import me.cameronwitcher.upsilon.utils.DamageReason;
