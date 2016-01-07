@@ -48,7 +48,7 @@ public class Projectile extends Entity implements Moveable {
 					continue;
 				}
 			}
-			remove();
+			if(!sprite.getType().equals(SpriteType.LADDER))remove();
 		}
 	}
 
