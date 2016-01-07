@@ -8,10 +8,12 @@ import me.cameronwitcher.upsilon.utils.Utils;
 public class Wall extends Sprite {
 	
 	State state;
+	int size;
 
-    public Wall(int x, int y, State state) {
+    public Wall(int x, int y, int size, State state) {
         super(x, y);
         this.state = state;
+        this.size = size;
         init();
     }
     

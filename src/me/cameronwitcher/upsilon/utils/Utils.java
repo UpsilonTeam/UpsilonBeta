@@ -39,7 +39,7 @@ public class Utils {
 		
 		
 		
-		backgrounds.put(1, Background.TEST);
+		backgrounds.put(1, Background.HELL);
 		backgrounds.put(2, Background.SKY);
 		backgrounds.put(3, Background.SKY);
 		backgrounds.put(4, Background.SKY);
