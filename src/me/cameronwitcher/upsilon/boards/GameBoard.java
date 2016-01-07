@@ -875,15 +875,15 @@ public class GameBoard extends Board implements ActionListener {
 		for(Moveable sprite : moveables){
 			sprites.remove(sprite);
 			sprite.move();
-			temp_.add(sprite);	
+			moveables_temp.add(sprite);	
 			
 		}
 		moveables.clear();
-		for (Moveable sprite : temp_) {
+		for (Moveable sprite : moveables_temp) {
 			moveables.add(sprite);
 			sprites.add(((Sprite)sprite));
 		}
-		temp_.clear();
+		moveables_temp.clear();
 		Bridge.getPlayer().move();
 		for (Sprite sprite : removedSprites){
 			if (moveables.contains(sprite))
