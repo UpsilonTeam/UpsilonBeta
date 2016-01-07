@@ -39,6 +39,9 @@ public class Wall extends Sprite {
     		break;
     	case VERTICAL:
     		loadImage("wall/vertical.png");
+    		height = size;
+    		setImageDimensions(2, size);
+    		Utils.broadcastMessage(height + "");
     		break;
     	case LARGE_VERTICAL:
     		loadImage("wall/vertical_large.png");
@@ -46,11 +49,12 @@ public class Wall extends Sprite {
     		
     	case HORIZONTAL:
     		loadImage("wall/horizontal.png");
+    		setImageDimensions(size, 2);
+    		width = size;
     		break;
     		default:
     			loadImage("wall/vertical.png");
     			break;
     	}
-        getImageDimensions();
     }
 }

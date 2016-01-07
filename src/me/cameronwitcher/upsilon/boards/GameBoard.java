@@ -305,7 +305,7 @@ public class GameBoard extends Board implements ActionListener {
 		level4.add(new Floor(5 * 32, 16 * 32));
 		level4.add(new Floor(4 * 32, 16 * 32));
 		level4.add(new Floor(3 * 32, 16 * 32));
-		level4.add(new Wall(2 * 32, 0 * 32, 32, State.LARGE_VERTICAL));
+		level4.add(new Wall(2 * 32, 0 * 32, 512, State.VERTICAL));
         
 		level4.add(new Ladder(3 * 32, 15 * 32));
 		level4.add(new Ladder(3 * 32, 14 * 32));
@@ -642,8 +642,9 @@ public class GameBoard extends Board implements ActionListener {
 		g.drawString("Tool:", (B_WIDTH / 2 + B_WIDTH) / 2, 20);
 		for (Sprite sprite : sprites) {
 
-			if (!(sprite instanceof Player) && !(sprite instanceof Knobber))
-				g.drawImage(sprite.getImage(), sprite.getX(), sprite.getY(), this);
+			if (!(sprite instanceof Player) && !(sprite instanceof Knobber)){
+				g.drawImage(sprite.getImage(), sprite.getX(), sprite.getY(), sprite.getWidth(), sprite.getHeight(), this);
+			}
 			if (debug && hitboxes)
 				g.drawPolygon(sprite.getPolygon());
 		}
@@ -898,9 +899,11 @@ public class GameBoard extends Board implements ActionListener {
 	}
 	
 	public void toggleGravity() {
-		if (Bridge.player.gravity)
+		if (Bridge.player.gravity){
 			Bridge.player.gravity = false;
-		else
+			Bridge.player.dx=0;
+			Bridge.player.dy=0;
+		} else
 			Bridge.player.gravity = true;
 	}
 
