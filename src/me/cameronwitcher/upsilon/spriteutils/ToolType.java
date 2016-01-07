@@ -1,4 +1,7 @@
-package me.cameronwitcher.upsilon.spriteutils.tools;
+package me.cameronwitcher.upsilon.spriteutils;
+
+import me.cameronwitcher.upsilon.sprites.tools.Bow;
+import me.cameronwitcher.upsilon.sprites.tools.NinjaCloak;
 
 public enum ToolType {
 	

@@ -1,4 +1,4 @@
-package me.cameronwitcher.upsilon.spriteutils.tools;
+package me.cameronwitcher.upsilon.spriteutils;
 
 public class Weapon extends Tool {
 

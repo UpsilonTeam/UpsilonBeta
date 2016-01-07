@@ -1,9 +1,10 @@
-package me.cameronwitcher.upsilon.spriteutils.tools;
+package me.cameronwitcher.upsilon.sprites.tools;
 
 import me.cameronwitcher.upsilon.Bridge;
 import me.cameronwitcher.upsilon.boards.GameBoard;
 import me.cameronwitcher.upsilon.sprites.Arrow;
 import me.cameronwitcher.upsilon.spriteutils.SpriteType;
+import me.cameronwitcher.upsilon.spriteutils.Weapon;
 import me.cameronwitcher.upsilon.utils.Sound;
 import res.Audio;
 

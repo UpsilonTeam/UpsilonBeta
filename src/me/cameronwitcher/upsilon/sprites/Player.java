@@ -15,7 +15,7 @@ import me.cameronwitcher.upsilon.spriteutils.Moveable;
 import me.cameronwitcher.upsilon.spriteutils.Sprite;
 import me.cameronwitcher.upsilon.spriteutils.SpriteSubType;
 import me.cameronwitcher.upsilon.spriteutils.SpriteType;
-import me.cameronwitcher.upsilon.spriteutils.tools.Tool;
+import me.cameronwitcher.upsilon.spriteutils.Tool;
 import me.cameronwitcher.upsilon.utils.BoardType;
 import me.cameronwitcher.upsilon.utils.DamageReason;
 import me.cameronwitcher.upsilon.utils.Direction;

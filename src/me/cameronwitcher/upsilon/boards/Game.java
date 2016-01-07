@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 
 import me.cameronwitcher.upsilon.Bridge;
 import me.cameronwitcher.upsilon.spriteutils.PlayerModel;
-import me.cameronwitcher.upsilon.spriteutils.tools.Tool;
+import me.cameronwitcher.upsilon.spriteutils.Tool;
 import me.cameronwitcher.upsilon.utils.Board;
 import me.cameronwitcher.upsilon.utils.Utils;
 import res.Texture;

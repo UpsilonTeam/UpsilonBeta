@@ -1,8 +1,9 @@
-package me.cameronwitcher.upsilon.spriteutils.tools;
+package me.cameronwitcher.upsilon.sprites.tools;
 
 import java.security.GeneralSecurityException;
 
 import me.cameronwitcher.upsilon.spriteutils.SpriteType;
+import me.cameronwitcher.upsilon.spriteutils.Tool;
 
 public class NinjaCloak extends Tool {
 	
