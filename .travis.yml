@@ -1,12 +1,3 @@
 language: java
 notifications:
   slack: upsilon-team:5XuJg8QUFazp3JqDcDzB8XEn
-
-sudo: required
-
-
-before_install:
-  - wget http://downloads.sourceforge.net/project/xmltask/xmltask/1.16.1/xmltask.tar.gz?r=http%3A%2F%2Fsourceforge.net%2Fprojects%2Fxmltask%2Ffiles%2Fxmltask%2F1.16.1%2F&ts=1452224302&use_mirror=iweb
-
-before_script:
- - tar -zxvf xmltask.tar.gz?r=http:%2F%2Fsourceforge.net%2Fprojects%2Fxmltask%2Ffiles%2Fxmltask%2F1.16.1%2F
