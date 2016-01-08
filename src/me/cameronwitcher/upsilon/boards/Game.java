@@ -1,24 +1,16 @@
 package me.cameronwitcher.upsilon.boards;
 
 import java.awt.Dimension;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.InvalidPropertiesFormatException;
+import java.io.File;
 import java.util.List;
-import java.util.Properties;
-import java.util.Scanner;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 import me.cameronwitcher.upsilon.Bridge;
-import me.cameronwitcher.upsilon.spriteutils.PlayerModel;
 import me.cameronwitcher.upsilon.spriteutils.Tool;
 import me.cameronwitcher.upsilon.utils.Board;
 import me.cameronwitcher.upsilon.utils.Utils;
+import me.cameronwitcher.upsilon.utils.XmlFile;
 import res.Texture;
 
 public class Game extends JFrame {
@@ -30,21 +22,19 @@ public class Game extends JFrame {
 	public int DEBUG_LEVEL = 1;
 	private String version;
 	public Board board;
+	public XmlFile description = new XmlFile(new File("description.xml"));
 
 	public Game() {
 		
-		Properties prop = new Properties();
-		try {
-			
-			prop.loadFromXML(new FileInputStream("description.xml"));
-		} catch (Exception e) {
-			
-			e.printStackTrace();
-		}
-		version = prop.getProperty("version");
+		version = description.getProperty("version");
+		
 		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+	
+	public XmlFile getDescriptionFile(){
+		return description;
 	}
 
 	public String getVersion(){
