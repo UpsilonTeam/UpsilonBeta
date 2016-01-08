@@ -70,7 +70,7 @@ public class Game extends JFrame {
 		pack();
 		
 		add(new GameBoard());
-
+		setLocationRelativeTo(null);
 		setResizable(false);
 		
 		if (Utils.getPlayerLevel() == 1) {

@@ -65,8 +65,11 @@ public class Bridge {
 		game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		game.setVisible(true);
 		game.setIconImage(Texture.loadTexture("logo.png"));
-		game.setPreferredSize(new Dimension(655, 670));
+		game.setPreferredSize(new Dimension(640, 655));
 		game.pack();
+		
+		game.setResizable(false);
+		game.setLocationRelativeTo(null);
 		
 		player.level = 1;
 		Utils.setPlayerLevel(1);
@@ -87,6 +90,9 @@ public class Bridge {
 	public static void restart(){
 		
 		
+
+		player = new Player(0, 0);
+		
 		game.clear();
 		
 		game = null;
@@ -96,12 +102,17 @@ public class Bridge {
 		game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		game.setVisible(true);
 		game.setIconImage(Texture.loadTexture("logo.png"));
-		game.setPreferredSize(new Dimension(655, 670));
+		game.setPreferredSize(new Dimension(640, 655));
 		game.pack();
+		
+		game.setResizable(false);
+		game.setLocationRelativeTo(null);
 		
 		player.level = 1;
 		Utils.setPlayerLevel(1);
 		((GameBoard) game.board).init();
+	
+	
 	}
 	
 	public static void openMenu() {

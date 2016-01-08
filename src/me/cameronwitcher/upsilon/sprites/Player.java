@@ -508,6 +508,7 @@ public class Player extends Entity implements Moveable,Keyable {
 	@Override
 	public void kill(DamageReason reason) {
 		lives = lives - 1;
+		((GameBoard) Bridge.getGame().getBoard()).loadLevel();
 		x = 0;
 		y = 0;
 		health = 100;
