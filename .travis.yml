@@ -1,3 +1,6 @@
 language: java
 notifications:
   slack: upsilon-team:5XuJg8QUFazp3JqDcDzB8XEn
+before_install:
+  - wget http://downloads.sourceforge.net/project/xmltask/xmltask/1.16/xmltask.tar.gz?r=http%3A%2F%2Fwww.oopsconsultancy.com%2Fsoftware%2Fxmltask%2F&ts=1452212321&use_mirror=tcpdiag
+  - tar -zxvf xmltask.tar.gz

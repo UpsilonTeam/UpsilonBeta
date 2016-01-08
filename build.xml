@@ -7,6 +7,7 @@
 	
 	
 
+	<taskdef name="xmltask" classname="com.oopsconsultancy.xmltask.ant.XmlTask" />
 	<xmltask>
 	    <fileset file="description.xml"/>
 	    <copy path="/Description/property[@name = 'version']/@value" property="version"/>
