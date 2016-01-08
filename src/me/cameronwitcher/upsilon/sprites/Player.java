@@ -93,6 +93,7 @@ public class Player extends Entity implements Moveable,Keyable {
 
 			if (key == KeyEvent.VK_A || key == KeyEvent.VK_LEFT) {
 				setDirection(Direction.LEFT);
+				facing = Direction.LEFT;
 				dx = -2;
 				walking= true;
 				
@@ -106,6 +107,7 @@ public class Player extends Entity implements Moveable,Keyable {
 
 			if (key == KeyEvent.VK_D || key == KeyEvent.VK_RIGHT) {
 				setDirection(Direction.RIGHT);
+				facing = Direction.RIGHT;
 				dx = 2;
 				walking= true;
 				
@@ -335,6 +337,7 @@ public class Player extends Entity implements Moveable,Keyable {
 					if(sprite instanceof Player) continue;
 					if (!getPolygon().intersects(sprite.getPolygon().getBounds()))continue;
 					if(!Utils.intersects(getPolygon(), sprite.getPolygon())) continue;
+					
 					if (sprite instanceof Money) {
 						climbing = false;
 						Money money = (Money) sprite;

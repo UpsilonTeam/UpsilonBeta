@@ -19,7 +19,8 @@ public class Entity extends Sprite {
 	protected int score;
 	protected Tool tool;
 	public boolean walking;
-	Direction direction = Direction.RIGHT;
+	protected Direction direction = Direction.RIGHT;
+	protected Direction facing = Direction.RIGHT;
 
 	public Entity(int x, int y) {
 		super(x, y);
@@ -31,6 +32,10 @@ public class Entity extends Sprite {
 
 	public int getMaxHealth() {
 		return maxhealth;
+	}
+	
+	public Direction getFacingDirection(){
+		return facing;
 	}
 
 	public void damage(int i, Entity damager, DamageReason reason) {
