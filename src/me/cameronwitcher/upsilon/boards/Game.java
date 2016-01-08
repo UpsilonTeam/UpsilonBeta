@@ -35,7 +35,8 @@ public class Game extends JFrame {
 		
 		Properties prop = new Properties();
 		try {
-			prop.loadFromXML(new FileInputStream("C:/Users/Cameron Witcher/workspaces/Java/UpsilonBeta/description.xml"));
+			
+			prop.loadFromXML(new FileInputStream("description.xml"));
 		} catch (Exception e) {
 			
 			e.printStackTrace();
