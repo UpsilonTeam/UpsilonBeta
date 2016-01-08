@@ -1,7 +1,12 @@
 package me.cameronwitcher.upsilon.boards;
 
 import java.awt.Dimension;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.InvalidPropertiesFormatException;
 import java.util.List;
+import java.util.Properties;
 import java.util.Scanner;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -23,10 +28,22 @@ public class Game extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	public int DEBUG_LEVEL = 1;
-	private String version = "0.0.1 BETA";
+	private String version;
 	public Board board;
 
 	public Game() {
+		
+		Properties prop = new Properties();
+		try {
+			
+			prop.loadFromXML(new FileInputStream("description.xml"));
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+		version = prop.getProperty("version");
+		
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
