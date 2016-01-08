@@ -1,6 +1,4 @@
-<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
-<properties>
- <entry key="test">a</entry>
-    <property name="version" value="0.0.2 BETA" />
-    
-</properties>
+<?xml version="1.0" encoding="utf-8"?>
+<Description>
+  <property name="version" value="0.0.2 BETA" />
+</Description>

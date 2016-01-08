@@ -1,57 +1,59 @@
 <project name="Upsilon" default="dist" basedir=".">
-  <description>
-    simple example build file
-  </description>
-  <!-- set global properties for this build -->
-  <property name="src" location="src"/>
-  <property name="build" location="build"/>
+	<description>simple example build file</description>
+	<!-- set global properties for this build -->
+	<property name="src" location="src"/>
+	<property name="build" location="build"/>
 	<property name="dist" location="dist"/>
-	 <xmlproperty file="description.xml" collapseAttributes="true" />
+	
 	
 
+	<taskdef name="xmltask" classname="com.oopsconsultancy.xmltask.ant.XmlTask" />
+	<xmltask>
+	    <fileset file="description.xml"/>
+	    <copy path="/Description/property[@name = 'version']/@value" property="version"/>
+	</xmltask>
 
+	
 	
   
-  <target name="test" depends="clean">
-      <echo message="Done." />
-  </target>
+ 
+	<target name="test" depends="clean">
+		<echo message="Done." />
+	</target>
 
-  <target name="init">
+	<target name="init">
   	
-  	<echo message="Running Upsilon version ${version}" />
+		<echo message="Running Upsilon version ${version}" />
   	
-    <!-- Create the time stamp -->
-    <tstamp/>
-    <!-- Create the build directory structure used by compile -->
-    <mkdir dir="${build}"/>
-    <echo message="Made build path." />
-  </target>
+		<!-- Create the time stamp -->
+		<tstamp/>
+		<!-- Create the build directory structure used by compile -->
+		<mkdir dir="${build}"/>
+		<echo message="Made build path." />
+	</target>
 
-  <target name="compile" depends="init"
-        description="compile the source">
-    <!-- Compile the java code from ${src} into ${build} -->
-    <javac srcdir="${src}" destdir="${build}"/>
-    <echo message="Compiled project." />
-  </target>
+	<target name="compile" depends="init" description="compile the source">
+		<!-- Compile the java code from ${src} into ${build} -->
+		<javac srcdir="${src}" destdir="${build}"/>
+		<echo message="Compiled project." />
+	</target>
 
-  <target name="dist" depends="compile"
-        description="generate the distribution">
-    <!-- Create the distribution directory -->
-    <mkdir dir="${dist}/lib"/>
+	<target name="dist" depends="compile" description="generate the distribution">
+		<!-- Create the distribution directory -->
+		<mkdir dir="${dist}/lib"/>
 
-    <!-- Put everything in ${build} into the MyProject-${DSTAMP}.jar file -->
-    <jar jarfile="${dist}/lib/MyProject-${DSTAMP}.jar" basedir="${build}"/>
+		<!-- Put everything in ${build} into the MyProject-${DSTAMP}.jar file -->
+		<jar jarfile="${dist}/lib/MyProject-${DSTAMP}.jar" basedir="${build}"/>
     
-    <echo message="Created distro." />
-  </target>
+		<echo message="Created distro." />
+	</target>
   
   
 
-  <target name="clean"
-        description="clean up" depends="dist">
-    <!-- Delete the ${build} and ${dist} directory trees -->
-    <delete dir="${build}"/>
-    <delete dir="${dist}"/>
-    <echo message="Removed it all." />
-  </target>
+	<target name="clean" description="clean up" depends="dist">
+		<!-- Delete the ${build} and ${dist} directory trees -->
+		<delete dir="${build}"/>
+		<delete dir="${dist}"/>
+		<echo message="Removed it all." />
+	</target>
 </project>
