@@ -175,47 +175,26 @@ public class GameBoard extends Board implements ActionListener {
 		level5.clear();
 		level6.clear();
 		
+		for(int x=0;x!=30;x++){
+			level1.add(new Floor(x*32,525));
+		}
 		
+		level1.add(new Gold(6 * 32, 510));
+		level1.add(new Gold(7 * 32, 510));
+		level1.add(new Gold(8 * 32, 510));
+		level1.add(new Gold(9 * 32, 510));
+		level1.add(new Gold(10 * 32, 510));
+		level1.add(new Gold(11 * 32, 510));
 		
-		level1.add(new Floor(0, 525));
-		level1.add(new Floor(32, 525));
-		level1.add(new Floor(2 * 32, 525));
-		level1.add(new Floor(3 * 32, 525));
-		level1.add(new Floor(4 * 32, 525));
-		level1.add(new Floor(5 * 32, 525));
-		level1.add(new Floor(6 * 32, 525));
-		level1.add(new Floor(7 * 32, 525));
-		level1.add(new Floor(8 * 32, 525));
-		level1.add(new Floor(9 * 32, 525));
-		level1.add(new Floor(10 * 32, 525));
-		level1.add(new Floor(11 * 32, 525));
-
-		level1.add(new Gold(6 * 32, 525));
-		level1.add(new Gold(7 * 32, 525));
-		level1.add(new Gold(8 * 32, 525));
-		level1.add(new Gold(9 * 32, 525));
-		level1.add(new Gold(10 * 32, 525));
-		level1.add(new Gold(11 * 32, 525));
-
-		level1.add(new Floor(12 * 32, 525));
-		level1.add(new Floor(13 * 32, 525));
-		level1.add(new Floor(14 * 32, 525));
-		level1.add(new Floor(15 * 32, 525));
-		level1.add(new Floor(16 * 32, 525));
-		level1.add(new Floor(17 * 32, 525));
-		level1.add(new Floor(18 * 32, 525));
-		level1.add(new Floor(19 * 32, 525));
-		level1.add(new Floor(20 * 32, 525));
-		level1.add(new Floor(21 * 32, 525));
-		level1.add(new Floor(22 * 32, 525));
-		level1.add(new Floor(23 * 32, 525));
+		for(int y=0;y!=5;y++){
+			level1.add(new Ladder(10*32,y*32));
+		}
 		
 		level1.add(new Ladder(17 * 32, 33 * 15));
 		level1.add(new Ladder(17 * 32, 33 * 15));
 		level1.add(new Ladder(17 * 32, 33 * 15));
 		level1.add(new Ladder(17 * 32, 33 * 15));
 		level1.add(new Ladder(17 * 32, 33 * 15));
-		
 		
 		
 		level1.add(new Floor(16 * 15, 16 * 15));

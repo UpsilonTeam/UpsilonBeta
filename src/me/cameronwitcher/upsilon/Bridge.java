@@ -51,10 +51,24 @@ public class Bridge {
 	}
 
 	public static void openLevelDebug(int level) {
-		JFrame frame = new JFrame("Debug: " + level);
-		frame.add(new LevelDebugBoard(level));
-		frame.setVisible(true);
-		frame.setSize(640, 640);
+		
+		
+		game.clear();
+		
+		game = null;
+		game = new Game();
+		game.setBoard(new LevelDebugBoard(level));
+		game.setTitle("Debug: " + level);
+		game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		game.setVisible(true);
+		game.setIconImage(Texture.loadTexture("logo.png"));
+		game.setPreferredSize(new Dimension(960, 540));
+		game.pack();
+		game.setLocationRelativeTo(null);
+		
+		
+		
+		
 	}
 
 	public static void start() {

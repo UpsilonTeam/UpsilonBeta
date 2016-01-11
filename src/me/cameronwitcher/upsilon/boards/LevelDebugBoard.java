@@ -1,5 +1,6 @@
 package me.cameronwitcher.upsilon.boards;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Toolkit;
@@ -77,6 +78,8 @@ public class LevelDebugBoard extends Board implements ActionListener {
 		
 		for(Sprite sprite : testing.getLevel(i)){
 			g.drawImage(sprite.getImage(), sprite.getX(), sprite.getY(), this);
+			g.setColor(Color.BLUE);
+			g.drawRect(sprite.getX(), sprite.getY(), sprite.getWidth(), sprite.getHeight());
 		}
 		
 		testing.loadLevels(true);

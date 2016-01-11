@@ -1,6 +1,10 @@
 package me.cameronwitcher.upsilon.boards;
 
+import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.Point;
+import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.List;
 
@@ -29,8 +33,15 @@ public class Game extends JFrame {
 		version = description.getProperty("version");
 		
 		
+		BufferedImage cursorImg = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
+
+		// Create a new blank cursor.
+		Cursor blankCursor = Toolkit.getDefaultToolkit().createCustomCursor(
+		    cursorImg, new Point(0, 0), "blank cursor");
+
+		// Set the blank cursor to the JFrame.
+		setCursor(blankCursor);
 		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
 	public XmlFile getDescriptionFile(){

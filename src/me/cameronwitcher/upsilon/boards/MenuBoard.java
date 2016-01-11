@@ -17,6 +17,7 @@ import java.util.List;
 
 import javax.swing.Timer;
 
+import javafx.scene.Cursor;
 import me.cameronwitcher.upsilon.Bridge;
 import me.cameronwitcher.upsilon.spriteutils.Clickable;
 import me.cameronwitcher.upsilon.utils.Background;
@@ -37,6 +38,8 @@ public class MenuBoard extends Board implements ActionListener {
 	public int M_WIDTH = 960;
 	public int M_HEIGHT = 640;
 	public int LEVEL_DEBUG = 6;
+	private int mx = 0;
+	private int my = 0;
 	Timer timer;
 	public List<Clickable> clickables = new ArrayList<>();
 
@@ -76,8 +79,12 @@ public class MenuBoard extends Board implements ActionListener {
 	}
 
 	public void drawMenu(Graphics g) {
+		
+		
 
 		g.drawImage(Background.WIN.getImage(), 0, 0, M_WIDTH, M_HEIGHT, null);
+		
+		
 
 		g.drawImage(Texture.loadTexture("playermodels/yellow/stand_right.png"),
 				(M_WIDTH / 2) - ((13 * 5) / 2), (M_HEIGHT / 2) - ((44 * 5) / 2), 13 * 5, 44 * 5, null);
@@ -87,6 +94,9 @@ public class MenuBoard extends Board implements ActionListener {
 		for (Clickable clickable : clickables) {
 			g.drawPolygon(clickable.drawPolygon(g));
 		}
+		
+		
+		g.drawImage(Texture.loadTexture("pointer.png"), mx, my, this);
 
 	}
 
@@ -161,6 +171,8 @@ public class MenuBoard extends Board implements ActionListener {
 	private class MMListener extends MouseMotionAdapter {
 
 		public void mouseMoved(MouseEvent e) {
+			mx = e.getX();
+			my = e.getY();
 			for (Clickable clickable : clickables) {
 				if (clickable.getPolygon().contains(e.getPoint())) {
 					clickable.mouseMoved(e);
