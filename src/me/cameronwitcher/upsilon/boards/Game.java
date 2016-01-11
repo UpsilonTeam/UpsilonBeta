@@ -1,19 +1,16 @@
 package me.cameronwitcher.upsilon.boards;
 
 import java.awt.Dimension;
+import java.io.File;
 import java.util.List;
-import java.util.Scanner;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 import me.cameronwitcher.upsilon.Bridge;
-import me.cameronwitcher.upsilon.spriteutils.PlayerModel;
 import me.cameronwitcher.upsilon.spriteutils.Tool;
 import me.cameronwitcher.upsilon.utils.Board;
 import me.cameronwitcher.upsilon.utils.Utils;
+import me.cameronwitcher.upsilon.utils.XmlFile;
 import res.Texture;
 
 public class Game extends JFrame {
@@ -23,11 +20,21 @@ public class Game extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	public int DEBUG_LEVEL = 1;
-	private String version = "0.0.1 BETA";
+	private String version;
 	public Board board;
+	public XmlFile description = new XmlFile(new File("description.xml"));
 
 	public Game() {
+		
+		version = description.getProperty("version");
+		
+		
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+	
+	public XmlFile getDescriptionFile(){
+		return description;
 	}
 
 	public String getVersion(){
@@ -63,7 +70,7 @@ public class Game extends JFrame {
 		pack();
 		
 		add(new GameBoard());
-
+		setLocationRelativeTo(null);
 		setResizable(false);
 		
 		if (Utils.getPlayerLevel() == 1) {

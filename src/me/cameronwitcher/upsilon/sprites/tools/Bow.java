@@ -33,9 +33,9 @@ public class Bow extends Weapon {
 		Arrow arrow = new Arrow(
 				getEntity().x, 
 				getEntity().y,
-				getEntity().getDirection(),
+				getEntity().getFacingDirection(),
 				getEntity());
-		arrow.direction = getEntity().getDirection();
+		arrow.direction = getEntity().getFacingDirection();
 		((GameBoard)Bridge.getGame().getBoard()).addMoveable(arrow);
 		 
 	}

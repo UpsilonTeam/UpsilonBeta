@@ -471,6 +471,7 @@ public class GameBoard extends Board implements ActionListener {
 	}
 
 	public void loadLevel() {
+		Utils.broadcastMessage("test");
 		ingame = false;
 		loaded = false;
 		if (Utils.getPlayerLevel() > levels.size()) {
