@@ -66,15 +66,14 @@ public class GameBoard extends Board implements ActionListener {
 	public boolean ingame;
 	public boolean inv = false;
 	public String gameStatus;
-	public final int B_WIDTH = 640;
-	public final int B_HEIGHT = 640;
-	public final int DELAY = 15;
+	public final int B_WIDTH = Bridge.getGameBoardSize(0);
+	public final int B_HEIGHT = Bridge.getGameBoardSize(1);
+	public final int DELAY = 10;
 	private boolean hitboxes = false;
 	public double i = 0.9;
 	public int l = 0;
 
 	public boolean paused = false;
-	ArrayList<Rectangle> recs = new ArrayList<>();
 	public Map<Integer, String> messages = new HashMap<>();
 	public Map<Integer, String> messages_player = new HashMap<>();
 	public ArrayList<Sprite> sprites = new ArrayList<>();
@@ -83,7 +82,6 @@ public class GameBoard extends Board implements ActionListener {
 
 	public List<Moveable> moveables_temp = new ArrayList<>();
 	public List<Sprite> removedSprites = new ArrayList<>();
-	List<Moveable> temp_ = new ArrayList<>();
 	public List<String> strings_temp = new ArrayList<>();
 	public List<String> strings_temp_player = new ArrayList<>();
 	public List<Sprite> tools = new ArrayList<>();
@@ -141,7 +139,6 @@ public class GameBoard extends Board implements ActionListener {
 		gameStatus = "";
 		i = 0.9;
 		l = 0;
-		recs.clear();
 		messages.clear();
 		messages_player.clear();
 		sprites.clear();
@@ -149,7 +146,6 @@ public class GameBoard extends Board implements ActionListener {
 		moveables.clear();
 		moveables_temp.clear();
 		removedSprites.clear();
-		temp_.clear();
 		strings_temp.clear();
 		strings_temp_player.clear();
 		tools.clear();
@@ -166,15 +162,15 @@ public class GameBoard extends Board implements ActionListener {
 
 	public void loadLevels() {
 		levels.clear();
-		level1.add(new Floor(0, 19 * 32));
-		level1.add(new Floor(32, 19 * 32));
-		level1.add(new Floor(2 * 32, 19 * 32));
-		level1.add(new Floor(3 * 32, 19 * 32));
-		level1.add(new Floor(4 * 32, 19 * 32));
-		level1.add(new Floor(5 * 32, 19 * 32));
-		level1.add(new Floor(6 * 32, 19 * 32));
-		level1.add(new Floor(7 * 32, 19 * 32));
-		level1.add(new Floor(8 * 32, 19 * 32));
+		level1.add(new Floor(0, 608));
+		level1.add(new Floor(32, 608));
+		level1.add(new Floor(2 * 32, 608));
+		level1.add(new Floor(3 * 32, 608));
+		level1.add(new Floor(4 * 32, 608));
+		level1.add(new Floor(5 * 32, 608));
+		level1.add(new Floor(6 * 32, 608));
+		level1.add(new Floor(7 * 32, 608));
+		level1.add(new Floor(8 * 32, 608));
 
 		level1.add(new Floor(9 * 32, 608));
 		level1.add(new Floor(10 * 32, 608));
@@ -187,40 +183,42 @@ public class GameBoard extends Board implements ActionListener {
 		level1.add(new Gold(10 * 32, 598));
 		level1.add(new Gold(11 * 32, 598));
 
-		level1.add(new Floor(12 * 32, 19 * 32));
-		level1.add(new Floor(13 * 32, 19 * 32));
-		level1.add(new Floor(14 * 32, 19 * 32));
-		level1.add(new Floor(15 * 32, 19 * 32));
-		level1.add(new Floor(16 * 32, 19 * 32));
-		level1.add(new Floor(17 * 32, 19 * 32));
+		level1.add(new Floor(12 * 32, 608));
+		level1.add(new Floor(13 * 32, 608));
+		level1.add(new Floor(14 * 32, 608));
+		level1.add(new Floor(15 * 32, 608));
+		level1.add(new Floor(16 * 32, 608));
+		level1.add(new Floor(17 * 32, 608));
 		level1.add(new Ladder(17 * 32, 18 * 32));
 		level1.add(new Ladder(17 * 32, 17 * 32));
 		level1.add(new Ladder(17 * 32, 16 * 32));
 		level1.add(new Ladder(17 * 32, 15 * 32));
-		level1.add(new Floor(16 * 32, 15 * 32));
-		level1.add(new Floor(15 * 32, 15 * 32));
-		level1.add(new Floor(14 * 32, 15 * 32));
-		level1.add(new Floor(13 * 32, 15 * 32));
-		level1.add(new Floor(12 * 32, 15 * 32));
-		level1.add(new Floor(11 * 32, 15 * 32));
-		level1.add(new Floor(10 * 32, 15 * 32));
-		level1.add(new Floor(9 * 32, 15 * 32));
-		level1.add(new Floor(8 * 32, 15 * 32));
-		level1.add(new Floor(7 * 32, 15 * 32));
-		level1.add(new Floor(6 * 32, 15 * 32));
-		level1.add(new Floor(5 * 32, 15 * 32));
-		level1.add(new Floor(4 * 32, 15 * 32));
-		level1.add(new Floor(3 * 32, 15 * 32));
+		level1.add(new Floor(16 * 32, 16 * 32));
+		level1.add(new Floor(15 * 32, 16 * 32));
+		level1.add(new Floor(14 * 32, 16 * 32));
+		level1.add(new Floor(13 * 32, 16 * 32));
+		level1.add(new Floor(12 * 32, 16 * 32));
+		level1.add(new Floor(11 * 32, 16 * 32));
+		level1.add(new Floor(10 * 32, 16 * 32));
+		level1.add(new Floor(9 * 32, 16 * 32));
+		level1.add(new Floor(8 * 32, 16 * 32));
+		level1.add(new Floor(7 * 32, 16 * 32));
+		level1.add(new Floor(6 * 32, 16 * 32));
+		level1.add(new Floor(5 * 32, 16 * 32));
+		level1.add(new Floor(4 * 32, 16 * 32));
+		level1.add(new Floor(3 * 32, 16 * 32));
+		level1.add(new Ladder(3 * 32, 15 * 32));
 		level1.add(new Ladder(3 * 32, 14 * 32));
 		level1.add(new Ladder(3 * 32, 13 * 32));
 		level1.add(new Ladder(3 * 32, 12 * 32));
 		level1.add(new Ladder(3 * 32, 11 * 32));
+		level1.add(new Ladder(3 * 32, 10 * 32));
 		level1.add(new Floor(4 * 32, 11 * 32));
 		level1.add(new Floor(5 * 32, 11 * 32));
 		level1.add(new Floor(6 * 32, 11 * 32));
 		level1.add(new Floor(7 * 32, 11 * 32));
 		level1.add(new Floor(8 * 32, 11 * 32));
-		level1.add(new Wall(8 * 32, 10 * 32, 32, State.VERTICAL));
+		level1.add(new Wall(8 * 32, 10 * 32, 50, State.VERTICAL));
 		level1.add(new Floor(9 * 32, 11 * 32));
 		level1.add(new Floor(10 * 32, 11 * 32));
 		level1.add(new Floor(11 * 32, 11 * 32));
@@ -711,9 +709,7 @@ public class GameBoard extends Board implements ActionListener {
 			g.drawString("Level: " + player.level, 0, 120);
 		}
 
-		for (Rectangle rec : recs) {
-			g.drawRect(rec.x, rec.y, rec.width, rec.height);
-		}
+		
 
 		if (paused) {
 			g.drawImage(Texture.loadTexture("darken.png"), 0, 0, null);

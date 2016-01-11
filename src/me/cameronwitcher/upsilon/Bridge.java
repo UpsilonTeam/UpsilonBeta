@@ -2,6 +2,7 @@ package me.cameronwitcher.upsilon;
 
 import java.awt.Dimension;
 import java.io.File;
+import java.util.HashMap;
 
 import javax.swing.JFrame;
 
@@ -18,7 +19,13 @@ public class Bridge {
 	private static Game game;
 	public static Player player;
 	
+	//Cameron
+	//First value is X or Y. 0 = x : 1 = y
+	public static HashMap<Integer, Integer> gameBoardSize = new HashMap<>();
+	
 	public static void main(String[] args) {
+		gameBoardSize.put(0, 960);
+		gameBoardSize.put(1, 540);
 		game = new Game();
 		game.init();
 		File file = new File("C://Upsilon/");
@@ -65,7 +72,7 @@ public class Bridge {
 		game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		game.setVisible(true);
 		game.setIconImage(Texture.loadTexture("logo.png"));
-		game.setPreferredSize(new Dimension(640, 655));
+		game.setPreferredSize(new Dimension(960, 540));
 		game.pack();
 		
 		game.setResizable(false);
@@ -102,7 +109,7 @@ public class Bridge {
 		game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		game.setVisible(true);
 		game.setIconImage(Texture.loadTexture("logo.png"));
-		game.setPreferredSize(new Dimension(640, 655));
+		game.setPreferredSize(new Dimension(640*2, 655));
 		game.pack();
 		
 		game.setResizable(false);
@@ -126,6 +133,10 @@ public class Bridge {
 		
 		
 		game.setLocationRelativeTo(null);
+	}
+	
+	public static int getGameBoardSize(int value){
+		return gameBoardSize.get(value);
 	}
 
 }

@@ -20,7 +20,7 @@ public enum SpriteType {
 	}
 	
 	public SpriteSubType getSubType(){
-		if(this == FLOOR) return SpriteSubType.COLLIDEABLE;
+		if(this == FLOOR) return SpriteSubType.PARTIAL_COLLIDEABLE;
 		if(this == FALLING_FLOOR) return SpriteSubType.PARTIAL_COLLIDEABLE;
 		if(this == KNOBBER) return SpriteSubType.ENEMY;
 		if(this == SPIKE) return SpriteSubType.BAD_THINGS;
