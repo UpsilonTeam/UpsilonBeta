@@ -22,8 +22,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
 
-import javax.swing.JButton;
-import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import me.cameronwitcher.upsilon.Bridge;
@@ -97,6 +95,12 @@ public class GameBoard extends Board implements ActionListener {
 		setType(BoardType.GAME_BOARD);
 
 	}
+	
+	public void startDebug(){
+		ingame = true;
+		gameStatus = "ingame";
+		loadLevels(true);
+	}
 
 	public void init() {
 
@@ -113,7 +117,7 @@ public class GameBoard extends Board implements ActionListener {
 		setFocusable(true);
 		setBackground(Color.RED);
 
-		loadLevels();
+		loadLevels(false);
 
 		setPreferredSize(new Dimension(B_WIDTH, B_HEIGHT));
 
@@ -159,275 +163,296 @@ public class GameBoard extends Board implements ActionListener {
 		
 		
 	}
+	
+	
 
-	public void loadLevels() {
+	public void loadLevels(boolean debug) {
 		levels.clear();
-		level1.add(new Floor(0, 608));
-		level1.add(new Floor(32, 608));
-		level1.add(new Floor(2 * 32, 608));
-		level1.add(new Floor(3 * 32, 608));
-		level1.add(new Floor(4 * 32, 608));
-		level1.add(new Floor(5 * 32, 608));
-		level1.add(new Floor(6 * 32, 608));
-		level1.add(new Floor(7 * 32, 608));
-		level1.add(new Floor(8 * 32, 608));
+		level1.clear();
+		level2.clear();
+		level3.clear();
+		level4.clear();
+		level5.clear();
+		level6.clear();
+		
+		
+		
+		level1.add(new Floor(0, 525));
+		level1.add(new Floor(32, 525));
+		level1.add(new Floor(2 * 32, 525));
+		level1.add(new Floor(3 * 32, 525));
+		level1.add(new Floor(4 * 32, 525));
+		level1.add(new Floor(5 * 32, 525));
+		level1.add(new Floor(6 * 32, 525));
+		level1.add(new Floor(7 * 32, 525));
+		level1.add(new Floor(8 * 32, 525));
+		level1.add(new Floor(9 * 32, 525));
+		level1.add(new Floor(10 * 32, 525));
+		level1.add(new Floor(11 * 32, 525));
 
-		level1.add(new Floor(9 * 32, 608));
-		level1.add(new Floor(10 * 32, 608));
-		level1.add(new Floor(11 * 32, 608));
+		level1.add(new Gold(6 * 32, 525));
+		level1.add(new Gold(7 * 32, 525));
+		level1.add(new Gold(8 * 32, 525));
+		level1.add(new Gold(9 * 32, 525));
+		level1.add(new Gold(10 * 32, 525));
+		level1.add(new Gold(11 * 32, 525));
 
-		level1.add(new Gold(6 * 32, 598));
-		level1.add(new Gold(7 * 32, 598));
-		level1.add(new Gold(8 * 32, 598));
-		level1.add(new Gold(9 * 32, 598));
-		level1.add(new Gold(10 * 32, 598));
-		level1.add(new Gold(11 * 32, 598));
-
-		level1.add(new Floor(12 * 32, 608));
-		level1.add(new Floor(13 * 32, 608));
-		level1.add(new Floor(14 * 32, 608));
-		level1.add(new Floor(15 * 32, 608));
-		level1.add(new Floor(16 * 32, 608));
-		level1.add(new Floor(17 * 32, 608));
-		level1.add(new Ladder(17 * 32, 18 * 32));
-		level1.add(new Ladder(17 * 32, 17 * 32));
-		level1.add(new Ladder(17 * 32, 16 * 32));
-		level1.add(new Ladder(17 * 32, 15 * 32));
-		level1.add(new Floor(16 * 32, 16 * 32));
-		level1.add(new Floor(15 * 32, 16 * 32));
-		level1.add(new Floor(14 * 32, 16 * 32));
-		level1.add(new Floor(13 * 32, 16 * 32));
-		level1.add(new Floor(12 * 32, 16 * 32));
-		level1.add(new Floor(11 * 32, 16 * 32));
-		level1.add(new Floor(10 * 32, 16 * 32));
-		level1.add(new Floor(9 * 32, 16 * 32));
-		level1.add(new Floor(8 * 32, 16 * 32));
-		level1.add(new Floor(7 * 32, 16 * 32));
-		level1.add(new Floor(6 * 32, 16 * 32));
-		level1.add(new Floor(5 * 32, 16 * 32));
-		level1.add(new Floor(4 * 32, 16 * 32));
-		level1.add(new Floor(3 * 32, 16 * 32));
-		level1.add(new Ladder(3 * 32, 15 * 32));
-		level1.add(new Ladder(3 * 32, 14 * 32));
-		level1.add(new Ladder(3 * 32, 13 * 32));
-		level1.add(new Ladder(3 * 32, 12 * 32));
-		level1.add(new Ladder(3 * 32, 11 * 32));
-		level1.add(new Ladder(3 * 32, 10 * 32));
-		level1.add(new Floor(4 * 32, 11 * 32));
-		level1.add(new Floor(5 * 32, 11 * 32));
-		level1.add(new Floor(6 * 32, 11 * 32));
-		level1.add(new Floor(7 * 32, 11 * 32));
-		level1.add(new Floor(8 * 32, 11 * 32));
-		level1.add(new Wall(8 * 32, 10 * 32, 50, State.VERTICAL));
-		level1.add(new Floor(9 * 32, 11 * 32));
-		level1.add(new Floor(10 * 32, 11 * 32));
-		level1.add(new Floor(11 * 32, 11 * 32));
-		level1.add(new Floor(12 * 32, 11 * 32));
-		level1.add(new Gate(12 * 32, 10 * 32));
-		level1.add(new Bow(9 * 32, 14 * 32));
-		level1.add(new NinjaCloak(10 * 32, 14 * 32));
-		level1.add(Bridge.getPlayer());
+		level1.add(new Floor(12 * 32, 525));
+		level1.add(new Floor(13 * 32, 525));
+		level1.add(new Floor(14 * 32, 525));
+		level1.add(new Floor(15 * 32, 525));
+		level1.add(new Floor(16 * 32, 525));
+		level1.add(new Floor(17 * 32, 525));
+		level1.add(new Floor(18 * 32, 525));
+		level1.add(new Floor(19 * 32, 525));
+		level1.add(new Floor(20 * 32, 525));
+		level1.add(new Floor(21 * 32, 525));
+		level1.add(new Floor(22 * 32, 525));
+		level1.add(new Floor(23 * 32, 525));
+		
+		level1.add(new Ladder(17 * 32, 33 * 15));
+		level1.add(new Ladder(17 * 32, 33 * 15));
+		level1.add(new Ladder(17 * 32, 33 * 15));
+		level1.add(new Ladder(17 * 32, 33 * 15));
+		level1.add(new Ladder(17 * 32, 33 * 15));
+		
+		
+		
+		level1.add(new Floor(16 * 15, 16 * 15));
+		level1.add(new Floor(15 * 15, 16 * 15));
+		level1.add(new Floor(14 * 15, 16 * 15));
+		level1.add(new Floor(13 * 15, 16 * 15));
+		level1.add(new Floor(12 * 15, 16 * 15));
+		level1.add(new Floor(11 * 15, 16 * 15));
+		level1.add(new Floor(10 * 15, 16 * 15));
+		level1.add(new Floor(9 * 15, 16 * 15));
+		level1.add(new Floor(8 * 15, 16 * 15));
+		level1.add(new Floor(7 * 15, 16 * 15));
+		level1.add(new Floor(6 * 15, 16 * 15));
+		level1.add(new Floor(5 * 15, 16 * 15));
+		level1.add(new Floor(4 * 15, 16 * 15));
+		level1.add(new Floor(3 * 15, 16 * 15));
+		level1.add(new Ladder(3 * 15, 15 * 15));
+		level1.add(new Ladder(3 * 15, 14 * 15));
+		level1.add(new Ladder(3 * 15, 13 * 15));
+		level1.add(new Ladder(3 * 15, 12 * 15));
+		level1.add(new Ladder(3 * 15, 11 * 15));
+		level1.add(new Ladder(3 * 15, 10 * 15));
+		level1.add(new Floor(4 * 15, 11 * 15));
+		level1.add(new Floor(5 * 15, 11 * 15));
+		level1.add(new Floor(6 * 15, 11 * 15));
+		level1.add(new Floor(7 * 15, 11 * 15));
+		level1.add(new Floor(8 * 15, 11 * 15));
+		level1.add(new Wall(8 * 15, 10 * 15, 50, State.VERTICAL));
+		level1.add(new Floor(9 * 15, 11 * 15));
+		level1.add(new Floor(10 * 15, 11 * 15));
+		level1.add(new Floor(11 * 15, 11 * 15));
+		level1.add(new Floor(12 * 15, 11 * 15));
+		level1.add(new Gate(12 * 15, 10 * 15));
+		level1.add(new Bow(9 * 15, 14 * 15));
+		level1.add(new NinjaCloak(10 * 15, 14 * 15));
+		if(!debug) level1.add(Bridge.getPlayer());
 
 		levels.put(1, level1);
 
-		level2.add(new Floor(0, 14 * 32));
-		level2.add(new Floor(1 * 32, 14 * 32));
-		level2.add(new Floor(2 * 32, 14 * 32));
-		level2.add(new Floor(3 * 32, 14 * 32));
-		level2.add(new Floor(4 * 32, 14 * 32));
-		level2.add(new Floor(5 * 32, 14 * 32));
-		level2.add(new Floor(6 * 32, 14 * 32));
-		level2.add(new Floor(7 * 32, 14 * 32));
-		level2.add(new Floor(8 * 32, 13 * 32));
-		level2.add(new Floor(9 * 32, 12 * 32));
-		level2.add(new Floor(10 * 32, 11 * 32));
-		level2.add(new Floor(11 * 32, 10 * 32));
-		level2.add(new Floor(12 * 32, 9 * 32));
-		level2.add(new Gate(12 * 32, 8 * 32));
-		level2.add(Bridge.getPlayer());
+		level2.add(new Floor(0, 14 * 15));
+		level2.add(new Floor(1 * 15, 14 * 15));
+		level2.add(new Floor(2 * 15, 14 * 15));
+		level2.add(new Floor(3 * 15, 14 * 15));
+		level2.add(new Floor(4 * 15, 14 * 15));
+		level2.add(new Floor(5 * 15, 14 * 15));
+		level2.add(new Floor(6 * 15, 14 * 15));
+		level2.add(new Floor(7 * 15, 14 * 15));
+		level2.add(new Floor(8 * 15, 13 * 15));
+		level2.add(new Floor(9 * 15, 12 * 15));
+		level2.add(new Floor(10 * 15, 11 * 15));
+		level2.add(new Floor(11 * 15, 10 * 15));
+		level2.add(new Floor(12 * 15, 9 * 15));
+		level2.add(new Gate(12 * 15, 8 * 15));
+		if(!debug) level2.add(Bridge.getPlayer());
 
 		levels.put(2, level2);
 
-		level3.add(new FallingFloor(0, 8 * 32));
-		level3.add(new FallingFloor(1 * 32, 8 * 32));
-		level3.add(new FallingFloor(2 * 32, 8 * 32));
-		level3.add(new FallingFloor(3 * 32, 8 * 32));
-		level3.add(new FallingFloor(4 * 32, 8 * 32));
-		level3.add(new FallingFloor(5 * 32, 8 * 32));
-		level3.add(new FallingFloor(6 * 32, 8 * 32));
-		level3.add(new FallingFloor(7 * 32, 8 * 32));
-		level3.add(new FallingFloor(8 * 32, 9 * 32));
-		level3.add(new FallingFloor(9 * 32, 10 * 32));
-		level3.add(new FallingFloor(10 * 32, 11 * 32));
-		level3.add(new FallingFloor(11 * 32, 12 * 32));
-		level3.add(new FallingFloor(12 * 32, 13 * 32));
-		level3.add(new Gate(12 * 32, 12 * 32));
-		level3.add(Bridge.getPlayer());
+		level3.add(new FallingFloor(0, 8 * 15));
+		level3.add(new FallingFloor(1 * 15, 8 * 15));
+		level3.add(new FallingFloor(2 * 15, 8 * 15));
+		level3.add(new FallingFloor(3 * 15, 8 * 15));
+		level3.add(new FallingFloor(4 * 15, 8 * 15));
+		level3.add(new FallingFloor(5 * 15, 8 * 15));
+		level3.add(new FallingFloor(6 * 15, 8 * 15));
+		level3.add(new FallingFloor(7 * 15, 8 * 15));
+		level3.add(new FallingFloor(8 * 15, 9 * 15));
+		level3.add(new FallingFloor(9 * 15, 10 * 15));
+		level3.add(new FallingFloor(10 * 15, 11 * 15));
+		level3.add(new FallingFloor(11 * 15, 12 * 15));
+		level3.add(new FallingFloor(12 * 15, 13 * 15));
+		level3.add(new Gate(12 * 15, 12 * 15));
+		if(!debug) level3.add(Bridge.getPlayer());
 
 		levels.put(3, level3);
 
-		level4.add(new Floor(0 * 32, 608));
-		level4.add(new Floor(1 * 32, 608));
-		level4.add(new Floor(2 * 32, 608));
-		level4.add(new Floor(3 * 32, 608));
-		level4.add(new Floor(4 * 32, 608));
-		level4.add(new Floor(5 * 32, 608));
-		level4.add(new Floor(6 * 32, 608));
-		level4.add(new Floor(7 * 32, 608));
-		level4.add(new Floor(9 * 32, 608));
-		level4.add(new Floor(10 * 32, 608));
-		level4.add(new Floor(11 * 32, 608));
-		level4.add(new Floor(12 * 32, 608));
-		level4.add(new Floor(13 * 32, 608));
-		level4.add(new Floor(14 * 32, 608));
-		level4.add(new Floor(15 * 32, 608));
-		level4.add(new Floor(16 * 32, 608));
-		level4.add(new Floor(17 * 32, 608));
-		level4.add(new Ladder(17 * 32, 18 * 32));
-		level4.add(new Ladder(17 * 32, 17 * 32));
-		level4.add(new Ladder(17 * 32, 16 * 32));
-		level4.add(new Ladder(17 * 32, 15 * 32));
-		level4.add(new Floor(16 * 32, 16 * 32));
-		level4.add(new Floor(15 * 32, 16 * 32));
-		level4.add(new Floor(14 * 32, 16 * 32));
-		level4.add(new Floor(13 * 32, 16 * 32));
-		level4.add(new Floor(12 * 32, 16 * 32));
-		level4.add(new Floor(11 * 32, 16 * 32));
-		level4.add(new Floor(10 * 32, 16 * 32));
-		level4.add(new Floor(9 * 32, 16 * 32));
-		level4.add(new Floor(8 * 32, 16 * 32));
-		level4.add(new Floor(7 * 32, 16 * 32));
-		level4.add(new Floor(6 * 32, 16 * 32));
-		level4.add(new Floor(5 * 32, 16 * 32));
-		level4.add(new Floor(4 * 32, 16 * 32));
-		level4.add(new Floor(3 * 32, 16 * 32));
-		level4.add(new Wall(2 * 32, 0 * 32, 512, State.VERTICAL));
+		level4.add(new Floor(0 * 15, 608));
+		level4.add(new Floor(1 * 15, 608));
+		level4.add(new Floor(2 * 15, 608));
+		level4.add(new Floor(3 * 15, 608));
+		level4.add(new Floor(4 * 15, 608));
+		level4.add(new Floor(5 * 15, 608));
+		level4.add(new Floor(6 * 15, 608));
+		level4.add(new Floor(7 * 15, 608));
+		level4.add(new Floor(9 * 15, 608));
+		level4.add(new Floor(10 * 15, 608));
+		level4.add(new Floor(11 * 15, 608));
+		level4.add(new Floor(12 * 15, 608));
+		level4.add(new Floor(13 * 15, 608));
+		level4.add(new Floor(14 * 15, 608));
+		level4.add(new Floor(15 * 15, 608));
+		level4.add(new Floor(16 * 15, 608));
+		level4.add(new Floor(17 * 15, 608));
+		level4.add(new Ladder(17 * 15, 18 * 15));
+		level4.add(new Ladder(17 * 15, 17 * 15));
+		level4.add(new Ladder(17 * 15, 16 * 15));
+		level4.add(new Ladder(17 * 15, 15 * 15));
+		level4.add(new Floor(16 * 15, 16 * 15));
+		level4.add(new Floor(15 * 15, 16 * 15));
+		level4.add(new Floor(14 * 15, 16 * 15));
+		level4.add(new Floor(13 * 15, 16 * 15));
+		level4.add(new Floor(12 * 15, 16 * 15));
+		level4.add(new Floor(11 * 15, 16 * 15));
+		level4.add(new Floor(10 * 15, 16 * 15));
+		level4.add(new Floor(9 * 15, 16 * 15));
+		level4.add(new Floor(8 * 15, 16 * 15));
+		level4.add(new Floor(7 * 15, 16 * 15));
+		level4.add(new Floor(6 * 15, 16 * 15));
+		level4.add(new Floor(5 * 15, 16 * 15));
+		level4.add(new Floor(4 * 15, 16 * 15));
+		level4.add(new Floor(3 * 15, 16 * 15));
+		level4.add(new Wall(2 * 15, 0 * 15, 512, State.VERTICAL));
         
-		level4.add(new Ladder(3 * 32, 15 * 32));
-		level4.add(new Ladder(3 * 32, 14 * 32));
-		level4.add(new Ladder(3 * 32, 13 * 32));
-		level4.add(new Ladder(3 * 32, 12 * 32));
-		level4.add(new Ladder(3 * 32, 11 * 32));
-		level4.add(new Ladder(3 * 32, 10 * 32));
-		level4.add(new Floor(4 * 32, 11 * 32));
-		level4.add(new Floor(5 * 32, 11 * 32));
-		level4.add(new Floor(6 * 32, 11 * 32));
-		level4.add(new Floor(7 * 32, 11 * 32));
-		level4.add(new Floor(8 * 32, 11 * 32));
-		level4.add(new Floor(9 * 32, 11 * 32));
-		level4.add(new Floor(10 * 32, 11 * 32));
-		level4.add(new Floor(11 * 32, 11 * 32));
-		level4.add(new Floor(12 * 32, 11 * 32));
-		level4.add(new Gate(12 * 32, 10 * 32));
-		level4.add(new Knobber(10 * 32, 14 * 32));
-		level4.add(Bridge.getPlayer());
+		level4.add(new Ladder(3 * 15, 15 * 15));
+		level4.add(new Ladder(3 * 15, 14 * 15));
+		level4.add(new Ladder(3 * 15, 13 * 15));
+		level4.add(new Ladder(3 * 15, 12 * 15));
+		level4.add(new Ladder(3 * 15, 11 * 15));
+		level4.add(new Ladder(3 * 15, 10 * 15));
+		level4.add(new Floor(4 * 15, 11 * 15));
+		level4.add(new Floor(5 * 15, 11 * 15));
+		level4.add(new Floor(6 * 15, 11 * 15));
+		level4.add(new Floor(7 * 15, 11 * 15));
+		level4.add(new Floor(8 * 15, 11 * 15));
+		level4.add(new Floor(9 * 15, 11 * 15));
+		level4.add(new Floor(10 * 15, 11 * 15));
+		level4.add(new Floor(11 * 15, 11 * 15));
+		level4.add(new Floor(12 * 15, 11 * 15));
+		level4.add(new Gate(12 * 15, 10 * 15));
+		level4.add(new Knobber(10 * 15, 14 * 15));
+		if(!debug) level4.add(Bridge.getPlayer());
 
 		levels.put(4, level4);
 
-		level5.add(new Floor(0 * 32, 4 * 32));
-		level5.add(new Floor(1 * 32, 4 * 32));
-		level5.add(new Floor(2 * 32, 4 * 32));
-		level5.add(new Floor(3 * 32, 4 * 32));
-		level5.add(new Floor(4 * 32, 4 * 32));
-		level5.add(new Floor(5 * 32, 4 * 32));
-		level5.add(new Floor(6 * 32, 4 * 32));
-		level5.add(new Floor(7 * 32, 4 * 32));
-		level5.add(new Floor(8 * 32, 4 * 32));
-		level5.add(new Floor(9 * 32, 4 * 32));
-		level5.add(new Floor(10 * 32, 4 * 32));
-		level5.add(new Floor(11 * 32, 4 * 32));
-		level5.add(new Floor(12 * 32, 4 * 32));
-		level5.add(new Floor(13 * 32, 4 * 32));
-		level5.add(new Floor(14 * 32, 4 * 32));
-		level5.add(new Floor(15 * 32, 4 * 32));
-		level5.add(new Floor(16 * 32, 4 * 32));
-		level5.add(new Floor(17 * 32, 4 * 32));
-		level5.add(new Floor(18 * 32, 4 * 32));
-		level5.add(new FallingFloor(19 * 32, 4 * 32));
+		level5.add(new Floor(0 * 15, 4 * 15));
+		level5.add(new Floor(1 * 15, 4 * 15));
+		level5.add(new Floor(2 * 15, 4 * 15));
+		level5.add(new Floor(3 * 15, 4 * 15));
+		level5.add(new Floor(4 * 15, 4 * 15));
+		level5.add(new Floor(5 * 15, 4 * 15));
+		level5.add(new Floor(6 * 15, 4 * 15));
+		level5.add(new Floor(7 * 15, 4 * 15));
+		level5.add(new Floor(8 * 15, 4 * 15));
+		level5.add(new Floor(9 * 15, 4 * 15));
+		level5.add(new Floor(10 * 15, 4 * 15));
+		level5.add(new Floor(11 * 15, 4 * 15));
+		level5.add(new Floor(12 * 15, 4 * 15));
+		level5.add(new Floor(13 * 15, 4 * 15));
+		level5.add(new Floor(14 * 15, 4 * 15));
+		level5.add(new Floor(15 * 15, 4 * 15));
+		level5.add(new Floor(16 * 15, 4 * 15));
+		level5.add(new Floor(17 * 15, 4 * 15));
+		level5.add(new Floor(18 * 15, 4 * 15));
+		level5.add(new FallingFloor(19 * 15, 4 * 15));
 
-		level5.add(new FallingFloor(0 * 32, 8 * 32));
-		level5.add(new Floor(1 * 32, 8 * 32));
-		level5.add(new Floor(2 * 32, 8 * 32));
-		level5.add(new Floor(3 * 32, 8 * 32));
-		level5.add(new Floor(4 * 32, 8 * 32));
-		level5.add(new Floor(5 * 32, 8 * 32));
-		level5.add(new Floor(6 * 32, 8 * 32));
-		level5.add(new Floor(7 * 32, 8 * 32));
-		level5.add(new Floor(8 * 32, 8 * 32));
-		level5.add(new Floor(9 * 32, 8 * 32));
-		level5.add(new Floor(10 * 32, 8 * 32));
-		level5.add(new Floor(11 * 32, 8 * 32));
-		level5.add(new Floor(12 * 32, 8 * 32));
-		level5.add(new Floor(13 * 32, 8 * 32));
-		level5.add(new Floor(14 * 32, 8 * 32));
-		level5.add(new Floor(15 * 32, 8 * 32));
-		level5.add(new Floor(16 * 32, 8 * 32));
-		level5.add(new Floor(17 * 32, 8 * 32));
-		level5.add(new Floor(18 * 32, 8 * 32));
-		level5.add(new Floor(19 * 32, 8 * 32));
+		level5.add(new FallingFloor(0 * 15, 8 * 15));
+		level5.add(new Floor(1 * 15, 8 * 15));
+		level5.add(new Floor(2 * 15, 8 * 15));
+		level5.add(new Floor(3 * 15, 8 * 15));
+		level5.add(new Floor(4 * 15, 8 * 15));
+		level5.add(new Floor(5 * 15, 8 * 15));
+		level5.add(new Floor(6 * 15, 8 * 15));
+		level5.add(new Floor(7 * 15, 8 * 15));
+		level5.add(new Floor(8 * 15, 8 * 15));
+		level5.add(new Floor(9 * 15, 8 * 15));
+		level5.add(new Floor(10 * 15, 8 * 15));
+		level5.add(new Floor(11 * 15, 8 * 15));
+		level5.add(new Floor(12 * 15, 8 * 15));
+		level5.add(new Floor(13 * 15, 8 * 15));
+		level5.add(new Floor(14 * 15, 8 * 15));
+		level5.add(new Floor(15 * 15, 8 * 15));
+		level5.add(new Floor(16 * 15, 8 * 15));
+		level5.add(new Floor(17 * 15, 8 * 15));
+		level5.add(new Floor(18 * 15, 8 * 15));
+		level5.add(new Floor(19 * 15, 8 * 15));
 
-		level5.add(new Floor(0 * 32, 12 * 32));
-		level5.add(new Floor(1 * 32, 12 * 32));
-		level5.add(new Floor(2 * 32, 12 * 32));
-		level5.add(new Floor(3 * 32, 12 * 32));
-		level5.add(new Floor(4 * 32, 12 * 32));
-		level5.add(new Floor(5 * 32, 12 * 32));
-		level5.add(new Floor(6 * 32, 12 * 32));
-		level5.add(new Floor(7 * 32, 12 * 32));
-		level5.add(new Floor(8 * 32, 12 * 32));
-		level5.add(new Floor(9 * 32, 12 * 32));
-		level5.add(new Floor(10 * 32, 12 * 32));
-		level5.add(new Floor(11 * 32, 12 * 32));
-		level5.add(new Floor(12 * 32, 12 * 32));
-		level5.add(new Floor(13 * 32, 12 * 32));
-		level5.add(new Floor(14 * 32, 12 * 32));
-		level5.add(new Floor(15 * 32, 12 * 32));
-		level5.add(new Floor(16 * 32, 12 * 32));
-		level5.add(new Floor(17 * 32, 12 * 32));
-		level5.add(new Floor(18 * 32, 12 * 32));
-		level5.add(new FallingFloor(19 * 32, 12 * 32));
+		level5.add(new Floor(0 * 15, 12 * 15));
+		level5.add(new Floor(1 * 15, 12 * 15));
+		level5.add(new Floor(2 * 15, 12 * 15));
+		level5.add(new Floor(3 * 15, 12 * 15));
+		level5.add(new Floor(4 * 15, 12 * 15));
+		level5.add(new Floor(5 * 15, 12 * 15));
+		level5.add(new Floor(6 * 15, 12 * 15));
+		level5.add(new Floor(7 * 15, 12 * 15));
+		level5.add(new Floor(8 * 15, 12 * 15));
+		level5.add(new Floor(9 * 15, 12 * 15));
+		level5.add(new Floor(10 * 15, 12 * 15));
+		level5.add(new Floor(11 * 15, 12 * 15));
+		level5.add(new Floor(12 * 15, 12 * 15));
+		level5.add(new Floor(13 * 15, 12 * 15));
+		level5.add(new Floor(14 * 15, 12 * 15));
+		level5.add(new Floor(15 * 15, 12 * 15));
+		level5.add(new Floor(16 * 15, 12 * 15));
+		level5.add(new Floor(17 * 15, 12 * 15));
+		level5.add(new Floor(18 * 15, 12 * 15));
+		level5.add(new FallingFloor(19 * 15, 12 * 15));
 
-		level5.add(new Floor(0 * 32, 16 * 32));
-		level5.add(new Floor(1 * 32, 16 * 32));
-		level5.add(new Floor(2 * 32, 16 * 32));
-		level5.add(new Floor(3 * 32, 16 * 32));
-		level5.add(new Floor(4 * 32, 16 * 32));
-		level5.add(new Floor(5 * 32, 16 * 32));
-		level5.add(new Floor(6 * 32, 16 * 32));
-		level5.add(new Floor(7 * 32, 16 * 32));
-		level5.add(new Floor(8 * 32, 16 * 32));
-		level5.add(new Floor(9 * 32, 16 * 32));
-		level5.add(new Floor(10 * 32, 16 * 32));
-		level5.add(new Floor(11 * 32, 16 * 32));
-		level5.add(new Floor(12 * 32, 16 * 32));
-		level5.add(new Floor(13 * 32, 16 * 32));
-		level5.add(new Floor(14 * 32, 16 * 32));
-		level5.add(new Floor(15 * 32, 16 * 32));
-		level5.add(new Floor(16 * 32, 16 * 32));
-		level5.add(new Floor(17 * 32, 16 * 32));
-		level5.add(new Floor(18 * 32, 16 * 32));
-		level5.add(new Floor(19 * 32, 16 * 32));
-		level5.add(new Gate(1, 15 * 32));
-		level5.add(Bridge.getPlayer());
+		level5.add(new Floor(0 * 15, 16 * 15));
+		level5.add(new Floor(1 * 15, 16 * 15));
+		level5.add(new Floor(2 * 15, 16 * 15));
+		level5.add(new Floor(3 * 15, 16 * 15));
+		level5.add(new Floor(4 * 15, 16 * 15));
+		level5.add(new Floor(5 * 15, 16 * 15));
+		level5.add(new Floor(6 * 15, 16 * 15));
+		level5.add(new Floor(7 * 15, 16 * 15));
+		level5.add(new Floor(8 * 15, 16 * 15));
+		level5.add(new Floor(9 * 15, 16 * 15));
+		level5.add(new Floor(10 * 15, 16 * 15));
+		level5.add(new Floor(11 * 15, 16 * 15));
+		level5.add(new Floor(12 * 15, 16 * 15));
+		level5.add(new Floor(13 * 15, 16 * 15));
+		level5.add(new Floor(14 * 15, 16 * 15));
+		level5.add(new Floor(15 * 15, 16 * 15));
+		level5.add(new Floor(16 * 15, 16 * 15));
+		level5.add(new Floor(17 * 15, 16 * 15));
+		level5.add(new Floor(18 * 15, 16 * 15));
+		level5.add(new Floor(19 * 15, 16 * 15));
+		level5.add(new Gate(1, 15 * 15));
+		if(!debug) level5.add(Bridge.getPlayer());
 
 		levels.put(5, level5);
 
-		level6.add(new Wall(0 * 32, 2 * 32, 32*5, State.HORIZONTAL));
+		level6.add(new Wall(0 * 15, 2 * 15, 32*5, State.HORIZONTAL));
 
 		for (int i = 4; i != 17; i++) {
-			level6.add(new Wall(i * 32, (i * 32) / 2, 32, State.HORIZONTAL));
+			level6.add(new Wall(i * 15, (i * 15) / 2, 32, State.HORIZONTAL));
 		}
-		level6.add(new Ladder(17 * 32, 8 * 32));
-		level6.add(new Ladder(17 * 32, 9 * 32));
-		level6.add(new Ladder(17 * 32, 10 * 32));
+		level6.add(new Ladder(17 * 15, 8 * 15));
+		level6.add(new Ladder(17 * 15, 9 * 15));
+		level6.add(new Ladder(17 * 15, 10 * 15));
 
 		for (int i = 0; i != 18; i++) {
-			level6.add(new Floor(i * 32, 11 * 32));
+			level6.add(new Floor(i * 15, 11 * 15));
 		}
-		level6.add(new Knobber(2 * 32, 9 * 32));
-		level6.add(new Gate(10, 10 * 32));
+		level6.add(new Knobber(2 * 15, 9 * 15));
+		level6.add(new Gate(10, 10 * 15));
 
-		level6.add(Bridge.getPlayer());
+		if(!debug) level6.add(Bridge.getPlayer());
 
 		levels.put(6, level6);
 
@@ -467,7 +492,6 @@ public class GameBoard extends Board implements ActionListener {
 	}
 
 	public void loadLevel() {
-		Utils.broadcastMessage("test");
 		ingame = false;
 		loaded = false;
 		if (Utils.getPlayerLevel() > levels.size()) {
@@ -534,8 +558,8 @@ public class GameBoard extends Board implements ActionListener {
 
 		Utils.displayMessage(2, "These are coins. Pick them up to gain points!", 272, 578, -1, "#FFFFFF", 15);
 
-		Utils.displayMessage(3, "This a bow. If you pick it up, it'll appear in your \"tool\" slot.", 9 * 32,
-				14 * 32, -1, "#FFFFFF", 15);
+		Utils.displayMessage(3, "This a bow. If you pick it up, it'll appear in your \"tool\" slot.", 9 * 15,
+				14 * 15, -1, "#FFFFFF", 15);
 
 		Utils.displayMessage(4, "<--- This is your HUD --->", B_WIDTH / 2, 15, -1, "#FFFFFF", 10);
 

@@ -41,7 +41,6 @@ public class Wall extends Sprite {
     		loadImage("wall/vertical.png");
     		height = size;
     		setImageDimensions(2, size);
-    		Utils.broadcastMessage(height + "");
     		break;
     	case LARGE_VERTICAL:
     		loadImage("wall/vertical_large.png");
