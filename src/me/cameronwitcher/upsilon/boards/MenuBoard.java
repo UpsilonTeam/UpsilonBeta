@@ -17,7 +17,7 @@ import java.util.List;
 
 import javax.swing.Timer;
 
-import javafx.scene.Cursor;
+
 import me.cameronwitcher.upsilon.Bridge;
 import me.cameronwitcher.upsilon.spriteutils.Clickable;
 import me.cameronwitcher.upsilon.utils.Background;

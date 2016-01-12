@@ -70,6 +70,8 @@ public class GameBoard extends Board implements ActionListener {
 	private boolean hitboxes = false;
 	public double i = 0.9;
 	public int l = 0;
+	private int mx = 0;
+	private int my = 0;
 
 	public boolean paused = false;
 	public Map<Integer, String> messages = new HashMap<>();
@@ -179,12 +181,10 @@ public class GameBoard extends Board implements ActionListener {
 			level1.add(new Floor(x*32,525));
 		}
 		
-		level1.add(new Gold(6 * 32, 510));
-		level1.add(new Gold(7 * 32, 510));
-		level1.add(new Gold(8 * 32, 510));
-		level1.add(new Gold(9 * 32, 510));
-		level1.add(new Gold(10 * 32, 510));
-		level1.add(new Gold(11 * 32, 510));
+		for(int x=0;x!=10;x++){
+			level1.add(new Gold(x*32, 510));
+		}
+		
 		
 		for(int y=0;y!=5;y++){
 			level1.add(new Ladder(10*32,y*32));
@@ -794,6 +794,8 @@ public class GameBoard extends Board implements ActionListener {
 		for (Clickable clickable : clickables) {
 			g.drawPolygon(clickable.drawPolygon(g));
 		}
+		
+		if(paused) g.drawImage(Texture.loadTexture("pointer.png"), mx, my, this);
 
 	}
 
@@ -1075,6 +1077,9 @@ public class GameBoard extends Board implements ActionListener {
 	private class MMListener extends MouseMotionAdapter {
 
 		public void mouseMoved(MouseEvent e) {
+			
+			mx = e.getX();
+			my = e.getY();
 			for (Clickable clickable : clickables) {
 				if (clickable.getPolygon().contains(e.getPoint())) {
 					clickable.mouseMoved(e);
