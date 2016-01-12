@@ -42,6 +42,7 @@ public class Player extends Entity implements Moveable,Keyable {
 	private int i;
 	public int speedboost = 1;
 	public int level = 1;
+	int f = 970;
 	public List<Tool> inventory = new ArrayList<>();
 	private HashMap<Integer, Integer> jumpInfo = new HashMap<>();
 	private boolean ctrl = false;
@@ -302,6 +303,9 @@ public class Player extends Entity implements Moveable,Keyable {
 
 	@Override
 	public void move() {
+		
+		
+		
 		if(ctrl) speedboost = 2;
 		else speedboost = 1;
 		if (disabled)
@@ -440,6 +444,8 @@ public class Player extends Entity implements Moveable,Keyable {
 					x = 1;
 				if (y < 1)
 					y = 1;
+				if (x > f - width)
+					x = f - width;
 				return;
 			}
 			if(!climbing && !falling &!jumping && !onground) falling = true;
@@ -494,8 +500,9 @@ public class Player extends Entity implements Moveable,Keyable {
 			x = 1;
 		if (y < 1)
 			y = 1;
-		if (x > 640 - getImage().getWidth(null))
-			x = 640 - getImage().getWidth(null);
+		
+		if (x > f - width)
+			x = f - width;
 		
 	}
 
