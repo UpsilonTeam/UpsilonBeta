@@ -407,6 +407,7 @@ public class Player extends Entity implements Moveable,Keyable {
 							break;
 						case DOWN:
 							onground = true;
+							y=sprite.getY()-(height-1);
 							falling = false;
 							break;
 						case UP:
