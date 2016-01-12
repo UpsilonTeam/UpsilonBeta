@@ -834,6 +834,8 @@ public class GameBoard extends Board implements ActionListener {
 			g.setFont(small);
 			g.drawString(reason, (B_WIDTH - fm.stringWidth(reason)) / 2, B_HEIGHT / 3 + 20);
 			
+			g.drawImage(Texture.loadTexture("pointer.png"), mx, my, this);
+			
 			
 
 		}
@@ -854,6 +856,9 @@ public class GameBoard extends Board implements ActionListener {
 			FontMetrics fm = getFontMetrics(small);
 			g.setFont(small);
 			g.drawString(won, (B_WIDTH - fm.stringWidth(won)) / 2, B_HEIGHT / 3);
+			
+
+			g.drawImage(Texture.loadTexture("pointer.png"), mx, my, this);
 
 		}
 	}
