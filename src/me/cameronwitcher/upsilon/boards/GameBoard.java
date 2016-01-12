@@ -178,7 +178,7 @@ public class GameBoard extends Board implements ActionListener {
 		level6.clear();
 		
 		for(int x=0;x!=30;x++){
-			level1.add(new Floor(x*32,525));
+			level1.add(new Wall(x*32, 525-(x/2), 32, State.HORIZONTAL));
 		}
 		
 		for(int x=0;x!=10;x++){
@@ -186,15 +186,10 @@ public class GameBoard extends Board implements ActionListener {
 		}
 		
 		
-		for(int y=0;y!=5;y++){
-			level1.add(new Ladder(10*32,y*32));
+		for(int y=10;y!=16;y++){
+			level1.add(new Ladder(29*32,y*32));
 		}
 		
-		level1.add(new Ladder(17 * 32, 33 * 15));
-		level1.add(new Ladder(17 * 32, 33 * 15));
-		level1.add(new Ladder(17 * 32, 33 * 15));
-		level1.add(new Ladder(17 * 32, 33 * 15));
-		level1.add(new Ladder(17 * 32, 33 * 15));
 		
 		
 		level1.add(new Floor(16 * 15, 16 * 15));
