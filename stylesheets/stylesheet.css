@@ -116,9 +116,7 @@ a {
 .changelog-content{
 	padding: 2em;
 	border-left: lightgray solid 1px;
-	width: 48%;
 	height: 100%;
-	float: right;
 }
 
 .main-content :first-child {
