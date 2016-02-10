@@ -273,7 +273,6 @@ public class GameBoard extends JPanel implements ActionListener {
     	level4.add(new Floor(5*32,608));
     	level4.add(new Floor(6*32,608));
     	level4.add(new Floor(7*32,608));
-    	level4.add(new Floor(8*32,608));
     	level4.add(new Floor(9*32,608));
     	level4.add(new Floor(10*32,608));
     	level4.add(new Floor(11*32,608));
@@ -722,17 +721,18 @@ public class GameBoard extends JPanel implements ActionListener {
     	if(debug){
     		g.setColor(Color.black);
     		g.setFont(new Font("Helvetica", Font.BOLD, 10));
-    		g.drawString("Gravity: " + player.gravity, 0, 10);
-    		g.drawString("Falling: " + player.falling, 0, 20);
-        	g.drawString("Onground: " + player.onground, 0, 30);
-        	g.drawString("Jumping: " + player.jumping, 0, 40);
-        	g.drawString("Speed: " + player.speedboost, 0, 50);
-        	g.drawString("Location: " + player.x + ":" + player.y, 0, 60);
-        	g.drawString("Left: " + player.left, 0, 70);
-        	g.drawString("Right: " + player.right, 0, 80);
-        	g.drawString("Up: " + player.up, 0, 90);
-        	g.drawString("Climbing: " + player.climbing, 0, 100);
-        	g.drawString("Level: " + player.level, 0, 110);	
+    		g.drawString("Version: " + Bridge.getGame().getVersion(), 0, 10);
+    		g.drawString("Gravity: " + player.gravity, 0, 20);
+    		g.drawString("Falling: " + player.falling, 0, 30);
+        	g.drawString("Onground: " + player.onground, 0, 40);
+        	g.drawString("Jumping: " + player.jumping, 0, 50);
+        	g.drawString("Speed: " + player.speedboost, 0, 60);
+        	g.drawString("Location: " + player.x + ":" + player.y, 0, 70);
+        	g.drawString("Left: " + player.left, 0, 80);
+        	g.drawString("Right: " + player.right, 0, 90);
+        	g.drawString("Up: " + player.up, 0, 100);
+        	g.drawString("Climbing: " + player.climbing, 0, 110);
+        	g.drawString("Level: " + player.level, 0, 120);	
     	}
     	
     	for(Rectangle rec : recs){
